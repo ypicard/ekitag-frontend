@@ -1,0 +1,19 @@
+<div id="algo-container">
+  <div class="row">
+    <div id="header" class="col">
+      <h1>ALGORITHM</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Who is playing ?</h2>
+      <div>
+        <div *ngFor="let player of players | sort: 'pseudo'">
+          <div class="player">
+            {{ player.trigram }} {{ player.pseudo }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
