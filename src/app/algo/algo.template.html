@@ -5,15 +5,34 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
-      <h2>Who is playing ?</h2>
-      <div>
-        <div *ngFor="let player of players | sort: 'pseudo'">
-          <div class="player">
-            {{ player.trigram }} {{ player.pseudo }}
-          </div>
-        </div>
+    <div class="col-4">
+      <h2>Add players</h2>
+      <div *ngFor="let player of players | sort: 'pseudo'" class="player" (click)="selectPlayer(player)">
+        {{ player.trigram }} {{ player.pseudo }}
       </div>
+    </div>
+    <div class="col-4">
+      <h2>Selected players</h2>
+      <div *ngFor="let player of selectedPlayers | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
+        {{ player.trigram }} {{ player.pseudo }}
+      </div>
+    </div>
+    <div class="col-4">
+      <h2>TEAMS</h2>
+      <div>RED</div>
+      <div *ngFor="let player of redTeam | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
+        {{ player.trigram }} {{ player.pseudo }}
+      </div>
+      <div>BLUE</div>
+      <div *ngFor="let player of blueTeam | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
+        {{ player.trigram }} {{ player.pseudo }}
+      </div>
+      <button ngxClipboard [cbContent]="copyTeams()" [disabled]="blueTeam.length + redTeam.length < 2">COPY TEAMS</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <button (click)="generateTeams(this.selectedPlayers)">GENERATE</button>
     </div>
   </div>
 </div>
