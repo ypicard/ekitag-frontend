@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TagApiService } from '../services/tag-api.service';
 
 @Component({
   selector: 'algo',
@@ -14,28 +15,14 @@ export class AlgoComponent {
   blueTeam: any = []
 
 
+  constructor(private tagApiService: TagApiService) {
+    this.getAllPlayers()
+  }
 
-  constructor() {
-    this.players = [{
-      id: 1,
-      trigram: 'YaP',
-      pseudo: 'Yapus'
-    },
-    {
-      id: 2,
-      trigram: 'FrM',
-      pseudo: 'Covfefe'
-    },
-    {
-      id: 3,
-      trigram: 'ViS',
-      pseudo: 'CousinVic'
-    },
-    {
-      id: 4,
-      trigram: 'YoB',
-      pseudo: 'Roxxor'
-    }]
+  getAllPlayers() {
+    this.tagApiService.getAllUsers().subscribe((res) => {
+      this.players = res
+    })
   }
 
   selectPlayer(player) {
@@ -56,7 +43,7 @@ export class AlgoComponent {
     this.blueTeam = this.selectedPlayers.slice(this.selectedPlayers.length / 2, this.selectedPlayers.length)
   }
 
-  clearTeams(){
+  clearTeams() {
     this.redTeam = [];
     this.blueTeam = [];
   }

@@ -1,0 +1,27 @@
+<div *ngIf="match">
+  <div class="row">
+    <div class="col-12">
+      <h1>Match</h1>
+      <h2>Validated by {{ match.validator.pseudo }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h2>Red team</h2>
+      <p>Score: {{ match.r_score }}</p>
+      <table>
+      	<tr>
+      		ADD STATS HERE
+      		<th>Player</th>
+      		<th>Player</th>
+      	</tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h2>Blue team</h2>
+      <p>Score: {{ match.b_score }}</p>
+    </div>
+  </div>
+</div>

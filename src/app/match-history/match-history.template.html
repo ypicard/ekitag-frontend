@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="col-12">
+		<h1>Match history</h1>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Red score</th>
+				<th>Blue score</th>
+				<th>Date</th>
+				<th>Validator</th>
+				<th>Season</th>
+			</tr>
+			<tr *ngFor="let match of recentMatches" routerLink="/matches/{{ match.id }}">
+				<td>{{ match.id }}</td>
+				<td>{{ match.r_score }}</td>
+				<td>{{ match.b_score }}</td>
+				<td>{{ match.datetime }}</td>
+				<td>{{ match.validator.pseudo }}</td>
+				<td>Season</td>
+			</tr>
+		</table>
+	</div>
+</div>
