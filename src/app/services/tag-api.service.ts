@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ng2-cookies';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class TagApiService {
@@ -12,12 +13,50 @@ export class TagApiService {
     console.log('TagApiService')
   }
 
-  getAllUsers() {
-    return this.http.get(this.BASE_URL + 'users')
+  // ADMIN
+  isLoggedIn() {
+    return this.cookieService.check('Bearer')
   }
 
+  promoteAdmin(id, password) {
+    let formData = new FormData()
+    formData.append('user_id', id)
+    formData.append('password', password)
+
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + this.cookieService.get('Bearer'));
+
+    return this.http.post(this.BASE_URL + 'users/' + id + '/promote', formData, { headers: headers })
+  }
+
+  downgradeAdmin(id) {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + this.cookieService.get('Bearer'));
+
+    return this.http.delete(this.BASE_URL + 'users/' + id + '/promote', { headers: headers })
+  }
+
+  login(trigram, password) {
+    let formData = new FormData()
+    formData.append('login', trigram)
+    formData.append('password', password)
+    return this.http.post(this.BASE_URL + 'admin/', formData)
+  }
+
+  deactivateUser(id) {
+    let formData = new FormData();
+    formData.append('user_id', id)
+
+    return this.http.delete(this.BASE_URL + 'users/' + id, formData)
+  }
+
+  // USERS
   getUser(id) {
     return this.http.get(this.BASE_URL + 'users/' + id)
+  }
+
+  getAllUsers() {
+    return this.http.get(this.BASE_URL + 'users')
   }
 
   createUser(trigram, pseudo) {
@@ -26,14 +65,7 @@ export class TagApiService {
     formData.append('pseudo', pseudo)
     return this.http.post(this.BASE_URL + 'users', formData)
   }
-
-  deactivateUser(id) {
-    let formData = new FormData();
-    formData.append('user_id', id)
-    return this.http.delete(this.BASE_URL + 'users/' + id, formData)
-
-  }
-
+Je 
   addPseudo(user, newPseudo) {
     if (user.usual_pseudos.indexOf(newPseudo < 0)) return; // No duplicate pseudo
 
@@ -48,19 +80,20 @@ export class TagApiService {
     return this.http.put(this.BASE_URL + 'users/' + user.id, formData)
   }
 
-  login(trigram, password) {
-    let formData = new FormData()
-    formData.append('login', trigram)
-    formData.append('password', password)
-    return this.http.post(this.BASE_URL + 'admin/', formData)
+  // MATCHES
+
+  getMatch(id) {
+    return this.http.get(this.BASE_URL + 'matches/' + id)
   }
 
   getRecentMatches() {
     return this.http.get(this.BASE_URL + 'matches')
   }
 
-  getMatch(id) {
-    return this.http.get(this.BASE_URL + 'matches/' + id)
+  getMatchStats(id) : Observable<Object[]>{
+    return this.http.get(this.BASE_URL + 'matches/' + id + '/stats')
   }
+
+
 
 }

@@ -10,11 +10,18 @@
     <div>IS ADMIN : {{user.is_admin}}</div>
     la : {{ newPseudo }}
     <div>PSEUDOS : {{user.usual_pseudos}}</div>
-          <label for="new-pseudo">Add pseudo</label>
-
+    <label for="new-pseudo">Add pseudo</label>
     <input type="test" name="new-pseudo" [(ngModel)]="newPseudo">
     <button (click)="addPseudo(newPseudo)">ADD PSEUDO</button>
     <br>
-    <button *ngIf="user.is_admin" (click)="deactivateUser()">DEACTIVATE</button>
+    <div *ngIf="tagApiService.isLoggedIn()">
+      <form *ngIf="!user.is_admin" #promoteForm="ngForm" (ngSubmit)="promoteAdmin(promoteForm)">
+        <label for="password">Choose a password for him</label>
+        <input type="text" name="password" class="form-control" ngModel>
+        <button type="submit">Promote admin</button>
+      </form>
+      <button *ngIf="user.is_admin" (click)="deactivate()">DEACTIVATE</button>
+      <button *ngIf="user.is_admin" (click)="downgradeAdmin()">Remove admin rights</button>
+    </div>
   </div>
 </div>

@@ -22,6 +22,12 @@ export class AdminUserComponent {
 		});
 	}
 
+	refreshUser() {
+		this.tagApiService.getUser(this.user.id).subscribe(resUser => {
+			this.user = resUser;
+		})
+	}
+
 	addPseudo(newPseudo) {
 		console.log(this.user.usual_pseudos)
 		// if (this.user.usual_pseudos.indexOf(newPseudo) < 0) {
@@ -42,8 +48,26 @@ export class AdminUserComponent {
 	}
 
 	refreshUI() {
-		this.tagApiService.getUser(this.user.id).subscribe(resUser => {
-			this.user = resUser;
+		this.tagApiService.downgradeAdmin(this.user.id).subscribe(res => {
+			alert('Downgraded')
+			this.refreshUser();
+		})
+	}
+
+	promoteAdmin(form) {
+		if (form.value.password.length < 3) {
+			alert('Choose a longer password')
+			return
+		}
+		this.tagApiService.promoteAdmin(this.user.id, form.value.password).subscribe(res => {
+			alert('Success')
+			this.refreshUser();
+		})
+	}
+
+	downgradeAdmin(){
+		this.tagApiService.downgradeAdmin(this.user.id).subscribe(res => {
+			console.log(res)
 		})
 	}
 
