@@ -9,14 +9,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // ng-bootstrap
 // COMPONENTS
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AdminComponent } from './admin/admin.component';
-import { AdminUserComponent } from './admin-user/admin-user.component';
+import { PlayersComponent } from './players/players.component';
+import { PlayerComponent } from './player/player.component';
 import { AlgoComponent } from './algo/algo.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { MatchHistoryComponent } from './match-history/match-history.component';
 import { HallOfFameComponent } from './hall-of-fame/hall-of-fame.component';
 import { AuthComponent } from './auth/auth.component';
 import { MatchComponent } from './match/match.component';
+import { LeaguesComponent } from './leagues/leagues.component';
+
 
 // PROVIDERS
 import { TagApiService } from './services/tag-api.service';
@@ -31,12 +33,18 @@ import { CookieService } from 'ng2-cookies';
 // Routes
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  
   { path: 'home', component: HomeComponent },
+
   { path: 'matches', component: MatchHistoryComponent },
   { path: 'matches/:id', component: MatchComponent },
+
+  { path: 'players', component: PlayersComponent },
+  { path: 'players/:id', component: PlayerComponent },
+
+  { path: 'leagues', component: LeaguesComponent },
+
   { path: 'hall_of_fame', component: HallOfFameComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'admin/user/:id', component: AdminUserComponent },
   { path: 'algo', component: AlgoComponent },
   { path: 'auth', component: AuthComponent },
 ]
@@ -45,14 +53,15 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    AdminComponent,
-    AdminUserComponent,
+    PlayersComponent,
+    PlayerComponent,
     AlgoComponent,
     TopBarComponent,
     MatchHistoryComponent,
     HallOfFameComponent,
     AuthComponent,
     MatchComponent,
+    LeaguesComponent,
     // PIPES
     ArraySortPipe
   ],

@@ -3,24 +3,23 @@ import { TagApiService } from '../services/tag-api.service';
 import { FormsModule }   from '@angular/forms';
 
 @Component({
-	selector: 'admin',
-	templateUrl: './admin.template.html',
-	styleUrls: ['./admin.style.scss']
+	selector: 'players',
+	templateUrl: './players.template.html',
+	styleUrls: ['./players.style.scss']
 })
 
-export class AdminComponent {
+export class PlayersComponent {
 
 	users: any;
 	pseudo: String;
 	trigram: String;
 
 	constructor(private tagApiService: TagApiService) {
-		console.log('AdminComponent')
+		console.log('PlayersComponent')
 		this.refreshUI()
 	}
 
 	createUser(trigram, pseudo) {
-		console.log('createUser()')
 		if (!trigram || !pseudo) {
 			alert('A player must have a trigram and a pseudo.')
 			return;

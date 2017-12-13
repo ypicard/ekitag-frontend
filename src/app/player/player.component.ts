@@ -3,18 +3,18 @@ import { TagApiService } from '../services/tag-api.service';
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
-	selector: 'admin-user',
-	templateUrl: './admin-user.template.html',
-	styleUrls: ['./admin-user.style.scss']
+	selector: 'player',
+	templateUrl: './player.template.html',
+	styleUrls: ['./player.style.scss']
 })
 
-export class AdminUserComponent {
+export class PlayerComponent {
 
 	user: any;
 	newPseudo: String = '';
 
 	constructor(private tagApiService: TagApiService, private route: ActivatedRoute) {
-		console.log('AdminComponent')
+		console.log('PlayerComponent')
 		this.route.params.subscribe(params => {
 			this.tagApiService.getUser(params['id']).subscribe(resUser => {
 				this.user = resUser;

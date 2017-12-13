@@ -52,7 +52,6 @@ export class MatchComponent {
 					this.blueTeam.sort(player => { return player.stats ? player.stats.score : 0 })
 				})
 
-
 			})
 
 

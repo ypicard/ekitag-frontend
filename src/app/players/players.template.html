@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-12">
+    <h1>Players</h1>
+    <table>
+      <tr>
+        <th>Preferred pseudo</th>
+        <th>Also known as</th>
+      </tr>
+      <tr *ngFor="let user of users">
+        <td>{{ user.pseudo }}</td>
+        <td>{{user.usual_pseudos }}</td>
+        <td><a routerLink="/players/{{ user.id }}">Edit</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <h1>CREATE USER</h1>
+    <form>
+      <label for="create-trigram">Trigram</label>
+      <input type="text" name="create-trigram" class="form-control" [(ngModel)]="trigram">
+      <br>
+      <label for="create-pseudo">Pseudo</label>
+      <input type="text" name="create-pseudo" class="form-control" [(ngModel)]="pseudo">
+      <br>
+      <button type='submit' (click)='createUser(trigram, pseudo)' class="form-control">ADD USER</button>
+    </form>
+  </div>
+</div>
