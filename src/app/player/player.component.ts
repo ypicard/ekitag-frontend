@@ -10,45 +10,41 @@ import { ActivatedRoute } from "@angular/router";
 
 export class PlayerComponent {
 
-	user: any;
+	player: any;
 	newPseudo: String = '';
 
 	constructor(private tagApiService: TagApiService, private route: ActivatedRoute) {
 		console.log('PlayerComponent')
 		this.route.params.subscribe(params => {
 			this.tagApiService.getUser(params['id']).subscribe(resUser => {
-				this.user = resUser;
+				this.player = resUser;
 			})
 		});
 	}
 
 	refreshUser() {
-		this.tagApiService.getUser(this.user.id).subscribe(resUser => {
-			this.user = resUser;
+		this.tagApiService.getUser(this.player.id).subscribe(resUser => {
+			this.player = resUser;
 		})
 	}
 
 	addPseudo(newPseudo) {
-		console.log(this.user.usual_pseudos)
-		// if (this.user.usual_pseudos.indexOf(newPseudo) < 0) {
-		// 	alert('Pseudo already in use.')
-		// 	return;
-		// }
-		this.tagApiService.addPseudo(this.user, newPseudo).subscribe(res => {
+		console.log(this.player.usual_pseudos)
+		this.tagApiService.addPseudo(this.player, newPseudo).subscribe(res => {
 			alert(res['message'])
 			this.refreshUI();
 		})
 	}
 
 	deactivateUser() {
-		this.tagApiService.deactivateUser(this.user.id).subscribe(res => {
+		this.tagApiService.deactivateUser(this.player.id).subscribe(res => {
 			alert(res['message'])
 			this.refreshUI();
 		})
 	}
 
 	refreshUI() {
-		this.tagApiService.downgradeAdmin(this.user.id).subscribe(res => {
+		this.tagApiService.downgradeAdmin(this.player.id).subscribe(res => {
 			alert('Downgraded')
 			this.refreshUser();
 		})
@@ -59,14 +55,14 @@ export class PlayerComponent {
 			alert('Choose a longer password')
 			return
 		}
-		this.tagApiService.promoteAdmin(this.user.id, form.value.password).subscribe(res => {
+		this.tagApiService.promoteAdmin(this.player.id, form.value.password).subscribe(res => {
 			alert('Success')
 			this.refreshUser();
 		})
 	}
 
 	downgradeAdmin(){
-		this.tagApiService.downgradeAdmin(this.user.id).subscribe(res => {
+		this.tagApiService.downgradeAdmin(this.player.id).subscribe(res => {
 			console.log(res)
 		})
 	}

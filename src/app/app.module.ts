@@ -9,16 +9,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // ng-bootstrap
 // COMPONENTS
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { PlayersComponent } from './players/players.component';
-import { PlayerComponent } from './player/player.component';
 import { AlgoComponent } from './algo/algo.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
-import { MatchHistoryComponent } from './match-history/match-history.component';
 import { HallOfFameComponent } from './hall-of-fame/hall-of-fame.component';
 import { AuthComponent } from './auth/auth.component';
-import { MatchComponent } from './match/match.component';
-import { LeaguesComponent } from './leagues/leagues.component';
 
+import { PlayersComponent } from './players/players.component';
+import { PlayerComponent } from './player/player.component';
+
+import { MatchComponent } from './match/match.component';
+import { MatchesComponent } from './matches/matches.component';
+
+import { LeaguesComponent } from './leagues/leagues.component';
 
 // PROVIDERS
 import { TagApiService } from './services/tag-api.service';
@@ -30,16 +32,18 @@ import { ArraySortPipe } from './pipes';
 import { ClipboardModule } from 'ngx-clipboard';
 import { CookieService } from 'ng2-cookies';
 
+// RESOLVERS
+import { PlayersResolver } from './resolves/players.resolver';
 // Routes
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  
+
   { path: 'home', component: HomeComponent },
 
-  { path: 'matches', component: MatchHistoryComponent },
+  { path: 'matches', component: MatchesComponent },
   { path: 'matches/:id', component: MatchComponent },
 
-  { path: 'players', component: PlayersComponent },
+  { path: 'players', component: PlayersComponent, resolve: { players: PlayersResolver } },
   { path: 'players/:id', component: PlayerComponent },
 
   { path: 'leagues', component: LeaguesComponent },
@@ -57,7 +61,7 @@ const appRoutes: Routes = [
     PlayerComponent,
     AlgoComponent,
     TopBarComponent,
-    MatchHistoryComponent,
+    MatchesComponent,
     HallOfFameComponent,
     AuthComponent,
     MatchComponent,
@@ -76,9 +80,9 @@ const appRoutes: Routes = [
     ),
     // LIBRAIRIES
     ClipboardModule,
-    NgbModule.forRoot(),
+    NgbModule.forRoot()
   ],
-  providers: [TagApiService, CookieService],
+  providers: [TagApiService, CookieService, PlayersResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

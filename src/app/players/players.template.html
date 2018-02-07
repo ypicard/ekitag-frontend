@@ -6,10 +6,12 @@
         <th>Preferred pseudo</th>
         <th>Also known as</th>
       </tr>
-      <tr *ngFor="let user of users">
-        <td>{{ user.pseudo }}</td>
-        <td>{{user.usual_pseudos }}</td>
-        <td><a routerLink="/players/{{ user.id }}">Edit</a></td>
+      <tr *ngFor="let player of getActivePlayers()">
+        <td>{{ player.pseudo }}</td>
+        <td>{{ player.usual_pseudos }}</td>
+        <td>
+          <a routerLink="/players/{{ player.id }}">Edit</a>
+        </td>
       </tr>
     </table>
   </div>
@@ -26,5 +28,21 @@
       <br>
       <button type='submit' (click)='createUser(trigram, pseudo)' class="form-control">ADD USER</button>
     </form>
+  </div>
+</div>
+<div class="row" *ngIf='tagApiService.isLoggedIn()'>
+  <div class="col-12">
+    <h1>Disabled Players</h1>
+    <table>
+      <tr>
+        <th>Preferred pseudo</th>
+        <th>Also known as</th>
+      </tr>
+      <tr *ngFor="let player of getUnactivePlayers()">
+
+        <td>{{ player.pseudo }}</td>
+        <td>{{ player.usual_pseudos }}</td>
+      </tr>
+    </table>
   </div>
 </div>

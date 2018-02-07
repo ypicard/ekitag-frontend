@@ -8,9 +8,10 @@ import {Observable} from 'rxjs/Observable';
 export class TagApiService {
 
   BASE_URL = "https://ekitag-api.herokuapp.com/v1/"
+  // BASE_URL = "http://localhost:5000/v1/"
 
   constructor(private http: HttpClient, public cookieService: CookieService) {
-    console.log('TagApiService')
+    console.log('TagApiService');
   }
 
   // ADMIN
@@ -65,7 +66,7 @@ export class TagApiService {
     formData.append('pseudo', pseudo)
     return this.http.post(this.BASE_URL + 'users', formData)
   }
-Je 
+
   addPseudo(user, newPseudo) {
     if (user.usual_pseudos.indexOf(newPseudo < 0)) return; // No duplicate pseudo
 
@@ -92,6 +93,14 @@ Je
 
   getMatchStats(id) : Observable<Object[]>{
     return this.http.get(this.BASE_URL + 'matches/' + id + '/stats')
+  }
+
+  getPendingMatches(){
+        return this.http.get(this.BASE_URL + 'matches/pending')
+  }
+
+  getPendingMatch(id){
+        return this.http.get(this.BASE_URL + 'matches/pending/'+id)
   }
 
 
