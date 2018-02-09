@@ -10,13 +10,18 @@
 				<th>Validator</th>
 				<th>Season</th>
 			</tr>
-			<tr *ngFor="let match of pendingMatches" routerLink="/matches/{{ match.id }}">
+			<tr *ngFor="let match of pendingMatches" >
+				 <!-- routerLink="/matches/{{ match.id }}" -->
 				<td>{{ match.id }}</td>
 				<td>{{ match.r_score }}</td>
 				<td>{{ match.b_score }}</td>
 				<td>{{ match.datetime }}</td>
 				<td></td>
 				<td>Season</td>
+				<td><button (click)="confirmPendingMatch(match.id)">Add</button></td>
+				<td>
+					<button (click)="deletePendingMatch(match.id)">Delete</button>
+				</td>
 			</tr>
 		</table>
 	</div>

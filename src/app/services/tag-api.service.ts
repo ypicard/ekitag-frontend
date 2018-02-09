@@ -16,7 +16,13 @@ export class TagApiService {
 
   // ADMIN
   isLoggedIn() {
-    return this.cookieService.check('Bearer')
+    return this.cookieService.check('Bearer');
+  }
+
+  getAdminHeaders(){
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + this.cookieService.get('Bearer'));
+    return headers;
   }
 
   promoteAdmin(id, password) {
@@ -24,15 +30,13 @@ export class TagApiService {
     formData.append('user_id', id)
     formData.append('password', password)
 
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer ' + this.cookieService.get('Bearer'));
+    let headers = this.getAdminHeaders();
 
     return this.http.post(this.BASE_URL + 'users/' + id + '/promote', formData, { headers: headers })
   }
 
   downgradeAdmin(id) {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer ' + this.cookieService.get('Bearer'));
+    let headers = this.getAdminHeaders();
 
     return this.http.delete(this.BASE_URL + 'users/' + id + '/promote', { headers: headers })
   }
@@ -91,17 +95,26 @@ export class TagApiService {
     return this.http.get(this.BASE_URL + 'matches')
   }
 
-  getMatchStats(id) : Observable<Object[]>{
+  getMatchStats(id): Observable<Object[]> {
     return this.http.get(this.BASE_URL + 'matches/' + id + '/stats')
   }
 
   getPendingMatches(){
-        return this.http.get(this.BASE_URL + 'matches/pending')
+        return this.http.get(this.BASE_URL + 'matches/pending');
   }
 
   getPendingMatch(id){
-        return this.http.get(this.BASE_URL + 'matches/pending/'+id)
+        return this.http.get(this.BASE_URL + 'matches/pending/' + id);
   }
+
+  deletePendingMatch(id){
+    let headers = this.getAdminHeaders();
+    return this.http.delete(this.BASE_URL + 'matches/pending/' + id, { headers: headers });
+  }
+
+  // confirmMatch(id) {
+  //   return this.http.put(this.BASE_URL + 'matches/pending/' + id)
+  // }
 
 
 
