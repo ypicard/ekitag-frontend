@@ -7,8 +7,8 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class TagApiService {
 
-  BASE_URL = "https://ekitag-api.herokuapp.com/v1/"
-  // BASE_URL = "http://localhost:5000/v1/"
+  // BASE_URL = "https://ekitag-api.herokuapp.com/v1/"
+  BASE_URL = "http://localhost:5000/v1/"
 
   constructor(private http: HttpClient, public cookieService: CookieService) {
     console.log('TagApiService');
@@ -30,15 +30,11 @@ export class TagApiService {
     formData.append('user_id', id)
     formData.append('password', password)
 
-    let headers = this.getAdminHeaders();
-
-    return this.http.post(this.BASE_URL + 'users/' + id + '/promote', formData, { headers: headers })
+    return this.http.post(this.BASE_URL + 'users/' + id + '/promote', formData, { headers: this.getAdminHeaders() })
   }
 
   downgradeAdmin(id) {
-    let headers = this.getAdminHeaders();
-
-    return this.http.delete(this.BASE_URL + 'users/' + id + '/promote', { headers: headers })
+    return this.http.delete(this.BASE_URL + 'users/' + id + '/promote', { headers: this.getAdminHeaders() })
   }
 
   login(trigram, password) {
@@ -108,14 +104,11 @@ export class TagApiService {
   }
 
   deletePendingMatch(id){
-    let headers = this.getAdminHeaders();
-    return this.http.delete(this.BASE_URL + 'matches/pending/' + id, { headers: headers });
+    return this.http.delete(this.BASE_URL + 'matches/pending/' + id, { headers: this.getAdminHeaders() });
   }
 
-  // confirmMatch(id) {
-  //   return this.http.put(this.BASE_URL + 'matches/pending/' + id)
-  // }
-
-
+  confirmPendingMatch(id) {
+    return this.http.put(this.BASE_URL + 'matches/pending/' + id, {}, { headers: this.getAdminHeaders() });
+  }
 
 }

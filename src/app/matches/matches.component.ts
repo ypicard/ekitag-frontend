@@ -34,6 +34,15 @@ export class MatchesComponent {
     })
   }
 
+  confirmPendingMatch(id) {
+    this.tagApiService.confirmPendingMatch(id).subscribe(res => {
+      this.getPendingMatches();
+      this.getRecentMatches();
+    }, error => {
+      alert(error.statusText);
+    });
+  }
+
   deletePendingMatch(id) {
     this.tagApiService.deletePendingMatch(id).subscribe(res => {
       this.getPendingMatches();
