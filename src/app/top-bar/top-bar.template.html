@@ -1,9 +1,30 @@
-<nav class="navbar navbar-light bg-faded">
-  <a class="navbar-brand" routerLink="/home">Home</a>
-  <a class="navbar-brand" routerLink="/algo">Algo</a>
-  <a class="navbar-brand" routerLink="/matches">Match History</a>
-  <a class="navbar-brand" routerLink="/hall_of_fame">Hall Of Fame</a>
-  <a class="navbar-brand" routerLink="/players">Players</a>
-  <a class="navbar-brand" routerLink="/leagues">Leagues</a>
-  <a class="navbar-brand" routerLink="/auth">Login</a>
-</nav>
+<div class='topbar'>
+  <div class='part-1'>
+    <img src="/assets/images/tagpro_eki.png">
+    <div>
+      <div id="login" routerLink="/auth">Log In</div>
+      <div id="players" routerLink="/players">Players</div>
+    </div>
+
+
+  </div>
+  <div class='row'>
+    <div class='col-12 tabs'>
+      <div class='tab' routerLink="/home" routerLinkActive="active">
+        Home
+      </div>
+      <div class='tab' routerLink="/algo" routerLinkActive="active">
+        Algo
+      </div>
+      <div class='tab' routerLink="/matches" routerLinkActive="active">
+        Match History
+      </div>
+      <div class='tab' routerLink="/hall_of_fame" routerLinkActive="active">
+        Hall Of Fame
+      </div>
+      <div class='tab' routerLink="/leagues" routerLinkActive="active">
+        Leagues
+      </div>
+    </div>
+  </div>
+</div>
