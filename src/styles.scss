@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "_variables.scss";
+
+// GLOBAL STYLES
+html,
+body {
+  height: 100%;
+  font-family: "Lato", sans-serif;
+  background-color: $tag-gray;
+  color: $text;
+}
+
+h1 {
+  color: #8BC34A;
+  margin: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #1b1b1b;
+}
+
+button {
+  text-align: center;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: bold;
+  color: #222;
+  padding: .5em;
+  background: #CDDC39;
+  margin-bottom: 13px;
+  border-radius: 3px;
+  border: 1px solid #827717;
+  box-shadow: 0 3px #827717;
+  text-transform: uppercase;
+}
+

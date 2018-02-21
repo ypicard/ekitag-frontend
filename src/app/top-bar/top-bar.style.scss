@@ -1,4 +1,5 @@
-@import "../_variables.scss";
+@import "../../_variables.scss";
+
 .topbar {
   background-image: url('/assets/images/banner.jpg');
   margin-bottom: 40px;
@@ -11,9 +12,9 @@
 }
 
 #login {
-    cursor: pointer;
+  cursor: pointer;
   color: $text;
-  background: #0E8AE0;
+  background: $tag-blue;
   border: 1px solid #095C96;
   box-shadow: 0 3px #095C96;
   border-radius: 3px;
@@ -24,10 +25,10 @@
 }
 
 #players {
-    cursor: pointer;
+  cursor: pointer;
   margin-top: 10px;
   text-align: center;
-  background: #353535;
+  background: $tag-light-gray;
   border: 1px solid #404040;
   padding: 8px 10px;
   border-radius: 3px;
