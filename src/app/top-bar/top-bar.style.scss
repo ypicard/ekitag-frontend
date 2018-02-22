@@ -1,5 +1,4 @@
 @import "../../_variables.scss";
-
 .topbar {
   background-image: url('/assets/images/banner.jpg');
   margin-bottom: 40px;
@@ -9,19 +8,6 @@
     display: flex;
     justify-content: space-between;
   }
-}
-
-
-#players {
-  cursor: pointer;
-  margin-top: 10px;
-  text-align: center;
-  background: $tag-light-gray;
-  border: 1px solid #404040;
-  padding: 8px 10px;
-  border-radius: 3px;
-  color: $text-gray;
-  font-size: 14px;
 }
 
 img {

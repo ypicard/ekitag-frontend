@@ -37,7 +37,6 @@ button {
   border-radius: 3px;
   border: 1px solid #827717;
   box-shadow: 0 3px #827717;
-  text-transform: uppercase;
   cursor: pointer;
 }
 
@@ -52,6 +51,19 @@ button {
   padding: 5px;
   text-transform: uppercase;
   text-align: center;
+}
+
+.gray-button {
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: center;
+  background: $tag-light-gray;
+  border: 1px solid #404040;
+  padding: 8px 10px;
+  border-radius: 3px;
+  color: $text-gray;
+  font-size: 14px;
+  box-shadow: none;
 }
 
 .form-control {
@@ -111,9 +123,13 @@ table {
     td {
       padding: 0.2em 0.5em;
     }
-  }
-  tr:nth-child(2n) {
-    background: #404040;
+    &:nth-child(2n) {
+      background: #404040;
+    }
+    &:hover{
+      color: $tag-green;
+    }
+
   }
 }
 

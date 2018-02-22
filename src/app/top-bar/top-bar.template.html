@@ -4,7 +4,7 @@
     <div>
       <div class="blue-button" *ngIf='!authService.isLoggedIn()' routerLink="/auth">Log In</div>
       <div class="blue-button" *ngIf='authService.isLoggedIn()' (click)='authService.logout()'>Log Out</div>
-      <div id="players" routerLink="/players">Players</div>
+      <div class='gray-button' routerLink="/players">Players</div>
     </div>
   </div>
   <div class='row'>
