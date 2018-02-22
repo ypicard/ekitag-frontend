@@ -13,7 +13,7 @@ export class PlayerComponent {
 	player: any;
 	newPseudo: String = '';
 
-	constructor(private tagApiService: TagApiService, private route: ActivatedRoute) {
+	constructor(public tagApiService: TagApiService, private route: ActivatedRoute) {
 		console.log('PlayerComponent')
 		this.route.params.subscribe(params => {
 			this.tagApiService.getUser(params['id']).subscribe(resUser => {

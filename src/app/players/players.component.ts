@@ -26,7 +26,7 @@ export class PlayersComponent {
   pseudo: String;
   trigram: String;
 
-  constructor(public route: ActivatedRoute, private tagApiService: TagApiService) {
+  constructor(public route: ActivatedRoute, public tagApiService: TagApiService) {
     console.log('PlayersComponent');
     this.route.data.subscribe(val => {
       this.players = val.players;

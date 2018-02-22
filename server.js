@@ -6,7 +6,7 @@ app.use(express.static(__dirname + '/dist'));
 
 // Catch all other routes and return the index file
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname + 'dist/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 // Start the app by listening on the default Heroku port
 var myPort = process.env.PORT || 8080
