@@ -2,11 +2,14 @@
   <div class="col-12">
     <h1>LOGIN</h1>
     <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-      <label for="trigram">Pseudo</label>
-      <input type="text" name="pseudo" class="form-control" ngModel>
-      <label for="password">Password</label>
-      <input type="password" name="password" class="form-control" ngModel>
-        <button type="submit">Login</button>
+      <label class='col-sm-2' for="trigram">Pseudo</label>
+      <input type="text" name="pseudo" class="col-sm-8 form-control" ngModel>
+      <br>
+      <label class='col-sm-2' for="password">Password</label>
+      <input type="password" name="password" class="col-sm-8 form-control" ngModel>
+      <br>
+      <hr>
+      <button type="submit">Login</button>
     </form>
   </div>
 </div>
