@@ -38,15 +38,17 @@
   <div class="col-12">
     <h1>Disabled Players</h1>
     <table>
-      <tr>
+      <thead>
         <th>Preferred pseudo</th>
         <th>Also known as</th>
-      </tr>
-      <tr *ngFor="let player of getUnactivePlayers()">
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of getUnactivePlayers()">
 
-        <td>{{ player.pseudo }}</td>
-        <td>{{ player.usual_pseudos }}</td>
-      </tr>
+          <td class='text-right'>{{ player.pseudo }}</td>
+          <td>{{ player.usual_pseudos }}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </div>

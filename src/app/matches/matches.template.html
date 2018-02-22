@@ -1,51 +1,65 @@
 <div class="row">
-	<div class="col-12">
-		<h1>Pending matches</h1>
-		<table>
-			<tr>
-				<th>ID</th>
-				<th>Red score</th>
-				<th>Blue score</th>
-				<th>Date</th>
-				<th>Validator</th>
-				<th>Season</th>
-			</tr>
-			<tr *ngFor="let match of pendingMatches" >
-				 <!-- routerLink="/matches/{{ match.id }}" -->
-				<td>{{ match.id }}</td>
-				<td>{{ match.r_score }}</td>
-				<td>{{ match.b_score }}</td>
-				<td>{{ match.datetime }}</td>
-				<td></td>
-				<td>Season</td>
-				<td><button (click)="confirmPendingMatch(match.id)">Confirm</button></td>
-				<td>
-					<button (click)="deletePendingMatch(match.id)">Delete</button>
-				</td>
-			</tr>
-		</table>
-	</div>
+  <div class="col-12">
+    <h1>Pending matches</h1>
+    <table>
+      <thead>
+        <th>ID</th>
+        <th>Red score</th>
+        <th>Blue score</th>
+        <th>Date</th>
+        <th>Validator</th>
+        <th>Season</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let match of pendingMatches" class='pointer'>
+          <!-- routerLink="/matches/{{ match.id }}" -->
+          <td>{{ match.id }}</td>
+          <td>{{ match.r_score }}</td>
+          <td>{{ match.b_score }}</td>
+          <td>{{ match.datetime }}</td>
+          <td></td>
+          <td>Season</td>
+          <td>
+            <button (click)="confirmPendingMatch(match.id)">Confirm</button>
+          </td>
+          <td>
+            <button (click)="deletePendingMatch(match.id)">Delete</button>
+          </td>
+		</tr>
+		<tr *ngIf="pendingMatches.length == 0">
+			<td>All clear</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <div class="row">
-	<div class="col-12">
-		<h1>Match history</h1>
-		<table>
-			<tr>
-				<th>ID</th>
-				<th>Red score</th>
-				<th>Blue score</th>
-				<th>Date</th>
-				<th>Validator</th>
-				<th>Season</th>
-			</tr>
-			<tr *ngFor="let match of recentMatches" routerLink="/matches/{{ match.id }}">
-				<td>{{ match.id }}</td>
-				<td>{{ match.r_score }}</td>
-				<td>{{ match.b_score }}</td>
-				<td>{{ match.datetime }}</td>
-				<td>{{ match.validator.pseudo }}</td>
-				<td>Season</td>
-			</tr>
-		</table>
-	</div>
+  <div class="col-12">
+    <h1>Match history</h1>
+    <table>
+      <thead>
+        <th>ID</th>
+        <th>Red score</th>
+        <th>Blue score</th>
+        <th>Date</th>
+        <th>Validator</th>
+        <th>Season</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let match of recentMatches" routerLink="/matches/{{ match.id }}" class='pointer'>
+          <td>{{ match.id }}</td>
+          <td class='text-right'>{{ match.r_score }}</td>
+          <td>{{ match.b_score }}</td>
+          <td class='text-right'>{{ match.datetime | date: 'EEE dd yyyy, HH:mm'}}</td>
+          <td>{{ match.validator.pseudo }}</td>
+          <td>Season ?</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

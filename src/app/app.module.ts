@@ -24,6 +24,8 @@ import { LeaguesComponent } from './leagues/leagues.component';
 
 // PROVIDERS
 import { TagApiService } from './services/tag-api.service';
+import { AuthService } from './services/auth.service';
+
 
 // PIPES
 import { ArraySortPipe } from './pipes';
@@ -82,7 +84,7 @@ const appRoutes: Routes = [
     ClipboardModule,
     NgbModule.forRoot()
   ],
-  providers: [TagApiService, CookieService, PlayersResolver],
+  providers: [TagApiService, CookieService, PlayersResolver, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

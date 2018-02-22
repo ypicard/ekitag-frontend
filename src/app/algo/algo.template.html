@@ -1,32 +1,56 @@
 <div id="algo-container">
   <div class="row">
-    <div id="header" class="col">
+    <div class="col">
       <h1>ALGORITHM</h1>
     </div>
   </div>
   <div class="row">
     <div class="col-4">
-      <h2>Add players</h2>
-      <div *ngFor="let player of players | sort: 'pseudo'" class="player" (click)="selectPlayer(player)">
-        {{ player.pseudo }}
+      <div class='group'>
+        <div class='header'>
+          Add players
+        </div>
+        <ul class='content'>
+          <li *ngFor="let player of players | sort: 'pseudo'" class="player" (click)="selectPlayer(player)">
+            {{ player.pseudo }}
+          </li>
+        </ul>
       </div>
     </div>
     <div class="col-4">
-      <h2>Selected players</h2>
-      <div *ngFor="let player of selectedPlayers | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
-        {{ player.pseudo }}
+      <div class='group'>
+        <div class='header'>
+          Selected players
+        </div>
+        <ul class='content'>
+          <li *ngFor="let player of selectedPlayers | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
+            {{ player.pseudo }}
+          </li>
+        </ul>
       </div>
     </div>
     <div class="col-4">
-      <h2>TEAMS</h2>
-      <div>RED</div>
-      <div *ngFor="let player of redTeam | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
-        {{ player.pseudo }}
+      <div class='group'>
+        <div class='header red'>
+          RED
+        </div>
+        <ul class='content'>
+        <li *ngFor="let player of redTeam | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
+          {{ player.pseudo }}
+        </li>
+        </ul>
       </div>
-      <div>BLUE</div>
-      <div *ngFor="let player of blueTeam | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
-        {{ player.pseudo }}
+      <div class='group'>
+        <div class='header blue'>
+          BLUE
+        </div>
+        <ul class='content'>
+        <li *ngFor="let player of blueTeam | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
+          {{ player.pseudo }}
+        </li>
+        </ul>
       </div>
+
       <button ngxClipboard [cbContent]="copyTeams()" [disabled]="blueTeam.length + redTeam.length < 2">COPY TEAMS</button>
     </div>
   </div>

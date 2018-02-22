@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TagApiService } from '../services/tag-api.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'top-bar',
@@ -8,7 +10,7 @@ import { Component } from '@angular/core';
 
 export class TopBarComponent {
 
-  constructor() {
+  constructor(public authService: AuthService) {
   }
 
 }

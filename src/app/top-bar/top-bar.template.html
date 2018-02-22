@@ -2,11 +2,10 @@
   <div class='part-1'>
     <img src="/assets/images/tagpro_eki.png">
     <div>
-      <div id="login" routerLink="/auth">Log In</div>
+      <div class="blue-button" *ngIf='!authService.isLoggedIn()' routerLink="/auth">Log In</div>
+      <div class="blue-button" *ngIf='authService.isLoggedIn()' (click)='authService.logout()'>Log Out</div>
       <div id="players" routerLink="/players">Players</div>
     </div>
-
-
   </div>
   <div class='row'>
     <div class='col-12 tabs'>
