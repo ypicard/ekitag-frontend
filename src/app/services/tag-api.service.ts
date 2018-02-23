@@ -41,14 +41,15 @@ export class TagApiService {
     let formData = new FormData()
     formData.append('login', trigram)
     formData.append('password', password)
-    return this.http.post(this.BASE_URL + 'admin/', formData)
+    return this.http.post(this.BASE_URL + 'admin/', formData);
   }
 
   deactivateUser(id) {
-    let formData = new FormData();
-    formData.append('user_id', id)
+    // let formData = new FormData();
+    // formData.append('user_id', id);
 
-    return this.http.delete(this.BASE_URL + 'users/' + id, formData)
+    // TODO: fix in back i think
+    return this.http.delete(this.BASE_URL + 'users/' + id);
   }
 
   // USERS
@@ -91,8 +92,9 @@ export class TagApiService {
     return this.http.get(this.BASE_URL + 'matches')
   }
 
-  getMatchStats(id): Observable<Object[]> {
-    return this.http.get(this.BASE_URL + 'matches/' + id + '/stats')
+  getMatchStats(id): Observable<Object> {
+    // Used to be: getMatchStats(id): Observable<Object[]> {
+    return this.http.get(this.BASE_URL + 'matches/' + id + '/stats');
   }
 
   getPendingMatches(){

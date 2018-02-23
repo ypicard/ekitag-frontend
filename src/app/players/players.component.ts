@@ -8,9 +8,6 @@ import {
   FormsModule
 } from '@angular/forms';
 import {
-  $
-} from 'protractor';
-import {
   ActivatedRoute
 } from '@angular/router';
 
