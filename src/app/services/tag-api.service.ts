@@ -1,8 +1,17 @@
-import { Injectable } from '@angular/core';
+import {
+  Injectable
+} from '@angular/core';
 import 'rxjs/add/operator/map';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CookieService } from 'ng2-cookies';
-import {Observable} from 'rxjs/Observable';
+import {
+  HttpClient,
+  HttpHeaders
+} from '@angular/common/http';
+import {
+  CookieService
+} from 'ng2-cookies';
+import {
+  Observable
+} from 'rxjs/Observable';
 
 @Injectable()
 export class TagApiService {
@@ -19,7 +28,7 @@ export class TagApiService {
     return this.cookieService.check('Bearer');
   }
 
-  getAdminHeaders(){
+  getAdminHeaders() {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Bearer ' + this.cookieService.get('Bearer'));
     return headers;
@@ -30,11 +39,15 @@ export class TagApiService {
     formData.append('user_id', id)
     formData.append('password', password)
 
-    return this.http.post(this.BASE_URL + 'users/' + id + '/promote', formData, { headers: this.getAdminHeaders() })
+    return this.http.post(this.BASE_URL + 'users/' + id + '/promote', formData, {
+      headers: this.getAdminHeaders()
+    })
   }
 
   downgradeAdmin(id) {
-    return this.http.delete(this.BASE_URL + 'users/' + id + '/promote', { headers: this.getAdminHeaders() })
+    return this.http.delete(this.BASE_URL + 'users/' + id + '/promote', {
+      headers: this.getAdminHeaders()
+    })
   }
 
   login(trigram, password) {
@@ -92,25 +105,29 @@ export class TagApiService {
     return this.http.get(this.BASE_URL + 'matches')
   }
 
-  getMatchStats(id): Observable<Object> {
+  getMatchStats(id): Observable < Object > {
     // Used to be: getMatchStats(id): Observable<Object[]> {
     return this.http.get(this.BASE_URL + 'matches/' + id + '/stats');
   }
 
-  getPendingMatches(){
-        return this.http.get(this.BASE_URL + 'matches/pending');
+  getPendingMatches() {
+    return this.http.get(this.BASE_URL + 'matches/pending');
   }
 
-  getPendingMatch(id){
-        return this.http.get(this.BASE_URL + 'matches/pending/' + id);
+  getPendingMatch(id) {
+    return this.http.get(this.BASE_URL + 'matches/pending/' + id);
   }
 
-  deletePendingMatch(id){
-    return this.http.delete(this.BASE_URL + 'matches/pending/' + id, { headers: this.getAdminHeaders() });
+  deletePendingMatch(id) {
+    return this.http.delete(this.BASE_URL + 'matches/pending/' + id, {
+      headers: this.getAdminHeaders()
+    });
   }
 
   confirmPendingMatch(id) {
-    return this.http.put(this.BASE_URL + 'matches/pending/' + id, {}, { headers: this.getAdminHeaders() });
+    return this.http.put(this.BASE_URL + 'matches/pending/' + id, {}, {
+      headers: this.getAdminHeaders()
+    });
   }
 
   // ------------------------- SEASONS
@@ -127,16 +144,20 @@ export class TagApiService {
     return this.http.get(this.BASE_URL + 'seasons/' + id + '/matches');
   }
 
-  endSeason(id){
-    return this.http.delete(this.BASE_URL + 'seasons/' + id, { headers: this.getAdminHeaders() });
+  endSeason(id) {
+    return this.http.delete(this.BASE_URL + 'seasons/' + id, {
+      headers: this.getAdminHeaders()
+    });
   }
 
-  createSeason(name, maxMatches, maxTime){
+  createSeason(name, maxMatches, maxTime) {
     let formData = new FormData();
     formData.append('name', name);
     formData.append('max_time', maxTime);
     formData.append('max_matches', maxMatches);
-    return this.http.post(this.BASE_URL + 'seasons', formData, { headers: this.getAdminHeaders() });
+    return this.http.post(this.BASE_URL + 'seasons', formData, {
+      headers: this.getAdminHeaders()
+    });
   }
 
 }

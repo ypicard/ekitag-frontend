@@ -51,7 +51,7 @@
         <th>Season</th>
       </thead>
       <tbody>
-        <tr *ngFor="let match of recentMatches" routerLink="/matches/{{ match.id }}" class='pointer'>
+        <tr *ngFor="let match of matches" routerLink="/matches/{{ match.id }}" class='pointer'>
           <td>{{ match.id }}</td>
           <td class='text-right'>{{ match.r_score }}</td>
           <td>{{ match.b_score }}</td>

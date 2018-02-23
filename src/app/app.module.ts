@@ -38,6 +38,8 @@ import { CookieService } from 'ng2-cookies';
 import { PlayersResolver } from './resolves/players.resolver';
 import { SeasonsResolver } from './resolves/seasons.resolver';
 import { SeasonResolver } from './resolves/season.resolver';
+import { MatchesResolver } from './resolves/matches.resolver';
+import { PendingMatchesResolver } from './resolves/pending-matches.resolver';
 
 // Routes
 const appRoutes: Routes = [
@@ -45,7 +47,7 @@ const appRoutes: Routes = [
 
   { path: 'home', component: HomeComponent },
 
-  { path: 'matches', component: MatchesComponent },
+  { path: 'matches', component: MatchesComponent, resolve: { matches: MatchesResolver, pendingMatches: PendingMatchesResolver } },
   { path: 'matches/:id', component: MatchComponent },
 
   { path: 'players', component: PlayersComponent, resolve: { players: PlayersResolver } },
@@ -89,7 +91,7 @@ const appRoutes: Routes = [
     ClipboardModule,
     NgbModule.forRoot()
   ],
-  providers: [TagApiService, CookieService, PlayersResolver, AuthService, SeasonsResolver, SeasonResolver],
+  providers: [TagApiService, CookieService, PlayersResolver, AuthService, SeasonsResolver, SeasonResolver, MatchesResolver, PendingMatchesResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

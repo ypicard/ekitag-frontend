@@ -4,6 +4,9 @@ import {
 import {
   TagApiService
 } from '../services/tag-api.service';
+import {
+  ActivatedRoute
+} from '@angular/router';
 
 @Component({
   selector: 'matches',
@@ -13,18 +16,20 @@ import {
 
 export class MatchesComponent {
 
-  recentMatches: any;
+  matches: any;
   pendingMatches: any;
 
-  constructor(private tagApiService: TagApiService) {
+  constructor(private tagApiService: TagApiService, public route: ActivatedRoute) {
     console.log('MatchHistoryComponent')
-    this.getRecentMatches();
-    this.getPendingMatches();
+    this.route.data.subscribe(val => {
+      this.matches = val.matches;
+      this.pendingMatches = val.pendingMatches;
+    });
   }
 
   getRecentMatches() {
     this.tagApiService.getRecentMatches().subscribe(res => {
-      this.recentMatches = res;
+      this.matches = res;
     })
   }
 
@@ -36,8 +41,7 @@ export class MatchesComponent {
 
   confirmPendingMatch(id) {
     this.tagApiService.confirmPendingMatch(id).subscribe(res => {
-      this.getPendingMatches();
-      this.getRecentMatches();
+      this.updateUI();
     }, error => {
       alert(error.statusText);
     });
@@ -45,10 +49,15 @@ export class MatchesComponent {
 
   deletePendingMatch(id) {
     this.tagApiService.deletePendingMatch(id).subscribe(res => {
-      this.getPendingMatches();
+      this.updateUI();
     }, error => {
       alert(error.statusText);
     });
+  }
+
+  updateUI(){
+    this.getPendingMatches();
+    this.getRecentMatches();
   }
 
 }
