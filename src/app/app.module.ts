@@ -20,12 +20,12 @@ import { PlayerComponent } from './player/player.component';
 import { MatchComponent } from './match/match.component';
 import { MatchesComponent } from './matches/matches.component';
 
-import { LeaguesComponent } from './leagues/leagues.component';
+import { SeasonsComponent } from './seasons/seasons.component';
+import { SeasonComponent } from './season/season.component';
 
 // PROVIDERS
 import { TagApiService } from './services/tag-api.service';
 import { AuthService } from './services/auth.service';
-
 
 // PIPES
 import { ArraySortPipe } from './pipes';
@@ -36,6 +36,9 @@ import { CookieService } from 'ng2-cookies';
 
 // RESOLVERS
 import { PlayersResolver } from './resolves/players.resolver';
+import { SeasonsResolver } from './resolves/seasons.resolver';
+import { SeasonResolver } from './resolves/season.resolver';
+
 // Routes
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -48,7 +51,8 @@ const appRoutes: Routes = [
   { path: 'players', component: PlayersComponent, resolve: { players: PlayersResolver } },
   { path: 'players/:id', component: PlayerComponent },
 
-  { path: 'leagues', component: LeaguesComponent },
+  { path: 'seasons', component: SeasonsComponent, resolve: { seasons: SeasonsResolver }},
+  { path: 'seasons/:id', component: SeasonComponent, resolve: { season: SeasonResolver } },
 
   { path: 'hall_of_fame', component: HallOfFameComponent },
   { path: 'algo', component: AlgoComponent },
@@ -67,7 +71,8 @@ const appRoutes: Routes = [
     HallOfFameComponent,
     AuthComponent,
     MatchComponent,
-    LeaguesComponent,
+    SeasonsComponent,
+    SeasonComponent,
     // PIPES
     ArraySortPipe
   ],
@@ -84,7 +89,7 @@ const appRoutes: Routes = [
     ClipboardModule,
     NgbModule.forRoot()
   ],
-  providers: [TagApiService, CookieService, PlayersResolver, AuthService],
+  providers: [TagApiService, CookieService, PlayersResolver, AuthService, SeasonsResolver, SeasonResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

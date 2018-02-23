@@ -7,14 +7,14 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class TagApiService {
 
-  BASE_URL = "https://ekitag-api.herokuapp.com/v1/"
-  // BASE_URL = "http://localhost:5000/v1/"
+  // BASE_URL = "https://ekitag-api.herokuapp.com/v1/"
+  BASE_URL = "http://localhost:5000/v1/"
 
   constructor(private http: HttpClient, public cookieService: CookieService) {
     console.log('TagApiService');
   }
 
-  // ADMIN
+  // ------------------------- ADMIN
   isLoggedIn() {
     return this.cookieService.check('Bearer');
   }
@@ -52,7 +52,7 @@ export class TagApiService {
     return this.http.delete(this.BASE_URL + 'users/' + id);
   }
 
-  // USERS
+  // ------------------------- USERS
   getUser(id) {
     return this.http.get(this.BASE_URL + 'users/' + id)
   }
@@ -82,7 +82,7 @@ export class TagApiService {
     return this.http.put(this.BASE_URL + 'users/' + user.id, formData)
   }
 
-  // MATCHES
+  // ------------------------- MATCHES
 
   getMatch(id) {
     return this.http.get(this.BASE_URL + 'matches/' + id)
@@ -111,6 +111,32 @@ export class TagApiService {
 
   confirmPendingMatch(id) {
     return this.http.put(this.BASE_URL + 'matches/pending/' + id, {}, { headers: this.getAdminHeaders() });
+  }
+
+  // ------------------------- SEASONS
+
+  getAllSeasons() {
+    return this.http.get(this.BASE_URL + 'seasons');
+  }
+
+  getSeason(id) {
+    return this.http.get(this.BASE_URL + 'seasons/' + id);
+  }
+
+  getSeasonMatches(id) {
+    return this.http.get(this.BASE_URL + 'seasons/' + id + '/matches');
+  }
+
+  endSeason(id){
+    return this.http.delete(this.BASE_URL + 'seasons/' + id, { headers: this.getAdminHeaders() });
+  }
+
+  createSeason(name, maxMatches, maxTime){
+    let formData = new FormData();
+    formData.append('name', name);
+    formData.append('max_time', maxTime);
+    formData.append('max_matches', maxMatches);
+    return this.http.post(this.BASE_URL + 'seasons', formData, { headers: this.getAdminHeaders() });
   }
 
 }

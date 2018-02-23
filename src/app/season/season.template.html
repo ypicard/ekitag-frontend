@@ -1,0 +1,52 @@
+<h1>SEASON {{ season.name }}</h1>
+<div class="row">
+  <div class="col-12">
+    <table>
+      <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Max Time</th>
+        <th>Played Matches</th>
+        <th>Max Matches</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class='text-right'>{{ season.id }}</td>
+          <td>{{ season.name }}</td>
+          <td>{{ season.start_date }}</td>
+          <td>{{ season.end_date }}</td>
+          <td>{{ season.max_time }}</td>
+          <td>{{ season.played_matches }}</td>
+          <td>{{ season.max_matches }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<h3>Matches</h3>
+<div class="row">
+  <div class="col-12">
+    <table>
+      <thead>
+        <th>ID</th>
+        <th>Red score</th>
+        <th>Blue score</th>
+        <th>Date</th>
+        <th>Validator</th>
+        <th>Season</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let match of matches" routerLink="/matches/{{ match.id }}" class='pointer'>
+          <td>{{ match.id }}</td>
+          <td class='text-right'>{{ match.r_score }}</td>
+          <td>{{ match.b_score }}</td>
+          <td class='text-right'>{{ match.datetime | date: 'EEE dd yyyy, HH:mm'}}</td>
+          <td>{{ match.validator.pseudo }}</td>
+          <td>Season ?</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
