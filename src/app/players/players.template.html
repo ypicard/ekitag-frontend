@@ -3,12 +3,14 @@
     <h1>Players</h1>
     <table>
       <thead>
+        <th>ID</th>
         <th>Preferred pseudo</th>
         <th>Also known as</th>
         <th></th>
       </thead>
       <tbody>
         <tr *ngFor="let player of getActivePlayers()" routerLink="/players/{{ player.id }}" class="pointer">
+          <td class='text-right'>{{ player.id }}</td>
           <td class='text-right'>{{ player.pseudo }}</td>
           <td>{{ player.usual_pseudos }}</td>
           <td>
@@ -19,7 +21,7 @@
     </table>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf='tagApiService.isLoggedIn()'>
   <div class="col-12">
     <h1>CREATE USER</h1>
     <form>
@@ -39,12 +41,13 @@
     <h1>Disabled Players</h1>
     <table>
       <thead>
+        <th>ID</th>
         <th>Preferred pseudo</th>
         <th>Also known as</th>
       </thead>
       <tbody>
         <tr *ngFor="let player of getUnactivePlayers()">
-
+          <td class='text-right'>{{ player.pseudo }}</td>
           <td class='text-right'>{{ player.pseudo }}</td>
           <td>{{ player.usual_pseudos }}</td>
         </tr>

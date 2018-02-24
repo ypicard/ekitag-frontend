@@ -47,6 +47,8 @@ export class PlayersComponent {
   }
 
   refreshUI() {
+    this.trigram = null;
+    this.pseudo = null;
     this.tagApiService.getAllUsers().subscribe(res => {
       this.players = res;
     })

@@ -29,10 +29,13 @@ export class AuthComponent {
   }
 
   login(form) {
+    console.log('ici:' ,form.value.pseudo, form.value.password)
     this.authService.login(form.value.pseudo, form.value.password).subscribe(res => {
+      console.log(res)
       this.cookieService.set('Bearer', res['Bearer']);
       this.updateLoggedIn();
     }, err => {
+      console.log(err)
       alert('UNAUTHORIZED')
     })
   }
