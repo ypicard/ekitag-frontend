@@ -47,10 +47,9 @@ export class PlayersComponent {
   }
 
   refreshUI() {
-    // this.tagApiService.getAllUsers().subscribe(res => {
-    //   this.players = res;
-    //   console.log(res)
-    // })
+    this.tagApiService.getAllUsers().subscribe(res => {
+      this.players = res;
+    })
   }
 
   getActivePlayers() {
