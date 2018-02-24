@@ -53,11 +53,11 @@ const appRoutes: Routes = [
   { path: 'players', component: PlayersComponent, resolve: { players: PlayersResolver } },
   { path: 'players/:id', component: PlayerComponent },
 
-  { path: 'seasons', component: SeasonsComponent, resolve: { seasons: SeasonsResolver }},
+  { path: 'seasons', component: SeasonsComponent, resolve: { seasons: SeasonsResolver } },
   { path: 'seasons/:id', component: SeasonComponent, resolve: { season: SeasonResolver } },
 
   { path: 'hall_of_fame', component: HallOfFameComponent },
-  { path: 'algo', component: AlgoComponent },
+  { path: 'algo', component: AlgoComponent, resolve: { players: PlayersResolver } },
   { path: 'auth', component: AuthComponent },
 ]
 

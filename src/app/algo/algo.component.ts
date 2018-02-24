@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TagApiService } from '../services/tag-api.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'algo',
@@ -14,15 +15,11 @@ export class AlgoComponent {
   redTeam: any = [];
   blueTeam: any = []
 
-
-  constructor(private tagApiService: TagApiService) {
-    this.getAllPlayers()
-  }
-
-  getAllPlayers() {
-    this.tagApiService.getAllUsers().subscribe((res) => {
-      this.players = res
-    })
+  constructor(public route: ActivatedRoute, private tagApiService: TagApiService) {
+    console.log('AlgoComponent');
+    this.route.data.subscribe(val => {
+      this.players = val.players;
+    });
   }
 
   selectPlayer(player) {
