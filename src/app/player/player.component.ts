@@ -11,7 +11,7 @@ import { ActivatedRoute } from "@angular/router";
 export class PlayerComponent {
 
 	player: any;
-	newPseudo: String = '';
+	newPseudo: string = '';
 
 	constructor(public tagApiService: TagApiService, private route: ActivatedRoute) {
 		console.log('PlayerComponent')

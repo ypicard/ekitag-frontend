@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule } from '@angular/common/http'; // Which one use ?
+import {HttpClientModule } from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router'; // Routes
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // ng-bootstrap
@@ -19,6 +19,7 @@ import { PlayerComponent } from './player/player.component';
 
 import { MatchComponent } from './match/match.component';
 import { MatchesComponent } from './matches/matches.component';
+import { NewMatchComponent } from './new-match/new-match.component';
 
 import { SeasonsComponent } from './seasons/seasons.component';
 import { SeasonComponent } from './season/season.component';
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
 
   { path: 'matches', component: MatchesComponent, resolve: { matches: MatchesResolver, pendingMatches: PendingMatchesResolver } },
   { path: 'matches/:id', component: MatchComponent },
+  { path: 'new_match', component: NewMatchComponent, resolve: { players: PlayersResolver } },
 
   { path: 'players', component: PlayersComponent, resolve: { players: PlayersResolver } },
   { path: 'players/:id', component: PlayerComponent },
@@ -70,6 +72,7 @@ const appRoutes: Routes = [
     AlgoComponent,
     TopBarComponent,
     MatchesComponent,
+    NewMatchComponent,
     HallOfFameComponent,
     AuthComponent,
     MatchComponent,

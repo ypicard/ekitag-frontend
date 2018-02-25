@@ -38,6 +38,21 @@ button {
   border: 1px solid #827717;
   box-shadow: 0 3px #827717;
   cursor: pointer;
+  &:disabled{
+    background-color: gray;
+    border: 1px solid darken(gray, 20%);
+    box-shadow: 0 3px darken(gray, 20%);
+  }
+
+  &.red{
+     border: 1px solid darken($tag-red, 20%);
+     box-shadow: 0 3px darken($tag-red, 20%);
+  }
+   &.blue {
+     border: 1px solid darken($tag-blue, 20%);
+     box-shadow: 0 3px darken($tag-blue, 20%);
+   }
+
 }
 
 .blue-button {
@@ -67,7 +82,7 @@ button {
 }
 
 .form-control {
-  width: auto;
+  // width: auto;
   display: inline-block;
   color: $text;
   background: $tag-dark-gray;
@@ -165,4 +180,14 @@ hr {
       cursor: pointer;
     }
   }
+}
+
+.red {
+  background-color: $tag-red !important;
+  color: $text !important;
+}
+
+.blue {
+  background-color: $tag-blue !important;
+  color: $text !important;
 }

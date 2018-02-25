@@ -12,6 +12,7 @@ import {
 import {
   Observable
 } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
 
 @Injectable()
 export class TagApiService {
@@ -127,6 +128,34 @@ export class TagApiService {
   confirmPendingMatch(id) {
     return this.http.put(this.BASE_URL + 'matches/pending/' + id, {}, {
       headers: this.getAdminHeaders()
+    });
+  }
+
+  addPendingMatch(match, stats) {
+    let matchFormData = new FormData();
+    for (var k in match) {
+      matchFormData.append(k, match[k]);
+    }
+
+    return this.http.post(this.BASE_URL + 'matches/pending', matchFormData, {}).map(res => {
+      let matchId = res['value'];
+      let statRequests = [];
+
+      stats.forEach(pl => {
+        let statsFormData = new FormData();
+        statsFormData.append('match_id', matchId);
+        for (var k in pl) {
+          if (pl[k] != null) {
+            statsFormData.append(k, pl[k]);
+          }
+        }
+        statRequests.push(this.http.post(this.BASE_URL + 'matches/pending/' + matchId + '/stats', statsFormData, {}));
+      })
+
+      return Observable.forkJoin(statRequests)
+
+    }, err => {
+      console.log(err)
     });
   }
 

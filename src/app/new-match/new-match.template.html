@@ -1,0 +1,49 @@
+<div class='group'>
+  <div class='header'>
+    Add players
+  </div>
+  <ul class='content'>
+    <li *ngFor="let player of players | sort: 'pseudo'" class="player" (click)="selectPlayer(player)">
+      {{ player.pseudo }}
+    </li>
+  </ul>
+</div>
+<button (click)='toggleCurrentTeam()' [ngClass]='currentTeam'>{{ currentTeam }} Team</button>
+<form #newMatch="ngForm" (ngSubmit)="submitMatch(newMatch.value)">
+  Red Score: <input type='text' ngModel name='redScore' class='form-control' required/>
+  Blue Score: <input type='text' ngModel name='blueScore' class='form-control' required/>
+  <table>
+    <thead>
+      <th>Player</th>
+      <th>Score</th>
+      <th>Tags</th>
+      <th>Popped</th>
+      <th>Grabs</th>
+      <th>Drops</th>
+      <th>Hold</th>
+      <th>Captures</th>
+      <th>Prevent</th>
+      <th>Returns</th>
+      <th>Support</th>
+      <th>Pups</th>
+    </thead>
+    <tbody ngModelGroup="players">
+      <tr *ngFor="let player of teams['red'].concat(teams['blue'])" class='pointer' [ngModelGroup]="player.pseudo">
+        <td [ngClass]='player.team' (click)="removePlayer(player)">{{ player.pseudo }}</td>
+        <input type="hidden" name="pseudo" [ngModel]='player.pseudo'>
+        <td><input type='text' [(ngModel)]='player.score' name='score' class='form-control' required/></td>
+        <td><input type='text' [(ngModel)]='player.tags' name='tags' class='form-control'/></td>
+        <td><input type='text' [(ngModel)]='player.popped' name='popped' class='form-control'/></td>
+        <td><input type='text' [(ngModel)]='player.grabs' name='grabs' class='form-control'/></td>
+        <td><input type='text' [(ngModel)]='player.drops' name='drops' class='form-control'/></td>
+        <td><input type='text' [(ngModel)]='player.hold' name='hold' class='form-control'/></td>
+        <td><input type='text' [(ngModel)]='player.captures' name='captures' class='form-control'/></td>
+        <td><input type='text' [(ngModel)]='player.prevent' name='prevent' class='form-control'/></td>
+        <td><input type='text' [(ngModel)]='player.returns' name='returns' class='form-control'/></td>
+        <td><input type='text' [(ngModel)]='player.support' name='support' class='form-control'/></td>
+        <td><input type='text' [(ngModel)]='player.pups' name='pups' class='form-control'/></td>
+      </tr>
+      <button type="submit" [disabled]='!newMatch.form.valid'>Send</button>
+    </tbody>
+  </table>
+</form>

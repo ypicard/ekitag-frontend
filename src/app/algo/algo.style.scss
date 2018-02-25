@@ -1,15 +1,5 @@
 @import "../../_variables.scss";
 
-.red{
-  background-color: $tag-red;
-  color: $text;
-}
-
-.blue {
-  background-color: $tag-blue;
-  color: $text;
-}
-
 .player{
   &:hover{
     color: $tag-green;

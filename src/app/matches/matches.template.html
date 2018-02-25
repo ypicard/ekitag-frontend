@@ -1,3 +1,5 @@
+<button routerLink="/new_match">Add match</button>
+
 <div class="row">
   <div class="col-12">
     <h1>Pending matches</h1>
@@ -12,7 +14,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let match of pendingMatches" class='pointer'>
-          <!-- routerLink="/matches/{{ match.id }}" -->
           <td>{{ match.id }}</td>
           <td>{{ match.r_score }}</td>
           <td>{{ match.b_score }}</td>
@@ -25,15 +26,15 @@
           <td>
             <button (click)="deletePendingMatch(match.id)">Delete</button>
           </td>
-		</tr>
-		<tr *ngIf="pendingMatches.length == 0">
-			<td>All clear</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
+        </tr>
+        <tr *ngIf="pendingMatches.length == 0">
+          <td>All clear</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </div>

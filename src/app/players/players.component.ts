@@ -20,8 +20,8 @@ import {
 export class PlayersComponent {
 
   players: any;
-  pseudo: String;
-  trigram: String;
+  pseudo: string;
+  trigram: string;
 
   constructor(public route: ActivatedRoute, public tagApiService: TagApiService) {
     console.log('PlayersComponent');
