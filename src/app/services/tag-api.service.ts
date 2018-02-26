@@ -16,6 +16,12 @@ import 'rxjs/add/observable/forkJoin';
 import {
   Player
 } from '../_models/player.model';
+import { 
+  Match
+} from '../_models/match.model';
+import {
+  Statistics
+} from '../_models/statistics.model';
 
 @Injectable()
 export class TagApiService {
@@ -72,8 +78,10 @@ export class TagApiService {
   }
 
   getAllUsers(): Observable < Player[] > {
-    return this.http.get(this.BASE_URL + 'users').map((res:any[]) => {
-      return res.map(pl => { return new Player(pl)})
+    return this.http.get(this.BASE_URL + 'users').map((res: any[]) => {
+      return res.map(pl => {
+        return new Player(pl)
+      })
     })
   }
 
@@ -84,7 +92,7 @@ export class TagApiService {
     return this.http.post(this.BASE_URL + 'users', formData)
   }
 
-  addPseudo(user: Player, newPseudo: string): Observable<any> {
+  addPseudo(user: Player, newPseudo: string): Observable < any > {
     if (user.usualPseudos.indexOf(newPseudo) >= 0) return; // No duplicate pseudo
     let formData = new FormData();
     formData.append('user_id', user.id.toString())
@@ -99,24 +107,24 @@ export class TagApiService {
 
   // ------------------------- MATCHES
 
-  getMatch(id: number): Observable < any > {
+  getMatch(id: number): Observable < Match > {
     return this.http.get(this.BASE_URL + 'matches/' + id)
   }
 
-  getRecentMatches(): Observable < any > {
+  getRecentMatches(): Observable < Match[] > {
     return this.http.get(this.BASE_URL + 'matches')
   }
 
-  getMatchStats(id: number): Observable < Object > {
+  getMatchStats(id: number): Observable < Statistics[] > {
     // Used to be: getMatchStats(id): Observable<Object[]> {
     return this.http.get(this.BASE_URL + 'matches/' + id + '/stats');
   }
 
-  getPendingMatches(): Observable < any > {
+  getPendingMatches(): Observable < Match[] > {
     return this.http.get(this.BASE_URL + 'matches/pending');
   }
 
-  getPendingMatch(id: number): Observable < any > {
+  getPendingMatch(id: number): Observable < Match > {
     return this.http.get(this.BASE_URL + 'matches/pending/' + id);
   }
 
@@ -153,10 +161,10 @@ export class TagApiService {
         statRequests.push(this.http.post(this.BASE_URL + 'matches/pending/' + matchId + '/stats', statsFormData, {}));
       })
 
-      return Observable.forkJoin(statRequests)
+      return Observable.forkJoin(statRequests);
 
     }, err => {
-      console.log(err)
+      console.log(err);
     });
   }
 

@@ -7,6 +7,10 @@ import {
 import {
   ActivatedRoute
 } from '@angular/router';
+import { 
+  Match
+} from '../_models/match.model'
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'matches',
@@ -16,30 +20,30 @@ import {
 
 export class MatchesComponent {
 
-  matches: any;
-  pendingMatches: any;
+  matches: Match[];
+  pendingMatches: Match[];
 
-  constructor(private tagApiService: TagApiService, public route: ActivatedRoute) {
-    console.log('MatchHistoryComponent')
+  constructor(private tagApiService: TagApiService, public route: ActivatedRoute, public authService: AuthService) {
+    console.log('MatchHistoryComponent');
     this.route.data.subscribe(val => {
-      this.matches = val.matches;
-      this.pendingMatches = val.pendingMatches;
+      this.matches = val.matche as Match[];
+      this.pendingMatches = val.pendingMatches as Match[];
     });
   }
 
-  getRecentMatches() {
+  getRecentMatches(): void {
     this.tagApiService.getRecentMatches().subscribe(res => {
       this.matches = res;
     })
   }
 
-  getPendingMatches() {
+  getPendingMatches(): void {
     this.tagApiService.getPendingMatches().subscribe(res => {
       this.pendingMatches = res;
-    })
+    });
   }
 
-  confirmPendingMatch(id) {
+  confirmPendingMatch(id): void {
     this.tagApiService.confirmPendingMatch(id).subscribe(res => {
       this.updateUI();
     }, error => {
@@ -47,7 +51,7 @@ export class MatchesComponent {
     });
   }
 
-  deletePendingMatch(id) {
+  deletePendingMatch(id): void {
     this.tagApiService.deletePendingMatch(id).subscribe(res => {
       this.updateUI();
     }, error => {
@@ -55,7 +59,7 @@ export class MatchesComponent {
     });
   }
 
-  updateUI(){
+  updateUI(): void {
     this.getPendingMatches();
     this.getRecentMatches();
   }

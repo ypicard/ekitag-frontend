@@ -20,12 +20,14 @@
           <td>{{ match.datetime }}</td>
           <td></td>
           <td>Season</td>
-          <td>
-            <button (click)="confirmPendingMatch(match.id)">Confirm</button>
-          </td>
-          <td>
-            <button (click)="deletePendingMatch(match.id)">Delete</button>
-          </td>
+          <div *ngIf='authService.isLoggedIn()'>
+            <td>
+              <button (click)="confirmPendingMatch(match.id)">Confirm</button>
+            </td>
+            <td>
+              <button (click)="deletePendingMatch(match.id)">Delete</button>
+            </td>
+          </div>
         </tr>
         <tr *ngIf="pendingMatches.length == 0">
           <td>All clear</td>
