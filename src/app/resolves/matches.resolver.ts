@@ -9,6 +9,6 @@ import {  Match } from '../_models/match.model';
 export class MatchesResolver implements Resolve<any> {
     constructor(private tagApiService: TagApiService) { }
     resolve(route: ActivatedRouteSnapshot): Observable< Match[] > {
-        return this.tagApiService.getRecentMatches();
+        return this.tagApiService.getMatches();
     }
 }

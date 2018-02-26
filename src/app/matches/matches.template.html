@@ -15,8 +15,8 @@
       <tbody>
         <tr *ngFor="let match of pendingMatches" class='pointer'>
           <td>{{ match.id }}</td>
-          <td>{{ match.r_score }}</td>
-          <td>{{ match.b_score }}</td>
+          <td>{{ match.rScore }}</td>
+          <td>{{ match.bScore }}</td>
           <td>{{ match.datetime }}</td>
           <td></td>
           <td>Season</td>
@@ -56,8 +56,8 @@
       <tbody>
         <tr *ngFor="let match of matches" routerLink="/matches/{{ match.id }}" class='pointer'>
           <td>{{ match.id }}</td>
-          <td class='text-right'>{{ match.r_score }}</td>
-          <td>{{ match.b_score }}</td>
+          <td class='text-right'>{{ match.rScore }}</td>
+          <td>{{ match.bScore }}</td>
           <td class='text-right'>{{ match.datetime | date: 'EEE dd yyyy, HH:mm'}}</td>
           <td>{{ match.validator.pseudo }}</td>
           <td>Season ?</td>

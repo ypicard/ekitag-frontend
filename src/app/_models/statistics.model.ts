@@ -1,7 +1,7 @@
 export class Statistics {
   id: number;
-  match_id: number;
-  user_id: number;
+  matchId: number;
+  userId: number;
   score: number;
   tags: number;
   popped: number;
@@ -13,6 +13,23 @@ export class Statistics {
   returns: number;
   support: number;
   pups: number;
+
+  constructor(statsHash: any){
+    this.id = statsHash.id;
+    this.matchId = statsHash.match_id;
+    this.userId = statsHash.user_id;
+    this.score = statsHash.score;
+    this.tags = statsHash.tags;
+    this.popped = statsHash.popped;
+    this.grabs = statsHash.grabs;
+    this.drops = statsHash.drops;
+    this.hold = statsHash.hold;
+    this.captures = statsHash.captures;
+    this.prevent = statsHash.prevent;
+    this.returns = statsHash.returns;
+    this.support = statsHash.support;
+    this.pups = statsHash.pups;
+  }
 }
 // PSQL INTERVAL:
 // Period of time; Interval value is a string in single quotes with the following syntax:

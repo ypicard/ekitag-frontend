@@ -1,27 +1,12 @@
-import {
-  Injectable
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import {
-  HttpClient,
-  HttpHeaders
-} from '@angular/common/http';
-import {
-  CookieService
-} from 'ng2-cookies';
-import {
-  Observable
-} from 'rxjs/Observable';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ng2-cookies';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
-import {
-  Player
-} from '../_models/player.model';
-import { 
-  Match
-} from '../_models/match.model';
-import {
-  Statistics
-} from '../_models/statistics.model';
+import { Player } from '../_models/player.model';
+import { Match } from '../_models/match.model';
+import { Statistics } from '../_models/statistics.model';
 
 @Injectable()
 export class TagApiService {
@@ -44,7 +29,7 @@ export class TagApiService {
     return headers;
   }
 
-  promoteAdmin(id: number, password: string): Observable < any > {
+  promoteAdmin(id: number, password: string): Observable<any> {
     let formData = new FormData();
     formData.append('user_id', id.toString())
     formData.append('password', password)
@@ -54,93 +39,98 @@ export class TagApiService {
     })
   }
 
-  downgradeAdmin(id: number): Observable < any > {
+  downgradeAdmin(id: number): Observable<any> {
     return this.http.delete(this.BASE_URL + 'users/' + id + '/promote', {
       headers: this.getAdminHeaders()
     })
   }
 
-  login(trigram: string, password: string): Observable < any > {
+  login(trigram: string, password: string): Observable<any> {
     let formData = new FormData()
     formData.append('login', trigram)
     formData.append('password', password)
     return this.http.post(this.BASE_URL + 'admin/', formData);
   }
 
-  deactivateUser(id: number): Observable < any > {
+  deactivateUser(id: number): Observable<any> {
     // TODO: fix in back i think
     return this.http.delete(this.BASE_URL + 'users/' + id);
   }
 
   // ------------------------- USERS
-  getUser(id: number): Observable < any > {
+  getUser(id: number): Observable<any> {
     return this.http.get(this.BASE_URL + 'users/' + id)
   }
 
-  getAllUsers(): Observable < Player[] > {
+  getAllUsers(): Observable<Player[]> {
     return this.http.get(this.BASE_URL + 'users').map((res: any[]) => {
       return res.map(pl => {
-        return new Player(pl)
+        return new Player(pl);
       })
     })
   }
 
-  createUser(trigram: string, pseudo: string): Observable < any > {
+  createUser(trigram: string, pseudo: string): Observable<any> {
     let formData = new FormData();
     formData.append('trigram', trigram)
     formData.append('pseudo', pseudo)
     return this.http.post(this.BASE_URL + 'users', formData)
   }
 
-  addPseudo(user: Player, newPseudo: string): Observable < any > {
+  addPseudo(user: Player, newPseudo: string): Observable<any> {
     if (user.usualPseudos.indexOf(newPseudo) >= 0) return; // No duplicate pseudo
     let formData = new FormData();
-    formData.append('user_id', user.id.toString())
-    formData.append('pseudo', user.pseudo)
+    formData.append('user_id', user.id.toString());
+    formData.append('pseudo', user.pseudo);
     user.usualPseudos.forEach(pseudo => {
-      formData.append('usual_pseudos', pseudo)
-    })
-    formData.append('usual_pseudos', newPseudo)
+      formData.append('usual_pseudos', pseudo);
+    });
+    formData.append('usual_pseudos', newPseudo);
 
     return this.http.put(this.BASE_URL + 'users/' + user.id, formData);
   }
 
   // ------------------------- MATCHES
 
-  getMatch(id: number): Observable < Match > {
-    return this.http.get(this.BASE_URL + 'matches/' + id)
+  getMatch(id: number): Observable<Match> {
+    return this.http.get(this.BASE_URL + 'matches/' + id).map((res: any[]) => new Match(res));
   }
 
-  getRecentMatches(): Observable < Match[] > {
-    return this.http.get(this.BASE_URL + 'matches')
+  getMatches(): Observable<Match[]> {
+    return this.http.get(this.BASE_URL + 'matches').map((res: any[]) => {
+      return res.map(m => { return new Match(m); });
+    });
   }
 
-  getMatchStats(id: number): Observable < Statistics[] > {
-    // Used to be: getMatchStats(id): Observable<Object[]> {
-    return this.http.get(this.BASE_URL + 'matches/' + id + '/stats');
+  getMatchStats(id: number): Observable<Statistics[]> {
+    return this.http.get(this.BASE_URL + 'matches/' + id + '/stats').map((res: any[]) => {
+      return res.map(s => { return new Statistics(s); });
+    });
   }
 
-  getPendingMatches(): Observable < Match[] > {
-    return this.http.get(this.BASE_URL + 'matches/pending');
+  getPendingMatches(): Observable<Match[]> {
+    return this.http.get(this.BASE_URL + 'matches/pending').map((res: any[]) => {
+      return res.map(m => { return new Match(m); });
+    })
   }
 
-  getPendingMatch(id: number): Observable < Match > {
-    return this.http.get(this.BASE_URL + 'matches/pending/' + id);
+  getPendingMatch(id: number): Observable<Match> {
+    return this.http.get(this.BASE_URL + 'matches/pending/' + id).map(res => new Match(res));
   }
 
-  deletePendingMatch(id: number): Observable < any > {
+  deletePendingMatch(id: number): Observable<any> {
     return this.http.delete(this.BASE_URL + 'matches/pending/' + id, {
       headers: this.getAdminHeaders()
     });
   }
 
-  confirmPendingMatch(id: number): Observable < any > {
+  confirmPendingMatch(id: number): Observable<any> {
     return this.http.put(this.BASE_URL + 'matches/pending/' + id, {}, {
       headers: this.getAdminHeaders()
     });
   }
 
-  addPendingMatch(match, stats): Observable < any > {
+  addPendingMatch(match, stats): Observable<any> {
     let matchFormData = new FormData();
     for (var k in match) {
       matchFormData.append(k, match[k]);
@@ -170,25 +160,25 @@ export class TagApiService {
 
   // ------------------------- SEASONS
 
-  getAllSeasons(): Observable < any > {
+  getAllSeasons(): Observable<any> {
     return this.http.get(this.BASE_URL + 'seasons');
   }
 
-  getSeason(id: number): Observable < any > {
+  getSeason(id: number): Observable<any> {
     return this.http.get(this.BASE_URL + 'seasons/' + id);
   }
 
-  getSeasonMatches(id: number): Observable < any > {
+  getSeasonMatches(id: number): Observable<any> {
     return this.http.get(this.BASE_URL + 'seasons/' + id + '/matches');
   }
 
-  endSeason(id: number): Observable < any > {
+  endSeason(id: number): Observable<any> {
     return this.http.delete(this.BASE_URL + 'seasons/' + id, {
       headers: this.getAdminHeaders()
     });
   }
 
-  createSeason(name: string, maxMatches: number, maxTime: number): Observable < any > {
+  createSeason(name: string, maxMatches: number, maxTime: number): Observable<any> {
     let formData = new FormData();
     formData.append('name', name);
     formData.append('max_time', maxTime.toString());

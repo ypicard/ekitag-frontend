@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router'; // Routes
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // ng-bootstrap
@@ -95,7 +95,16 @@ const appRoutes: Routes = [
     ClipboardModule,
     NgbModule.forRoot()
   ],
-  providers: [TagApiService, MyHelper, CookieService, PlayersResolver, AuthService, SeasonsResolver, SeasonResolver, MatchesResolver, PendingMatchesResolver],
+  providers: [TagApiService,
+     MyHelper,
+     CookieService,
+     PlayersResolver,
+     AuthService,
+     SeasonsResolver,
+     SeasonResolver,
+     MatchesResolver,
+     PendingMatchesResolver
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

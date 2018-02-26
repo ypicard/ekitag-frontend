@@ -1,15 +1,7 @@
-import {
-  Component
-} from '@angular/core';
-import {
-  TagApiService
-} from '../services/tag-api.service';
-import {
-  ActivatedRoute
-} from '@angular/router';
-import { 
-  Match
-} from '../_models/match.model'
+import { Component } from '@angular/core';
+import { TagApiService } from '../services/tag-api.service';
+import { ActivatedRoute } from '@angular/router';
+import { Match } from '../_models/match.model';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -26,13 +18,13 @@ export class MatchesComponent {
   constructor(private tagApiService: TagApiService, public route: ActivatedRoute, public authService: AuthService) {
     console.log('MatchHistoryComponent');
     this.route.data.subscribe(val => {
-      this.matches = val.matche as Match[];
+      this.matches = val.matches as Match[];
       this.pendingMatches = val.pendingMatches as Match[];
     });
   }
 
-  getRecentMatches(): void {
-    this.tagApiService.getRecentMatches().subscribe(res => {
+  getMatches(): void {
+    this.tagApiService.getMatches().subscribe(res => {
       this.matches = res;
     })
   }
@@ -61,7 +53,7 @@ export class MatchesComponent {
 
   updateUI(): void {
     this.getPendingMatches();
-    this.getRecentMatches();
+    this.getMatches();
   }
 
 }
