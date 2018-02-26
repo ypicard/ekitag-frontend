@@ -1,3 +1,5 @@
+import { Statistics } from './statistics.model';
+
 export class Player {
   id: number;
   pseudo: string;
@@ -8,6 +10,7 @@ export class Player {
   silverStars: number;
   copperStars: number;
   loserStars: number;
+  statistics: Statistics;
 
   constructor(playerHash: any) {
     this.id = playerHash.id;
@@ -19,5 +22,7 @@ export class Player {
     this.silverStars = playerHash.silver_stars;
     this.copperStars = playerHash.copper_stars;
     this.loserStars = playerHash.loserStars;
+    console.log('yap')
+    console.log(this)
   }
 }

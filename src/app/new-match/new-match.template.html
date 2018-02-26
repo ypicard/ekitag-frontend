@@ -31,7 +31,7 @@
       <tr *ngFor="let player of teams['red'].concat(teams['blue'])" class='pointer' [ngModelGroup]="player.pseudo">
         <td [ngClass]='player.team' (click)="removePlayer(player)">{{ player.pseudo }}</td>
         <input type="hidden" name="pseudo" [ngModel]='player.pseudo'>
-        <td><input type='text' [(ngModel)]='player.score' name='score' class='form-control' required/></td>
+        <td><input type='text' [(ngModel)]='player.score' name='score' class='form-control'/></td>
         <td><input type='text' [(ngModel)]='player.tags' name='tags' class='form-control'/></td>
         <td><input type='text' [(ngModel)]='player.popped' name='popped' class='form-control'/></td>
         <td><input type='text' [(ngModel)]='player.grabs' name='grabs' class='form-control'/></td>

@@ -142,14 +142,15 @@ export class TagApiService {
 
       stats.forEach(pl => {
         let statsFormData = new FormData();
-        statsFormData.append('match_id', matchId);
-        for (var k in pl) {
+        statsFormData.append('match_id', matchId.toString());
+        for (let k in pl) {
           if (pl[k] != null) {
             statsFormData.append(k, pl[k]);
           }
         }
-        statRequests.push(this.http.post(this.BASE_URL + 'matches/pending/' + matchId + '/stats', statsFormData, {}));
-      })
+
+        statRequests.push(this.http.post(this.BASE_URL + 'matches/pending/' + matchId + '/stats', statsFormData, {}).subscribe(res => { return res }));
+      });
 
       return Observable.forkJoin(statRequests);
 
