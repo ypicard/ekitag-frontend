@@ -71,7 +71,7 @@ export class TagApiService {
     return this.http.get(this.BASE_URL + 'users/' + id)
   }
 
-  getAllUsers(): Observable < any > {
+  getAllUsers(): Observable < Player[] > {
     return this.http.get(this.BASE_URL + 'users').map((res:any[]) => {
       return res.map(pl => { return new Player(pl)})
     })

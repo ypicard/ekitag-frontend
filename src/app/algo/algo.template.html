@@ -11,7 +11,7 @@
           Add players
         </div>
         <ul class='content'>
-          <li *ngFor="let player of players | sort: 'pseudo'" class="player" (click)="selectPlayer(player)">
+          <li *ngFor="let player of myHelper.sortPlayers(players)" class="player" (click)="selectPlayer(player)">
             {{ player.pseudo }}
           </li>
         </ul>
@@ -23,7 +23,7 @@
           Selected players
         </div>
         <ul class='content'>
-          <li *ngFor="let player of selectedPlayers | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
+          <li *ngFor="let player of myHelper.sortPlayers(selectedPlayers)" class="player" (click)="deselectPlayer(player)">
             {{ player.pseudo }}
           </li>
         </ul>
@@ -35,7 +35,7 @@
           RED
         </div>
         <ul class='content'>
-        <li *ngFor="let player of redTeam | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
+        <li *ngFor="let player of myHelper.sortPlayers(redTeam)" class="player" (click)="deselectPlayer(player)">
           {{ player.pseudo }}
         </li>
         </ul>
@@ -45,7 +45,7 @@
           BLUE
         </div>
         <ul class='content'>
-        <li *ngFor="let player of blueTeam | sort: 'pseudo'" class="player" (click)="deselectPlayer(player)">
+        <li *ngFor="let player of myHelper.sortPlayers(blueTeam)" class="player" (click)="deselectPlayer(player)">
           {{ player.pseudo }}
         </li>
         </ul>

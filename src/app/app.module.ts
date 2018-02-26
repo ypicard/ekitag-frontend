@@ -27,6 +27,7 @@ import { SeasonComponent } from './season/season.component';
 // PROVIDERS
 import { TagApiService } from './services/tag-api.service';
 import { AuthService } from './services/auth.service';
+import { MyHelper } from './services/my-helper.service';
 
 // PIPES
 import { ArraySortPipe } from './pipes';
@@ -94,7 +95,7 @@ const appRoutes: Routes = [
     ClipboardModule,
     NgbModule.forRoot()
   ],
-  providers: [TagApiService, CookieService, PlayersResolver, AuthService, SeasonsResolver, SeasonResolver, MatchesResolver, PendingMatchesResolver],
+  providers: [TagApiService, MyHelper, CookieService, PlayersResolver, AuthService, SeasonsResolver, SeasonResolver, MatchesResolver, PendingMatchesResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
