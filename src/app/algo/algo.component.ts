@@ -1,18 +1,8 @@
-import {
-  Component
-} from '@angular/core';
-import {
-  TagApiService
-} from '../services/tag-api.service';
-import {
-  ActivatedRoute
-} from '@angular/router';
-import {
-  Player
-} from '../_models/player.model';
-import {
-  MyHelper
-}  from '../services/my-helper.service'
+import { Component } from '@angular/core';
+import { TagApiService } from '../services/tag-api.service';
+import { ActivatedRoute } from '@angular/router';
+import { Player } from '../_models/player.model';
+import { MyHelper }  from '../services/my-helper.service'
 
 @Component({
   selector: 'algo',
