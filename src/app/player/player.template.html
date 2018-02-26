@@ -2,19 +2,19 @@
   <div class="col-12">
     <h1>{{ player.pseudo }}</h1>
     <div>ID : {{player.id}}</div>
-    <div>GOLD STARS : {{player.gold_stars}}</div>
-    <div>SILVER STARS : {{player.silver_stars}}</div>
-    <div>COPPER STARS : {{player.copper_stars}}</div>
-    <div>LOSER STARS : {{player.loser_stars}}</div>
-    <div>IS ACTIVE : {{player.is_active}}</div>
-    <div>IS ADMIN : {{player.is_admin}}</div>
-    <div>PSEUDOS : {{player.usual_pseudos}}</div>
+    <div>GOLD STARS : {{player.goldStars}}</div>
+    <div>SILVER STARS : {{player.silverStars}}</div>
+    <div>COPPER STARS : {{player.copperStars}}</div>
+    <div>LOSER STARS : {{player.loserStars}}</div>
+    <div>IS ACTIVE : {{player.isActive}}</div>
+    <div>IS ADMIN : {{player.isAdmin}}</div>
+    <div>PSEUDOS : {{player.usualPseudos}}</div>
     <label for="new-pseudo">Add pseudo</label>
     <input type="test" name="new-pseudo" [(ngModel)]="newPseudo">
     <button (click)="addPseudo(newPseudo)">ADD PSEUDO</button>
     <br>
     <div *ngIf="tagApiService.isLoggedIn()">
-      <form *ngIf="!player.is_admin" #promoteForm="ngForm" (ngSubmit)="promoteAdmin(promoteForm)">
+      <form *ngIf="!player.is_admin" #promoteForm="ngForm" (ngSubmit)="promoteAdmin(promoteForm.value)">
         <label for="password">Choose a password for him</label>
         <input type="text" name="password" class="form-control" ngModel>
         <button type="submit">Promote admin</button>
