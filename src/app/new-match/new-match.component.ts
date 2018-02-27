@@ -1,45 +1,35 @@
-import {
-  Component
-} from '@angular/core';
-import {
-  TagApiService
-} from '../services/tag-api.service';
-import {
-  ActivatedRoute
-} from "@angular/router";
-import { 
-  Player
-}  from '../_models/player.model';
-import {
-	Router
-} from '@angular/router';
+import { Component } from "@angular/core";
+import { TagApiService } from "../services/tag-api.service";
+import { ActivatedRoute } from "@angular/router";
+import { Player } from "../_models/player.model";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'new-match',
-  templateUrl: './new-match.template.html',
-  styleUrls: ['./new-match.style.scss']
+  selector: "new-match",
+  templateUrl: "./new-match.template.html",
+  styleUrls: ["./new-match.style.scss"]
 })
-
 export class NewMatchComponent {
-
-  currentTeam: string = 'red';
+  currentTeam: string = "red";
   players: Player[];
-  teams: {
-    [id: string]: Player[]
-  } = {
+  teams: { [id: string]: Player[] } = {
     red: [],
     blue: []
   };
 
-	constructor(private tagApiService: TagApiService, private route: ActivatedRoute, private router: Router) {
-    console.log('NewMatchComponent');
+  constructor(
+    private tagApiService: TagApiService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    console.log("NewMatchComponent");
     this.route.data.subscribe(val => {
       this.players = val.players as Player[];
     });
   }
 
   toggleCurrentTeam(): void {
-    this.currentTeam = this.currentTeam === 'red' ? 'blue' : 'red';
+    this.currentTeam = this.currentTeam === "red" ? "blue" : "red";
   }
 
   selectPlayer(player): void {
@@ -55,7 +45,6 @@ export class NewMatchComponent {
   }
 
   submitMatch(form): void {
-
     // Match object
     let match = {
       b_score: form.blueScore,
@@ -76,10 +65,10 @@ export class NewMatchComponent {
     };
 
     this.teams.red.forEach((pl, i) => {
-      match['r' + (i + 1) + '_pseudo'] = pl.pseudo;
+      match["r" + (i + 1) + "_pseudo"] = pl.pseudo;
     });
     this.teams.blue.forEach((pl, i) => {
-      match['b' + (i + 1) + '_pseudo'] = pl.pseudo;
+      match["b" + (i + 1) + "_pseudo"] = pl.pseudo;
     });
 
     // Stats object
@@ -103,13 +92,14 @@ export class NewMatchComponent {
       });
     }
 
-    this.tagApiService.addPendingMatch(match, stats).subscribe(res => {
-			alert('Match created, waiting for validation !');
-			this.router.navigate(['/matches']);
-
-    }, err => {
-      alert(err.error.message);
-    });
+    this.tagApiService.addPendingMatch(match, stats).subscribe(
+      res => {
+        alert("Match created, waiting for validation !");
+        this.router.navigate(["/matches"]);
+      },
+      err => {
+        alert(err.error.message);
+      }
+    );
   }
-
 }
