@@ -11,8 +11,8 @@ import { Statistics } from '../_models/statistics.model';
 @Injectable()
 export class TagApiService {
 
-  // BASE_URL = "https://ekitag-api.herokuapp.com/v1/"
-  BASE_URL = "http://localhost:5000/v1/"
+  BASE_URL = "https://ekitag-api.herokuapp.com/v1/"
+  // BASE_URL = "http://localhost:5000/v1/"
 
   constructor(private http: HttpClient, public cookieService: CookieService) {
     console.log('TagApiService');
