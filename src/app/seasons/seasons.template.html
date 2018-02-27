@@ -16,13 +16,13 @@
         <td>{{ currentSeason.name }}</td>
         <td>{{ currentSeason.start_date }}</td>
         <td>{{ currentSeason.end_date }}</td>
-        <td>{{ currentSeason.max_time }}</td>
+        <td>{{ currentSeason.max_time }} days</td>
         <td>{{ currentSeason.played_matches }}</td>
         <td>{{ currentSeason.max_matches }}</td>
       </tr>
     </tbody>
   </table>
-<button (click)="endSeason(currentSeason)">End season</button>
+  <button (click)="endSeason(currentSeason)">End season</button>
 
 </div>
 <div *ngIf='!currentSeason'>
@@ -60,7 +60,7 @@
           <td>{{ season.name }}</td>
           <td>{{ season.start_date }}</td>
           <td>{{ season.end_date }}</td>
-          <td>{{ season.max_time }}</td>
+          <td>{{ season.max_time }} days</td>
           <td>{{ season.played_matches }}</td>
           <td>{{ season.max_matches }}</td>
         </tr>
