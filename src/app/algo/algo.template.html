@@ -35,9 +35,9 @@
           RED
         </div>
         <ul class='content'>
-        <li *ngFor="let player of myHelper.sortPlayers(redTeam)" class="player" (click)="deselectPlayer(player)">
-          {{ player.pseudo }}
-        </li>
+          <li *ngFor="let player of myHelper.sortPlayers(redTeam)" class="player" (click)="deselectPlayer(player)">
+            {{ player.pseudo }}
+          </li>
         </ul>
       </div>
       <div class='group'>
@@ -45,12 +45,12 @@
           BLUE
         </div>
         <ul class='content'>
-        <li *ngFor="let player of myHelper.sortPlayers(blueTeam)" class="player" (click)="deselectPlayer(player)">
-          {{ player.pseudo }}
-        </li>
+          <li *ngFor="let player of myHelper.sortPlayers(blueTeam)" class="player" (click)="deselectPlayer(player)">
+            {{ player.pseudo }}
+          </li>
         </ul>
       </div>
-
+      <div>Quality: {{ quality | percent }}</div>
       <button class='gray-button' ngxClipboard [cbContent]="copyTeams()" [disabled]="blueTeam.length + redTeam.length < 2">Copy Teams</button>
     </div>
   </div>

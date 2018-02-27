@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+  import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { CookieService } from 'ng2-cookies';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
@@ -46,9 +46,9 @@ export class TagApiService {
   }
 
   login(trigram: string, password: string): Observable<any> {
-    let formData = new FormData()
-    formData.append('login', trigram)
-    formData.append('password', password)
+    let formData = new FormData();
+    formData.append('login', trigram);
+    formData.append('password', password);
     return this.http.post(this.BASE_URL + 'admin/', formData);
   }
 
@@ -188,5 +188,15 @@ export class TagApiService {
       headers: this.getAdminHeaders()
     });
   }
+
+  // ------------------------- ALGO: MUSIGMA TEAM
+  runMusigmaTeam(playerIds) {
+    let reqParams = new HttpParams();
+    playerIds.forEach(id => {
+      reqParams = reqParams.append('ids', id);
+    });
+    return this.http.get(this.BASE_URL + 'algo/musigma_team', {params: reqParams});
+  }
+
 
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TagApiService } from '../services/tag-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Player } from '../_models/player.model';
-import { MyHelper }  from '../services/my-helper.service'
+import { MyHelper } from '../services/my-helper.service'
 
 @Component({
   selector: 'algo',
@@ -16,6 +16,7 @@ export class AlgoComponent {
   selectedPlayers: Player[] = [];
   redTeam: Player[] = [];
   blueTeam: Player[] = [];
+  quality: number;
 
   constructor(public route: ActivatedRoute, private tagApiService: TagApiService, public myHelper: MyHelper) {
     console.log('AlgoComponent');
@@ -32,14 +33,27 @@ export class AlgoComponent {
 
   deselectPlayer(player: Player): void {
     this.players.push(player);
+    this.selectedPlayers = this.selectedPlayers.concat(this.redTeam.splice(0, this.redTeam.length));
+    this.selectedPlayers = this.selectedPlayers.concat(this.blueTeam.splice(0, this.blueTeam.length));
     this.selectedPlayers.splice(this.selectedPlayers.indexOf(player), 1);
     this.clearTeams();
   }
   generateTeams(players: Player[]): void {
     if (players.length < 2) return;
-    // TODO : request algo here
-    this.redTeam = this.selectedPlayers.slice(0, this.selectedPlayers.length / 2)
-    this.blueTeam = this.selectedPlayers.slice(this.selectedPlayers.length / 2, this.selectedPlayers.length)
+
+    this.tagApiService.runMusigmaTeam(players.map(pl => { return pl.id; })).subscribe(res => {
+
+      res['r_ids'].forEach(r_id => {
+        this.redTeam.push(this.selectedPlayers.splice(this.selectedPlayers.findIndex(pl => { return pl.id === r_id; }), 1)[0]);
+      });
+      res['b_ids'].forEach(r_id => {
+        this.blueTeam.push(this.selectedPlayers.splice(this.selectedPlayers.findIndex(pl => { return pl.id === r_id; }), 1)[0]);
+      });
+      this.quality = res['quality'];
+    },
+      err => {
+        alert(err.error.message);
+      });
   }
 
   clearTeams(): void {
