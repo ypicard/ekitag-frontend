@@ -13,9 +13,9 @@
   <div class="row">
     <div class="col-6">
       <h2>Red team</h2>
-      <p>Score: {{ match.r_score }}</p>
+      <p>Score: {{ match.rScore }}</p>
       <table>
-        <tr>
+        <thead>
           <th>ID</th>
           <th>PSEUDO</th>
           <th>SCORE</th>
@@ -29,8 +29,8 @@
           <th>RETURNS</th>
           <th>SUPPORT</th>
           <th>PUPS</th>
-        </tr>
-        <tr *ngFor="let player of redTeam">
+        </thead>
+        <tr *ngFor="let player of match.redTeam" routerLink="/players/{{player.id}}" class="pointer">
           <td>{{ player.id }}</td>
           <td>{{ player.pseudo }}</td>
           <td *ngIf="player.statistics">{{ player.statistics.score }}</td>
@@ -51,9 +51,9 @@
   <div class="row">
     <div class="col-6">
       <h2>Blue team</h2>
-      <p>Score: {{ match.b_score }}</p>
+      <p>Score: {{ match.bScore }}</p>
       <table>
-        <tr>
+        <thead>
           <th>ID</th>
           <th>PSEUDO</th>
           <th>SCORE</th>
@@ -67,21 +67,21 @@
           <th>RETURNS</th>
           <th>SUPPORT</th>
           <th>PUPS</th>
-        </tr>
-        <tr *ngFor="let player of blueTeam">
+        </thead>
+        <tr *ngFor="let player of match.blueTeam" routerLink="/players/{{player.id}}" class="pointer">
           <td>{{ player.id }}</td>
           <td>{{ player.pseudo }}</td>
-          <td *ngIf="player.stats">{{ player.stats.score }}</td>
-          <td *ngIf="player.stats">{{ player.stats.tags }}</td>
-          <td *ngIf="player.stats">{{ player.stats.popped }}</td>
-          <td *ngIf="player.stats">{{ player.stats.grabs }}</td>
-          <td *ngIf="player.stats">{{ player.stats.drops }}</td>
-          <td *ngIf="player.stats">{{ player.stats.holds }}</td>
-          <td *ngIf="player.stats">{{ player.stats.captures }}</td>
-          <td *ngIf="player.stats">{{ player.stats.prevent }}</td>
-          <td *ngIf="player.stats">{{ player.stats.returns }}</td>
-          <td *ngIf="player.stats">{{ player.stats.support }}</td>
-          <td *ngIf="player.stats">{{ player.stats.pups }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.score }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.tags }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.popped }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.grabs }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.drops }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.holds }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.captures }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.prevent }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.returns }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.support }}</td>
+          <td *ngIf="player.statistics">{{ player.statistics.pups }}</td>
         </tr>
       </table>
     </div>
