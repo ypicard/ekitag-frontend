@@ -16,13 +16,13 @@
         <td>{{ currentSeason.name }}</td>
         <td>{{ currentSeason.start_date }}</td>
         <td>{{ currentSeason.end_date }}</td>
-        <td>{{ currentSeason.max_time }}</td>
+        <td>{{ currentSeason.max_time }} days</td>
         <td>{{ currentSeason.played_matches }}</td>
         <td>{{ currentSeason.max_matches }}</td>
       </tr>
     </tbody>
   </table>
-<button (click)="endSeason(currentSeason)">End season</button>
+  <button (click)="endSeason(currentSeason)">End season</button>
 
 </div>
 <div *ngIf='!currentSeason'>
@@ -31,13 +31,13 @@
     <input type="text" name="name" class="col-sm-8 form-control" ngModel required>
     <br>
     <label class='col-sm-2' for="maxMatches">Max matches</label>
-    <input type="text" name="maxMatches" class="col-sm-8 form-control" ngModel required>
+    <input type="text" name="maxMatches" class="col-sm-8 form-control" ngModel pattern="\d">
     <br>
     <label class='col-sm-2' for="maxTime">Max days</label>
-    <input type="text" name="maxTime" class="col-sm-8 form-control" ngModel required>
+    <input type="text" name="maxTime" class="col-sm-8 form-control" ngModel pattern="\d">
     <br>
     <hr>
-    <button type="submit">Launch new season</button>
+    <button type="submit" [disabled]='!newSeasonForm.form.valid'>Launch new season</button>
   </form>
 </div>
 
@@ -60,7 +60,7 @@
           <td>{{ season.name }}</td>
           <td>{{ season.start_date }}</td>
           <td>{{ season.end_date }}</td>
-          <td>{{ season.max_time }}</td>
+          <td>{{ season.max_time }} days</td>
           <td>{{ season.played_matches }}</td>
           <td>{{ season.max_matches }}</td>
         </tr>

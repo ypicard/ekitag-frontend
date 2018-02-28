@@ -1,0 +1,15 @@
+@import "../../_variables.scss";
+
+th{
+    font-size: 14px;
+    padding: 0.2em 0.3em;
+}
+
+.team-header{
+    background-color: $tag-red;
+    color: white;
+    border-radius: 5px;
+    padding: 0.2em 0.4em;
+    font-size: 1.2em;
+    margin-bottom: 0.4em;
+}

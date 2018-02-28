@@ -1,4 +1,5 @@
 import { Player } from './player.model';
+import { Season } from './season.model';
 
 export class Match {
   id: number;
@@ -14,6 +15,7 @@ export class Match {
   r4: Player;
   r5: Player;
   r6: Player;
+  season: Season;
   players: Player[];
   redTeam: Player[];
   blueTeam: Player[];
@@ -25,7 +27,6 @@ export class Match {
   constructor(matchHash: any) {
     this.id = matchHash.id;
 
-    // Should be done in backend
     if(matchHash.b1 && matchHash.b1.id != null) { this.b1 = matchHash.b1 as Player; }
     if (matchHash.b2 && matchHash.b2.id != null) { this.b2 = matchHash.b2 as Player; }
     if (matchHash.b3 && matchHash.b3.id != null) { this.b3 = matchHash.b3 as Player; }
@@ -39,6 +40,8 @@ export class Match {
     if (matchHash.r5 && matchHash.r5.id != null) { this.r5 = matchHash.r5 as Player; }
     if (matchHash.r6 && matchHash.r6.id != null) { this.r6 = matchHash.r6 as Player; }
 
+    if (matchHash.season && matchHash.season.id != null) { this.season = matchHash.season as Season; }
+
     this.rScore = matchHash.r_score;
     this.bScore = matchHash.b_score;
     this.datetime = matchHash.datetime;
@@ -50,6 +53,8 @@ export class Match {
     // Sort players on score
     this.redTeam.sort(player => { return player.statistics ? player.statistics.score : 0; });
     this.blueTeam.sort(player => { return player.statistics ? player.statistics.score : 0; });
+
+    console.log(this);
   }
 
   assignStats(statsArray) {

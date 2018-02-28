@@ -60,7 +60,7 @@
           <td>{{ match.bScore }}</td>
           <td class='text-right'>{{ match.datetime | date: 'EEE dd yyyy, HH:mm'}}</td>
           <td>{{ match.validator.pseudo }}</td>
-          <td>Season ?</td>
+          <td>{{ match.season ? match.season.name : '' }}</td>
         </tr>
       </tbody>
     </table>

@@ -1,37 +1,29 @@
 <div *ngIf="match">
   <div class="row">
     <div class="col-12">
-      <h1>Match</h1>
-      <h2>Validated by {{ match.validator.pseudo }}</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <h1>GLOBAL STATS</h1>
+      <h1 style='display: inline-block;'>Match {{ match.id }}</h1><span style='margin-left: 1.5em;'>Validated by {{ match.validator.pseudo }}</span>
+      <h3>Season {{ match.season.name }}</h3>
     </div>
   </div>
   <div class="row">
     <div class="col-6">
-      <h2>Red team</h2>
-      <p>Score: {{ match.rScore }}</p>
+      <div class='team-header red'>Red team: {{ match.rScore }}</div>
       <table>
         <thead>
-          <th>ID</th>
-          <th>PSEUDO</th>
-          <th>SCORE</th>
-          <th>TAGS</th>
-          <th>POPPED</th>
-          <th>GRABS</th>
-          <th>DROPS</th>
-          <th>HOLDS</th>
-          <th>CAPTURES</th>
-          <th>PREVENT</th>
-          <th>RETURNS</th>
-          <th>SUPPORT</th>
-          <th>PUPS</th>
+          <th>Pseudo</th>
+          <th>Score</th>
+          <th>Tags</th>
+          <th>Popped</th>
+          <th>Grabs</th>
+          <th>Drops</th>
+          <th>Holds</th>
+          <th>Captures</th>
+          <th>Prevent</th>
+          <th>Returns</th>
+          <th>Support</th>
+          <th>Pups</th>
         </thead>
         <tr *ngFor="let player of match.redTeam" routerLink="/players/{{player.id}}" class="pointer">
-          <td>{{ player.id }}</td>
           <td>{{ player.pseudo }}</td>
           <td *ngIf="player.statistics">{{ player.statistics.score }}</td>
           <td *ngIf="player.statistics">{{ player.statistics.tags }}</td>
@@ -50,26 +42,23 @@
   </div>
   <div class="row">
     <div class="col-6">
-      <h2>Blue team</h2>
-      <p>Score: {{ match.bScore }}</p>
+      <div class='team-header blue'>Blue team: {{ match.bScore }}</div>
       <table>
         <thead>
-          <th>ID</th>
-          <th>PSEUDO</th>
-          <th>SCORE</th>
-          <th>TAGS</th>
-          <th>POPPED</th>
-          <th>GRABS</th>
-          <th>DROPS</th>
-          <th>HOLDS</th>
-          <th>CAPTURES</th>
-          <th>PREVENT</th>
-          <th>RETURNS</th>
-          <th>SUPPORT</th>
-          <th>PUPS</th>
+          <th>Pseudo</th>
+          <th>Score</th>
+          <th>Tags</th>
+          <th>Popped</th>
+          <th>Grabs</th>
+          <th>Drops</th>
+          <th>Holds</th>
+          <th>Captures</th>
+          <th>Prevent</th>
+          <th>Returns</th>
+          <th>Support</th>
+          <th>Pups</th>
         </thead>
         <tr *ngFor="let player of match.blueTeam" routerLink="/players/{{player.id}}" class="pointer">
-          <td>{{ player.id }}</td>
           <td>{{ player.pseudo }}</td>
           <td *ngIf="player.statistics">{{ player.statistics.score }}</td>
           <td *ngIf="player.statistics">{{ player.statistics.tags }}</td>

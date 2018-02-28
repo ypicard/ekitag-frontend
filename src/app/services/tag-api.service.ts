@@ -179,11 +179,12 @@ export class TagApiService {
     });
   }
 
-  createSeason(name: string, maxMatches: number, maxTime: number): Observable<any> {
+  createSeason(name: string, maxMatches: number, maxTimeInSeconds: number): Observable<any> {
     let formData = new FormData();
     formData.append('name', name);
-    formData.append('max_time', maxTime.toString());
+    formData.append("max_time", maxTimeInSeconds.toString());
     formData.append('max_matches', maxMatches.toString());
+
     return this.http.post(this.BASE_URL + 'seasons', formData, {
       headers: this.getAdminHeaders()
     });
