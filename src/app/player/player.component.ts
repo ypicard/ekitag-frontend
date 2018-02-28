@@ -63,11 +63,11 @@ export class PlayerComponent {
   }
 
   promoteAdmin(form) {
-    if (form.password.length < 3) {
-      alert('Choose a longer password')
+    if (form.value.password.length < 3) {
+      alert('Choose a longer password');
       return
     }
-    this.tagApiService.promoteAdmin(this.player.id, form.password).subscribe(res => {
+    this.tagApiService.promoteAdmin(this.player.id, form.value.password).subscribe(res => {
       alert('Success')
       this.refreshUser();
     })

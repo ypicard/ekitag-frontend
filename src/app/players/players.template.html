@@ -29,7 +29,7 @@
       <input type="text" name="trigram" class="form-control" ngModel pattern='[a-z]{3}' required>
       <br>
       <label for="create-pseudo">Pseudo </label>
-      <input type="text" name="pseudo" class="form-control" ngModel pattern='[A-Za-z]{3,}' required>
+      <input type="text" name="pseudo" class="form-control" ngModel minlength="3" required>
       <br>
       <hr>
       <button type='submit' [disabled]='!newPlayerForm.form.valid'>ADD USER</button>

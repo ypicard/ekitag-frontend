@@ -14,21 +14,23 @@ export class Statistics {
   support: number;
   pups: number;
 
-  constructor(statsHash: any){
-    this.id = statsHash.id;
-    this.matchId = statsHash.match_id;
-    this.userId = statsHash.user_id;
-    this.score = statsHash.score;
-    this.tags = statsHash.tags;
-    this.popped = statsHash.popped;
-    this.grabs = statsHash.grabs;
-    this.drops = statsHash.drops;
-    this.hold = statsHash.hold;
-    this.captures = statsHash.captures;
-    this.prevent = statsHash.prevent;
-    this.returns = statsHash.returns;
-    this.support = statsHash.support;
-    this.pups = statsHash.pups;
+  constructor(statsHash?: any) {
+    if (statsHash) {
+      this.id = statsHash.id;
+      this.matchId = statsHash.match_id;
+      this.userId = statsHash.user_id;
+      this.score = statsHash.score;
+      this.tags = statsHash.tags;
+      this.popped = statsHash.popped;
+      this.grabs = statsHash.grabs;
+      this.drops = statsHash.drops;
+      this.hold = statsHash.hold;
+      this.captures = statsHash.captures;
+      this.prevent = statsHash.prevent;
+      this.returns = statsHash.returns;
+      this.support = statsHash.support;
+      this.pups = statsHash.pups;
+    }
   }
 }
 // PSQL INTERVAL:

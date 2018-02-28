@@ -1,23 +1,27 @@
 <div class="row" *ngIf="player">
   <div class="col-12">
-    <h1>{{ player.pseudo }}</h1>
-    <div>ID : {{player.id}}</div>
-    <!-- <div>GOLD STARS : {{player.goldStars}}</div>
-    <div>SILVER STARS : {{player.silverStars}}</div>
-    <div>COPPER STARS : {{player.copperStars}}</div>
-    <div>LOSER STARS : {{player.loserStars}}</div> -->
-    <div>IS ACTIVE : {{player.isActive}}</div>
-    <div>IS ADMIN : {{player.isAdmin}}</div>
-    <div>PSEUDOS : {{player.usualPseudos}}</div>
-    <label for="new-pseudo">Add pseudo</label>
-    <input type="test" name="new-pseudo" [(ngModel)]="newPseudo">
-    <button (click)="addPseudo(newPseudo)">ADD PSEUDO</button>
-    <br>
-    <div *ngIf="tagApiService.isLoggedIn()">
-      <form *ngIf="!player.is_admin" #promoteForm="ngForm" (ngSubmit)="promoteAdmin(promoteForm.value)">
+    <h1>{{  player.pseudo }}</h1>
+    <div>ID : {{ player.id }}</div>
+    <!-- <div>GOLD STARS : {{ player.goldStars}}</div>
+    <div>SILVER STARS : {{ player.silverStars}}</div>
+    <div>COPPER STARS : {{ player.copperStars}}</div>
+    <div>LOSER STARS : {{ player.loserStars}}</div> -->
+    <div>IS ACTIVE : {{ player.isActive }}</div>
+    <div>IS ADMIN : {{ player.isAdmin }}</div>
+    <div>PSEUDOS : {{ player.usualPseudos }}</div>
+
+    <div *ngIf="tagApiService.isLoggedIn() && player.isAdmin">
+      <form #newPseudoForm="ngForm" (ngSubmit)=addPseudo(newPseudoForm)>
+        <label for="new-pseudo">Add pseudo</label>
+        <input type="text" name="new-pseudo" class='form-control' ngModel minlength="3" required>
+        <button type="submit" [disabled]='!newPseudoForm.form.valid'>Add Pseudo</button>
+      </form>
+      <br>
+      <h3>Promote admin</h3>
+      <form #promoteForm="ngForm" (ngSubmit)="promoteAdmin(promoteForm)">
         <label for="password">Choose a password for him</label>
-        <input type="text" name="password" class="form-control" ngModel>
-        <button type="submit">Promote admin</button>
+        <input type="text" name="password" class="form-control" ngModel minlength='6' required>
+        <button type="submit" [disabled]='!promoteForm.form.valid'>Promote admin</button>
       </form>
       <button *ngIf="player.is_active" (click)="deactivate()">DEACTIVATE</button>
       <button *ngIf="player.is_admin" (click)="downgradeAdmin()">Remove admin rights</button>

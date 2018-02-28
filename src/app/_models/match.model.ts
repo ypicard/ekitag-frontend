@@ -4,18 +4,18 @@ import { Season } from './season.model';
 export class Match {
   id: number;
   b1: Player;
-  b2: Player;
-  b3: Player;
-  b4: Player;
-  b5: Player;
-  b6: Player;
+  b2?: Player;
+  b3?: Player;
+  b4?: Player;
+  b5?: Player;
+  b6?: Player;
   r1: Player;
-  r2: Player;
-  r3: Player;
-  r4: Player;
-  r5: Player;
-  r6: Player;
-  season: Season;
+  r2?: Player;
+  r3?: Player;
+  r4?: Player;
+  r5?: Player;
+  r6?: Player;
+  season?: Season;
   players: Player[];
   redTeam: Player[];
   blueTeam: Player[];
@@ -27,7 +27,7 @@ export class Match {
   constructor(matchHash: any) {
     this.id = matchHash.id;
 
-    if(matchHash.b1 && matchHash.b1.id != null) { this.b1 = matchHash.b1 as Player; }
+    if (matchHash.b1 && matchHash.b1.id != null) { this.b1 = matchHash.b1 as Player; }
     if (matchHash.b2 && matchHash.b2.id != null) { this.b2 = matchHash.b2 as Player; }
     if (matchHash.b3 && matchHash.b3.id != null) { this.b3 = matchHash.b3 as Player; }
     if (matchHash.b4 && matchHash.b4.id != null) { this.b4 = matchHash.b4 as Player; }
@@ -53,15 +53,13 @@ export class Match {
     // Sort players on score
     this.redTeam.sort(player => { return player.statistics ? player.statistics.score : 0; });
     this.blueTeam.sort(player => { return player.statistics ? player.statistics.score : 0; });
-
-    console.log(this);
   }
 
   assignStats(statsArray) {
     this.players.forEach(pl => {
       pl.statistics = statsArray.find(st => {
         return st.userId === pl.id; });
-    })
+    });
   }
 
 }
