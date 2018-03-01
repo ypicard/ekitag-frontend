@@ -7,12 +7,13 @@ import 'rxjs/add/observable/forkJoin';
 import { Player } from '../_models/player.model';
 import { Match } from '../_models/match.model';
 import { Statistics } from '../_models/statistics.model';
+import { PendingMatch } from '../_models/pending-match.model';
 
 @Injectable()
 export class TagApiService {
 
-  BASE_URL = "https://ekitag-api.herokuapp.com/v1/"
-  // BASE_URL = "http://localhost:5000/v1/"
+  // BASE_URL = "https://ekitag-api.herokuapp.com/v1/"
+  BASE_URL = "http://localhost:5000/v1/"
 
   constructor(private http: HttpClient, public cookieService: CookieService) {
     console.log('TagApiService');
@@ -108,14 +109,14 @@ export class TagApiService {
     });
   }
 
-  getPendingMatches(): Observable<Match[]> {
+  getPendingMatches(): Observable<PendingMatch[]> {
     return this.http.get(this.BASE_URL + 'matches/pending').map((res: any[]) => {
-      return res.map(m => { return new Match(m); });
-    })
+      return res.map(m => { return new PendingMatch(m); });
+    });
   }
 
-  getPendingMatch(id: number): Observable<Match> {
-    return this.http.get(this.BASE_URL + 'matches/pending/' + id).map(res => new Match(res));
+  getPendingMatch(id: number): Observable<PendingMatch> {
+    return this.http.get(this.BASE_URL + 'matches/pending/' + id).map(res => new PendingMatch(res));
   }
 
   deletePendingMatch(id: number): Observable<any> {

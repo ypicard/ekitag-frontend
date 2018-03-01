@@ -20,6 +20,8 @@ import { PlayerComponent } from './player/player.component';
 import { MatchComponent } from './match/match.component';
 import { MatchesComponent } from './matches/matches.component';
 import { NewMatchComponent } from './new-match/new-match.component';
+import { PendingMatchComponent } from './pending-match/pending-match.component';
+
 
 import { SeasonsComponent } from './seasons/seasons.component';
 import { SeasonComponent } from './season/season.component';
@@ -42,6 +44,7 @@ import { SeasonsResolver } from './resolves/seasons.resolver';
 import { SeasonResolver } from './resolves/season.resolver';
 import { MatchesResolver } from './resolves/matches.resolver';
 import { PendingMatchesResolver } from './resolves/pending-matches.resolver';
+import { PendingMatchResolver } from "./resolves/pending-match.resolver";
 import { MatchStatisticsResolver } from './resolves/statistics.resolver';
 import { MatchResolver } from './resolves/match.resolver';
 
@@ -53,6 +56,7 @@ const appRoutes: Routes = [
 
   { path: 'matches', component: MatchesComponent, resolve: { matches: MatchesResolver, pendingMatches: PendingMatchesResolver } },
   { path: 'matches/:id', component: MatchComponent, resolve: { match: MatchResolver, statistics: MatchStatisticsResolver } },
+  { path: 'matches_pending/:id', component: PendingMatchComponent, resolve: { pendingMatch: PendingMatchResolver, statistics: MatchStatisticsResolver } },
   { path: 'new_match', component: NewMatchComponent, resolve: { players: PlayersResolver } },
 
   { path: 'players', component: PlayersComponent, resolve: { players: PlayersResolver } },
@@ -81,6 +85,7 @@ const appRoutes: Routes = [
     MatchComponent,
     SeasonsComponent,
     SeasonComponent,
+    PendingMatchComponent,
     // PIPES
     ArraySortPipe
   ],
@@ -97,7 +102,8 @@ const appRoutes: Routes = [
     ClipboardModule,
     NgbModule.forRoot()
   ],
-  providers: [TagApiService,
+  providers: [
+    TagApiService,
     MyHelper,
     CookieService,
     PlayersResolver,
@@ -107,8 +113,9 @@ const appRoutes: Routes = [
     MatchesResolver,
     PendingMatchesResolver,
     MatchStatisticsResolver,
-    MatchResolver
+    MatchResolver,
+    PendingMatchResolver
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

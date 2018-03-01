@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-12">
+    <h1 style='display: inline-block;'>Match {{ pendingMatch.id }}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class='team-header red'>Red team: {{ pendingMatch.rScore }}</div>
+    <table>
+      <thead>
+        <th>Pseudo</th>
+        <th>Score</th>
+        <th>Tags</th>
+        <th>Popped</th>
+        <th>Grabs</th>
+        <th>Drops</th>
+        <th>Hold</th>
+        <th>Captures</th>
+        <th>Prevent</th>
+        <th>Returns</th>
+        <th>Support</th>
+        <th>Pups</th>
+      </thead>
+      <tr *ngFor="let stat of pendingMatch.redTeam" routerLink="/players/{{stat.id}}" class="pointer">
+        <td>{{ stat.userPseudo }}</td>
+        <td>{{ stat.score }}</td>
+        <td>{{ stat.tags }}</td>
+        <td>{{ stat.popped }}</td>
+        <td>{{ stat.grabs }}</td>
+        <td>{{ stat.drops }}</td>
+        <td>{{ stat.hold }}</td>
+        <td>{{ stat.captures }}</td>
+        <td>{{ stat.prevent }}</td>
+        <td>{{ stat.returns }}</td>
+        <td>{{ stat.support }}</td>
+        <td>{{ stat.pups }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class='team-header blue'>Blue team: {{ pendingMatch.bScore }}</div>
+    <table>
+      <thead>
+        <th>Pseudo</th>
+        <th>Score</th>
+        <th>Tags</th>
+        <th>Popped</th>
+        <th>Grabs</th>
+        <th>Drops</th>
+        <th>Holds</th>
+        <th>Captures</th>
+        <th>Prevent</th>
+        <th>Returns</th>
+        <th>Support</th>
+        <th>Pups</th>
+      </thead>
+      <tr *ngFor="let stat of pendingMatch.blueTeam" routerLink="/players/{{stat.id}}" class="pointer">
+        <td>{{ stat.userPseudo }}</td>
+        <td>{{ stat.score }}</td>
+        <td>{{ stat.tags }}</td>
+        <td>{{ stat.popped }}</td>
+        <td>{{ stat.grabs }}</td>
+        <td>{{ stat.drops }}</td>
+        <td>{{ stat.hold }}</td>
+        <td>{{ stat.captures }}</td>
+        <td>{{ stat.prevent }}</td>
+        <td>{{ stat.returns }}</td>
+        <td>{{ stat.support }}</td>
+        <td>{{ stat.pups }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div *ngIf='authService.isLoggedIn()'>
+  <td>
+    <button (click)="confirmPendingMatch(match.id)">Confirm</button>
+  </td>
+  <td>
+    <button (click)="deletePendingMatch(match.id)">Delete</button>
+  </td>
+</div>
