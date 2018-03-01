@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import { Player } from '../_models/player.model';
 import { Match } from '../_models/match.model';
-import { Statistics } from '../_models/statistics.model';
 import { PendingMatch } from '../_models/pending-match.model';
 
 @Injectable()
@@ -100,12 +99,6 @@ export class TagApiService {
   getMatches(): Observable<Match[]> {
     return this.http.get(this.BASE_URL + 'matches').map((res: any[]) => {
       return res.map(m => { return new Match(m); });
-    });
-  }
-
-  getMatchStats(id: number): Observable<Statistics[]> {
-    return this.http.get(this.BASE_URL + 'matches/' + id + '/stats').map((res: any[]) => {
-      return res.map(s => { return new Statistics(s); });
     });
   }
 

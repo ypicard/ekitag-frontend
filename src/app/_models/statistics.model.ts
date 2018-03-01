@@ -15,8 +15,7 @@ export class Statistics {
   support: number;
   pups: number;
 
-  constructor(statsHash?: any) {
-    // if (statsHash) {
+  constructor(statsHash: any) {
       this.id = statsHash.id;
       this.matchId = statsHash.match_id;
       this.userId = statsHash.user_id;
@@ -32,7 +31,6 @@ export class Statistics {
       this.returns = statsHash.returns;
       this.support = statsHash.support;
       this.pups = statsHash.pups;
-    // }
   }
 }
 // PSQL INTERVAL:

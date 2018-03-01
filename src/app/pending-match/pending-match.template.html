@@ -75,9 +75,9 @@
 </div>
 <div *ngIf='authService.isLoggedIn()'>
   <td>
-    <button (click)="confirmPendingMatch(match.id)">Confirm</button>
+    <button (click)="confirmPendingMatch(pendingMatch.id)">Confirm</button>
   </td>
   <td>
-    <button (click)="deletePendingMatch(match.id)">Delete</button>
+    <button (click)="deletePendingMatch(pendingMatch.id)">Delete</button>
   </td>
 </div>

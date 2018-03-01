@@ -27,20 +27,20 @@ export class Match {
   constructor(matchHash: any) {
     this.id = matchHash.id;
 
-    if (matchHash.b1 && matchHash.b1.id != null) { this.b1 = matchHash.b1 as Player; }
-    if (matchHash.b2 && matchHash.b2.id != null) { this.b2 = matchHash.b2 as Player; }
-    if (matchHash.b3 && matchHash.b3.id != null) { this.b3 = matchHash.b3 as Player; }
-    if (matchHash.b4 && matchHash.b4.id != null) { this.b4 = matchHash.b4 as Player; }
-    if (matchHash.b5 && matchHash.b5.id != null) { this.b5 = matchHash.b5 as Player; }
-    if (matchHash.b6 && matchHash.b6.id != null) { this.b6 = matchHash.b6 as Player; }
-    if (matchHash.r1 && matchHash.r1.id != null) { this.r1 = matchHash.r1 as Player; }
-    if (matchHash.r2 && matchHash.r2.id != null) { this.r2 = matchHash.r2 as Player; }
-    if (matchHash.r3 && matchHash.r3.id != null) { this.r3 = matchHash.r3 as Player; }
-    if (matchHash.r4 && matchHash.r4.id != null) { this.r4 = matchHash.r4 as Player; }
-    if (matchHash.r5 && matchHash.r5.id != null) { this.r5 = matchHash.r5 as Player; }
-    if (matchHash.r6 && matchHash.r6.id != null) { this.r6 = matchHash.r6 as Player; }
+    if (matchHash.b1 && matchHash.b1.id != null) { this.b1 = new Player(matchHash.b1); }
+    if (matchHash.b2 && matchHash.b2.id != null) { this.b2 = new Player(matchHash.b2); }
+    if (matchHash.b3 && matchHash.b3.id != null) { this.b3 = new Player(matchHash.b3); }
+    if (matchHash.b4 && matchHash.b4.id != null) { this.b4 = new Player(matchHash.b4); }
+    if (matchHash.b5 && matchHash.b5.id != null) { this.b5 = new Player(matchHash.b5); }
+    if (matchHash.b6 && matchHash.b6.id != null) { this.b6 = new Player(matchHash.b6); }
+    if (matchHash.r1 && matchHash.r1.id != null) { this.r1 = new Player(matchHash.r1); }
+    if (matchHash.r2 && matchHash.r2.id != null) { this.r2 = new Player(matchHash.r2); }
+    if (matchHash.r3 && matchHash.r3.id != null) { this.r3 = new Player(matchHash.r3); }
+    if (matchHash.r4 && matchHash.r4.id != null) { this.r4 = new Player(matchHash.r4); }
+    if (matchHash.r5 && matchHash.r5.id != null) { this.r5 = new Player(matchHash.r5); }
+    if (matchHash.r6 && matchHash.r6.id != null) { this.r6 = new Player(matchHash.r6); }
 
-    if (matchHash.season && matchHash.season.id != null) { this.season = matchHash.season as Season; }
+    if (matchHash.season && matchHash.season.id != null) { this.season = new Season(matchHash.season); }
 
     this.rScore = matchHash.r_score;
     this.bScore = matchHash.b_score;
@@ -53,13 +53,6 @@ export class Match {
     // Sort players on score
     this.redTeam.sort(player => { return player.statistics ? player.statistics.score : 0; });
     this.blueTeam.sort(player => { return player.statistics ? player.statistics.score : 0; });
-  }
-
-  assignStats(statsArray) {
-    this.players.forEach(pl => {
-      pl.statistics = statsArray.find(st => {
-        return st.userId === pl.id; });
-    });
   }
 
 }

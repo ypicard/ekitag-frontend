@@ -45,7 +45,6 @@ import { SeasonResolver } from './resolves/season.resolver';
 import { MatchesResolver } from './resolves/matches.resolver';
 import { PendingMatchesResolver } from './resolves/pending-matches.resolver';
 import { PendingMatchResolver } from "./resolves/pending-match.resolver";
-import { MatchStatisticsResolver } from './resolves/statistics.resolver';
 import { MatchResolver } from './resolves/match.resolver';
 
 // Routes
@@ -55,8 +54,8 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
 
   { path: 'matches', component: MatchesComponent, resolve: { matches: MatchesResolver, pendingMatches: PendingMatchesResolver } },
-  { path: 'matches/:id', component: MatchComponent, resolve: { match: MatchResolver, statistics: MatchStatisticsResolver } },
-  { path: 'matches_pending/:id', component: PendingMatchComponent, resolve: { pendingMatch: PendingMatchResolver, statistics: MatchStatisticsResolver } },
+  { path: 'matches/:id', component: MatchComponent, resolve: { match: MatchResolver } },
+  { path: 'matches_pending/:id', component: PendingMatchComponent, resolve: { pendingMatch: PendingMatchResolver } },
   { path: 'new_match', component: NewMatchComponent, resolve: { players: PlayersResolver } },
 
   { path: 'players', component: PlayersComponent, resolve: { players: PlayersResolver } },
@@ -112,7 +111,6 @@ const appRoutes: Routes = [
     SeasonResolver,
     MatchesResolver,
     PendingMatchesResolver,
-    MatchStatisticsResolver,
     MatchResolver,
     PendingMatchResolver
   ],
