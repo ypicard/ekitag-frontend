@@ -17,7 +17,7 @@ export class PendingMatchComponent {
     public tagApiService: TagApiService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    public authService: AuthService
   ) {
     console.log('PendingMatchComponent');
 

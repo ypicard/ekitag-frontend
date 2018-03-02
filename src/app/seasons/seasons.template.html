@@ -14,11 +14,11 @@
       <tr routerLink="/seasons/{{ currentSeason.id }}" class="pointer">
         <td class='text-right'>{{ currentSeason.id }}</td>
         <td>{{ currentSeason.name }}</td>
-        <td>{{ currentSeason.start_date }}</td>
-        <td>{{ currentSeason.end_date }}</td>
-        <td>{{ currentSeason.max_time }} days</td>
-        <td>{{ currentSeason.played_matches }}</td>
-        <td>{{ currentSeason.max_matches }}</td>
+        <td>{{ currentSeason.startTime | date: 'EEE dd yyyy, HH:mm' }}</td>
+        <td>{{ currentSeason.endTime | date: 'EEE dd yyyy, HH:mm' }}</td>
+        <td>{{ currentSeason.maxTime ? currentSeason.maxTime + ' days' : ''}}</td>
+        <td>{{ currentSeason.playedMatches }}</td>
+        <td>{{ currentSeason.maxMatches }}</td>
       </tr>
     </tbody>
   </table>
@@ -58,11 +58,11 @@
         <tr *ngFor="let season of seasons" routerLink="/seasons/{{ season.id }}" class="pointer">
           <td class='text-right'>{{ season.id }}</td>
           <td>{{ season.name }}</td>
-          <td>{{ season.start_date }}</td>
-          <td>{{ season.end_date }}</td>
-          <td>{{ season.max_time }} days</td>
-          <td>{{ season.played_matches }}</td>
-          <td>{{ season.max_matches }}</td>
+          <td>{{ season.startTime | date: 'EEE dd yyyy, HH:mm' }}</td>
+          <td>{{ season.endTime | date: 'EEE dd yyyy, HH:mm' }}</td>
+          <td>{{ season.maxTime ? season.maxTime + ' days' : ''}}</td>
+          <td>{{ season.playedMatches }}</td>
+          <td>{{ season.maxMatches }}</td>
         </tr>
       </tbody>
     </table>

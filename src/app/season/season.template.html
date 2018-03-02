@@ -15,11 +15,11 @@
         <tr>
           <td class='text-right'>{{ season.id }}</td>
           <td>{{ season.name }}</td>
-          <td>{{ season.start_date }}</td>
-          <td>{{ season.end_date }}</td>
-          <td>{{ season.max_time }} days</td>
-          <td>{{ season.played_matches }}</td>
-          <td>{{ season.max_matches }}</td>
+          <td>{{ season.startTime | date: 'EEE dd yyyy, HH:mm' }}</td>
+          <td>{{ season.endTime | date: 'EEE dd yyyy, HH:mm' }}</td>
+          <td>{{ season.maxTime }} days</td>
+          <td>{{ season.playedMatches }}</td>
+          <td>{{ season.maxMatches }}</td>
         </tr>
       </tbody>
     </table>
@@ -40,9 +40,9 @@
       <tbody>
         <tr *ngFor="let match of matches" routerLink="/matches/{{ match.id }}" class='pointer'>
           <td>{{ match.id }}</td>
-          <td class='text-right'>{{ match.r_score }}</td>
-          <td>{{ match.b_score }}</td>
-          <td class='text-right'>{{ match.datetime | date: 'EEE dd yyyy, HH:mm'}}</td>
+          <td class='text-right'>{{ match.rScore }}</td>
+          <td>{{ match.bScore }}</td>
+          <td class='text-right'>{{ match.datetime | date: 'EEE dd yyyy, HH:mm' }}</td>
           <td>{{ match.validator.pseudo }}</td>
           <td>Season ?</td>
         </tr>
