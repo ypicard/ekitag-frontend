@@ -17,8 +17,7 @@ export class MatchComponent {
         console.log('MatchComponent');
 
         this.route.data.subscribe(val => {
-            this.match = new Match(val.match);
-            console.log(this.match)
+            this.match = val.match as Match;
         });
     }
 

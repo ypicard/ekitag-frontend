@@ -41,7 +41,6 @@ export class Match {
     if (matchHash.r6 && matchHash.r6.id != null) { this.r6 = new Player(matchHash.r6); }
 
     if (matchHash.season && matchHash.season.id != null) { this.season = new Season(matchHash.season); }
-
     this.rScore = matchHash.r_score;
     this.bScore = matchHash.b_score;
     this.datetime = matchHash.datetime;

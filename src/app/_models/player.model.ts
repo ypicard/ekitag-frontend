@@ -12,7 +12,7 @@ export class Player {
   loserStars: number;
   statistics?: Statistics;
 
-  constructor(playerHash: any) {
+  constructor(playerHash: any, statsHash? : any) {
     this.id = playerHash.id;
     this.pseudo = playerHash.pseudo;
     this.usualPseudos = playerHash.usual_pseudos;
@@ -24,6 +24,9 @@ export class Player {
     this.loserStars = playerHash.loserStars;
     if (playerHash.statistics) {
       this.statistics = new Statistics(playerHash.statistics);
+    }
+    if(statsHash){
+      this.statistics = new Statistics(statsHash);
     }
   }
 }
