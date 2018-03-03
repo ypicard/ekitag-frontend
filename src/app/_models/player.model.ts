@@ -21,7 +21,7 @@ export class Player {
     this.goldStars = playerHash.gold_stars;
     this.silverStars = playerHash.silver_stars;
     this.copperStars = playerHash.copper_stars;
-    this.loserStars = playerHash.loserStars;
+    this.loserStars = playerHash.loser_stars;
     if (playerHash.statistics) {
       this.statistics = new Statistics(playerHash.statistics);
     }
