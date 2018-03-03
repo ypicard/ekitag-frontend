@@ -8,9 +8,9 @@ export class Statistics {
   popped: number;
   grabs: number;
   drops: number;
-  hold: string; // PSQL INTERVAL
+  hold: number; // PSQL INTERVAL
   captures: number;
-  prevent: string; // PSQL INTERVAL
+  prevent: number; // PSQL INTERVAL
   returns: number;
   support: number;
   pups: number;

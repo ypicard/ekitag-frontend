@@ -23,6 +23,7 @@ export class Match {
   bScore: number;
   validator: Player;
   datetime: Date;
+  duration: number;
 
   constructor(matchHash: any) {
     this.id = matchHash.id;
@@ -44,6 +45,7 @@ export class Match {
     this.rScore = matchHash.r_score;
     this.bScore = matchHash.b_score;
     this.datetime = matchHash.datetime;
+    this.duration = matchHash.duration;
     this.validator = matchHash.validator as Player;
     // Create teams
     this.blueTeam = [this.b1, this.b2, this.b3, this.b4, this.b5, this.b6].filter(pl => { return pl !=  null; });

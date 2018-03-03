@@ -3,6 +3,7 @@
     <h1 style='display: inline-block;'>Match {{ match.id }}</h1>
     <span style='margin-left: 1.5em;'>Validated by {{ match.validator.pseudo }}</span>
     <h3 *ngIf='match.season'>Season {{ match.season.name }}</h3>
+    <div>Duration: {{ match.duration * 1000 | date: 'mm:ss'}}</div>
   </div>
 </div>
 <div class="row">

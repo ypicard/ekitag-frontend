@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-12">
     <h1 style='display: inline-block;'>Match {{ pendingMatch.id }}</h1>
+    <div>Duration: {{ pendingMatch.duration * 1000 | date: 'mm:ss' }}</div>
   </div>
 </div>
 <div class="row">

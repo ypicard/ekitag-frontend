@@ -45,11 +45,16 @@ export class NewMatchComponent {
   }
 
   submitMatch(form): void {
+    if (this.teams.red.length < 1 || this.teams.blue.length < 1) {
+      alert("Needs one player in each team.");
+      return;
+    }
     // Match object
     let match = {
       b_score: form.blueScore,
       r_score: form.redScore,
       datetime: new Date().toISOString(),
+      duration: form.duration * 60, // in seconds
       r1_pseudo: null,
       r2_pseudo: null,
       r3_pseudo: null,
