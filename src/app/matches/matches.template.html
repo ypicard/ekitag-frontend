@@ -10,7 +10,6 @@
         <th>Blue score</th>
         <th>Duration</th>
         <th>Date</th>
-        <th>Season</th>
         <th></th>
         <th></th>
       </thead>
@@ -21,7 +20,6 @@
           <td routerLink="/matches_pending/{{ match.id }}">{{ match.bScore }}</td>
           <td routerLink="/matches_pending/{{ match.id }}">{{ match.duration * 1000 | date: 'mm:ss'}}</td>
           <td routerLink="/matches_pending/{{ match.id }}" class='text-right'>{{ match.datetime | date: 'EEE dd yyyy, HH:mm'}}</td>
-          <td routerLink="/matches_pending/{{ match.id }}">Season</td>
           <td>
             <button *ngIf='authService.isLoggedIn()' (click)="confirmPendingMatch(match.id)">Confirm</button>
           </td>

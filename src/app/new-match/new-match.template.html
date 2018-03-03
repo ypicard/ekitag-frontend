@@ -10,7 +10,7 @@
 </div>
 <button (click)='toggleCurrentTeam()' [ngClass]='currentTeam'>{{ currentTeam }} Team</button>
 <form #newMatch="ngForm" (ngSubmit)="submitMatch(newMatch.value)">
-  Duration (minutes): <input type='text' ngModel name='duration' class='form-control' pattern='\d' required/>
+  Duration (minutes): <input type='text' ngModel name='duration' class='form-control' pattern='\d+' required/>
   Red Score: <input type='text' ngModel name='redScore' class='form-control' pattern='\d' required/>
   Blue Score: <input type='text' ngModel name='blueScore' class='form-control' pattern='\d' required/>
   <table>
