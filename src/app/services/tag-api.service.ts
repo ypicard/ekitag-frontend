@@ -8,11 +8,11 @@ import { Player } from "../_models/player.model";
 import { Season } from "../_models/season.model";
 import { Match } from "../_models/match.model";
 import { PendingMatch } from "../_models/pending-match.model";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class TagApiService {
-  BASE_URL = 'https://ekitag-api.herokuapp.com/v1/'
-  // BASE_URL = "http://localhost:5000/v1/";
+  API_BASE_URL = environment.apiBaseUrl;
 
   constructor(private http: HttpClient, public cookieService: CookieService) {
     console.log("TagApiService");
@@ -38,7 +38,7 @@ export class TagApiService {
     formData.append("password", password);
 
     return this.http.post(
-      this.BASE_URL + "users/" + id + "/promote",
+      this.API_BASE_URL + "users/" + id + "/promote",
       formData,
       {
         headers: this.getAdminHeaders()
@@ -47,7 +47,7 @@ export class TagApiService {
   }
 
   downgradeAdmin(id: number): Observable<any> {
-    return this.http.delete(this.BASE_URL + "users/" + id + "/promote", {
+    return this.http.delete(this.API_BASE_URL + "users/" + id + "/promote", {
       headers: this.getAdminHeaders()
     });
   }
@@ -56,21 +56,21 @@ export class TagApiService {
     let formData = new FormData();
     formData.append("login", trigram);
     formData.append("password", password);
-    return this.http.post(this.BASE_URL + "admin/", formData);
+    return this.http.post(this.API_BASE_URL + "admin/", formData);
   }
 
   deactivateUser(id: number): Observable<any> {
     // TODO: fix in back i think
-    return this.http.delete(this.BASE_URL + "users/" + id);
+    return this.http.delete(this.API_BASE_URL + "users/" + id);
   }
 
   // ------------------------- USERS
   getUser(id: number): Observable<any> {
-    return this.http.get(this.BASE_URL + "users/" + id);
+    return this.http.get(this.API_BASE_URL + "users/" + id);
   }
 
   getAllUsers(): Observable<Player[]> {
-    return this.http.get(this.BASE_URL + "users").map((res: any[]) => {
+    return this.http.get(this.API_BASE_URL + "users").map((res: any[]) => {
       return res.map(pl => {
         return new Player(pl);
       });
@@ -81,7 +81,7 @@ export class TagApiService {
     let formData = new FormData();
     formData.append("trigram", trigram);
     formData.append("pseudo", pseudo);
-    return this.http.post(this.BASE_URL + "users", formData);
+    return this.http.post(this.API_BASE_URL + "users", formData);
   }
 
   addPseudo(user: Player, newPseudo: string): Observable<any> {
@@ -94,13 +94,13 @@ export class TagApiService {
     });
     formData.append("usual_pseudos", newPseudo);
 
-    return this.http.put(this.BASE_URL + "users/" + user.id, formData);
+    return this.http.put(this.API_BASE_URL + "users/" + user.id, formData);
   }
 
   // ------------------------- MATCHES
 
   getMatch(id: number): Observable<Match> {
-    return this.http.get(this.BASE_URL + "matches/" + id).map((res: any[]) => {
+    return this.http.get(this.API_BASE_URL + "matches/" + id).map((res: any[]) => {
       ["b", "r"].forEach(t => {
         [1, 2, 3, 4, 5, 6].forEach(i => {
           res[t + i]["statistics"] = res[t + i + "_stats"];
@@ -112,7 +112,7 @@ export class TagApiService {
   }
 
   getMatches(): Observable<Match[]> {
-    return this.http.get(this.BASE_URL + "matches").map((res: any[]) => {
+    return this.http.get(this.API_BASE_URL + "matches").map((res: any[]) => {
       return res.map(m => {
         return new Match(m);
       });
@@ -121,7 +121,7 @@ export class TagApiService {
 
   getPendingMatches(): Observable<PendingMatch[]> {
     return this.http
-      .get(this.BASE_URL + "matches/pending")
+      .get(this.API_BASE_URL + "matches/pending")
       .map((res: any[]) => {
         return res.map(m => {
           return new PendingMatch(m);
@@ -131,19 +131,19 @@ export class TagApiService {
 
   getPendingMatch(id: number): Observable<PendingMatch> {
     return this.http
-      .get(this.BASE_URL + "matches/pending/" + id)
+      .get(this.API_BASE_URL + "matches/pending/" + id)
       .map(res => new PendingMatch(res));
   }
 
   deletePendingMatch(id: number): Observable<any> {
-    return this.http.delete(this.BASE_URL + "matches/pending/" + id, {
+    return this.http.delete(this.API_BASE_URL + "matches/pending/" + id, {
       headers: this.getAdminHeaders()
     });
   }
 
   confirmPendingMatch(id: number): Observable<any> {
     return this.http.put(
-      this.BASE_URL + "matches/pending/" + id,
+      this.API_BASE_URL + "matches/pending/" + id,
       {},
       {
         headers: this.getAdminHeaders()
@@ -158,7 +158,7 @@ export class TagApiService {
     }
 
     return this.http
-      .post(this.BASE_URL + "matches/pending", matchFormData, {})
+      .post(this.API_BASE_URL + "matches/pending", matchFormData, {})
       .map(
         res => {
           let matchId = res["value"];
@@ -176,7 +176,7 @@ export class TagApiService {
             statRequests.push(
               this.http
                 .post(
-                  this.BASE_URL + "matches/pending/" + matchId + "/stats",
+                  this.API_BASE_URL + "matches/pending/" + matchId + "/stats",
                   statsFormData,
                   {}
                 )
@@ -197,7 +197,7 @@ export class TagApiService {
   // ------------------------- SEASONS
 
   getAllSeasons(): Observable<Season[]> {
-    return this.http.get(this.BASE_URL + "seasons").map((res: any[]) => {
+    return this.http.get(this.API_BASE_URL + "seasons").map((res: any[]) => {
       return res.map(m => {
         return new Season(m);
       });
@@ -206,13 +206,13 @@ export class TagApiService {
 
   getSeason(id: number): Observable<Season> {
     return this.http
-      .get(this.BASE_URL + "seasons/" + id)
+      .get(this.API_BASE_URL + "seasons/" + id)
       .map(res => new Season(res));
   }
 
   getSeasonMatches(id: number): Observable<Match[]> {
     return this.http
-      .get(this.BASE_URL + "seasons/" + id + "/matches")
+      .get(this.API_BASE_URL + "seasons/" + id + "/matches")
       .map((res: any[]) => {
         return res.map(m => {
           return new Match(m);
@@ -221,7 +221,7 @@ export class TagApiService {
   }
 
   endSeason(id: number): Observable<any> {
-    return this.http.delete(this.BASE_URL + "seasons/" + id, {
+    return this.http.delete(this.API_BASE_URL + "seasons/" + id, {
       headers: this.getAdminHeaders()
     });
   }
@@ -233,10 +233,14 @@ export class TagApiService {
   ): Observable<any> {
     let formData = new FormData();
     formData.append("name", name);
-    if(maxTimeInSeconds) { formData.append("max_time", maxTimeInSeconds); }
-    if(maxMatches) { formData.append("max_matches", maxMatches); }
+    if (maxTimeInSeconds) {
+      formData.append("max_time", maxTimeInSeconds);
+    }
+    if (maxMatches) {
+      formData.append("max_matches", maxMatches);
+    }
 
-    return this.http.post(this.BASE_URL + "seasons", formData, {
+    return this.http.post(this.API_BASE_URL + "seasons", formData, {
       headers: this.getAdminHeaders()
     });
   }
@@ -247,7 +251,7 @@ export class TagApiService {
     playerIds.forEach(id => {
       reqParams = reqParams.append("ids", id);
     });
-    return this.http.get(this.BASE_URL + "algo/musigma_team", {
+    return this.http.get(this.API_BASE_URL + "algo/musigma_team", {
       params: reqParams
     });
   }
