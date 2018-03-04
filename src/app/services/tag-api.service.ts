@@ -245,13 +245,13 @@ export class TagApiService {
     });
   }
 
-  // ------------------------- ALGO: MUSIGMA TEAM
-  runMusigmaTeam(playerIds): Observable<any> {
+  // ------------------------- ALGO
+  runAlgo(algoName, playerIds): Observable<any> {
     let reqParams = new HttpParams();
     playerIds.forEach(id => {
       reqParams = reqParams.append("ids", id);
     });
-    return this.http.get(this.API_BASE_URL + "algo/musigma_team", {
+    return this.http.get(this.API_BASE_URL + "algo/" + algoName, {
       params: reqParams
     });
   }
