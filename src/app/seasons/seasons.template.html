@@ -1,49 +1,54 @@
-<h1>Current Season</h1>
-<div *ngIf='currentSeason'>
-  <table>
-    <thead>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Max Time</th>
-      <th>Played Matches</th>
-      <th>Max Matches</th>
-    </thead>
-    <tbody>
-      <tr routerLink="/seasons/{{ currentSeason.id }}" class="pointer">
-        <td class='text-right'>{{ currentSeason.id }}</td>
-        <td>{{ currentSeason.name }}</td>
-        <td>{{ currentSeason.startTime | date: 'EEE dd yyyy, HH:mm' }}</td>
-        <td>{{ currentSeason.endTime | date: 'EEE dd yyyy, HH:mm' }}</td>
-        <td>{{ currentSeason.maxTime ? currentSeason.maxTime + ' days' : ''}}</td>
-        <td>{{ currentSeason.playedMatches }}</td>
-        <td>{{ currentSeason.maxMatches }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <button (click)="endSeason(currentSeason)">End season</button>
-
-</div>
-<div *ngIf='!currentSeason'>
-  <form #newSeasonForm="ngForm" (ngSubmit)="createSeason(newSeasonForm)">
-    <label class='col-sm-2' for="name">Name</label>
-    <input type="text" name="name" class="col-sm-8 form-control" ngModel required>
-    <br>
-    <label class='col-sm-2' for="maxMatches">Max matches</label>
-    <input type="text" name="maxMatches" class="col-sm-8 form-control" ngModel pattern="\d">
-    <br>
-    <label class='col-sm-2' for="maxTime">Max days</label>
-    <input type="text" name="maxTime" class="col-sm-8 form-control" ngModel pattern="\d">
-    <br>
-    <hr>
-    <button type="submit" [disabled]='!newSeasonForm.form.valid'>Launch new season</button>
-  </form>
-</div>
-
-<h1>Passed seasons</h1>
-<div class="row">
+<div class="row" *ngIf='currentSeason'>
   <div class="col-12">
+    <h1>Current Season</h1>
+    <table>
+      <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Max Time</th>
+        <th>Played Matches</th>
+        <th>Max Matches</th>
+      </thead>
+      <tbody>
+        <tr routerLink="/seasons/{{ currentSeason.id }}" class="pointer">
+          <td class='text-right'>{{ currentSeason.id }}</td>
+          <td>{{ currentSeason.name }}</td>
+          <td>{{ currentSeason.startTime | date: 'EEE dd yyyy, HH:mm' }}</td>
+          <td>{{ currentSeason.endTime | date: 'EEE dd yyyy, HH:mm' }}</td>
+          <td>{{ currentSeason.maxTime ? currentSeason.maxTime + ' days' : ''}}</td>
+          <td>{{ currentSeason.playedMatches }}</td>
+          <td>{{ currentSeason.maxMatches }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="endSeason(currentSeason)">End season</button>
+  </div>
+</div>
+
+<div class="row" *ngIf='!currentSeason'>
+  <div class="col-12">
+    <h1>Current Season</h1>
+    <form #newSeasonForm="ngForm" (ngSubmit)="createSeason(newSeasonForm)">
+      <label class='col-sm-2' for="name">Name</label>
+      <input type="text" name="name" class="col-sm-8 form-control" ngModel required>
+      <br>
+      <label class='col-sm-2' for="maxMatches">Max matches</label>
+      <input type="text" name="maxMatches" class="col-sm-8 form-control" ngModel pattern="\d">
+      <br>
+      <label class='col-sm-2' for="maxTime">Max days</label>
+      <input type="text" name="maxTime" class="col-sm-8 form-control" ngModel pattern="\d">
+      <br>
+      <hr>
+      <button type="submit" [disabled]='!newSeasonForm.form.valid'>Launch new season</button>
+    </form>
+  </div>
+</div>
+
+<div class="row" *ngIf='seasons.length > 0'>
+  <div class="col-12">
+    <h1>Passed seasons</h1>
     <table>
       <thead>
         <th>ID</th>
