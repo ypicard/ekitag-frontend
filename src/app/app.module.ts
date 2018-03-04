@@ -42,6 +42,7 @@ import { CookieService } from 'ng2-cookies';
 import { PlayersResolver } from './resolves/players.resolver';
 import { SeasonsResolver } from './resolves/seasons.resolver';
 import { SeasonResolver } from './resolves/season.resolver';
+import { CurrentSeasonResolver } from "./resolves/current-season.resolver";
 import { MatchesResolver } from './resolves/matches.resolver';
 import { PendingMatchesResolver } from './resolves/pending-matches.resolver';
 import { PendingMatchResolver } from "./resolves/pending-match.resolver";
@@ -65,7 +66,7 @@ const appRoutes: Routes = [
   { path: 'seasons/:id', component: SeasonComponent, resolve: { season: SeasonResolver } },
 
   { path: 'hall_of_fame', component: HallOfFameComponent },
-  { path: 'algo', component: AlgoComponent, resolve: { players: PlayersResolver } },
+  { path: 'algo', component: AlgoComponent, resolve: { players: PlayersResolver, currentSeason: CurrentSeasonResolver } },
   { path: 'auth', component: AuthComponent },
 ]
 
@@ -109,6 +110,7 @@ const appRoutes: Routes = [
     AuthService,
     SeasonsResolver,
     SeasonResolver,
+    CurrentSeasonResolver,
     MatchesResolver,
     PendingMatchesResolver,
     MatchResolver,

@@ -6,9 +6,9 @@ import { TagApiService } from '../services/tag-api.service';
 import { Season } from "../_models/season.model";
 
 @Injectable()
-export class SeasonsResolver implements Resolve<Season[]> {
+export class CurrentSeasonResolver implements Resolve<Season> {
     constructor(private tagApiService: TagApiService) { }
-    resolve(route: ActivatedRouteSnapshot): Observable<Season[]> {
-        return this.tagApiService.getAllSeasons();
+    resolve(route: ActivatedRouteSnapshot): Observable<Season> {
+        return this.tagApiService.getCurrentSeason();
     }
 }

@@ -100,15 +100,17 @@ export class TagApiService {
   // ------------------------- MATCHES
 
   getMatch(id: number): Observable<Match> {
-    return this.http.get(this.API_BASE_URL + "matches/" + id).map((res: any[]) => {
-      ["b", "r"].forEach(t => {
-        [1, 2, 3, 4, 5, 6].forEach(i => {
-          res[t + i]["statistics"] = res[t + i + "_stats"];
-          delete res[t + i + "_stats"];
+    return this.http
+      .get(this.API_BASE_URL + "matches/" + id)
+      .map((res: any[]) => {
+        ["b", "r"].forEach(t => {
+          [1, 2, 3, 4, 5, 6].forEach(i => {
+            res[t + i]["statistics"] = res[t + i + "_stats"];
+            delete res[t + i + "_stats"];
+          });
         });
+        return new Match(res);
       });
-      return new Match(res);
-    });
   }
 
   getMatches(): Observable<Match[]> {
@@ -208,6 +210,12 @@ export class TagApiService {
     return this.http
       .get(this.API_BASE_URL + "seasons/" + id)
       .map(res => new Season(res));
+  }
+
+  getCurrentSeason(): Observable<Season> {
+    return this.http.get(this.API_BASE_URL + "seasons/current").map(res => {
+      return res['id'] != null ? new Season(res) : null;
+    });
   }
 
   getSeasonMatches(id: number): Observable<Match[]> {

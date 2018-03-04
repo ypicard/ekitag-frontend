@@ -1,62 +1,62 @@
-<div id="algo-container">
-  <div class="row">
-    <div class="col">
-      <h1>ALGORITHM</h1>
+<div class="row">
+  <div class="col">
+    <h1>ALGORITHM</h1>
+    <h3>{{ currentSeason ? 'Season ' + currentSeason.name : 'No current season' }}</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-center">
+    <button *ngFor="let algo of algos" (click)="generateTeams(algo.key_name, this.selectedPlayers)">Generate using {{ algo.name }}</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <div class='group'>
+      <div class='header'>
+        Add players
+      </div>
+      <ul class='content'>
+        <li *ngFor="let player of myHelper.sortPlayers(players, 'pseudo')" class="player" (click)="selectPlayer(player)">
+          {{ player.pseudo }}
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="row">
-    <div class="col-4">
-      <div class='group'>
-        <div class='header'>
-          Add players
-        </div>
-        <ul class='content'>
-          <li *ngFor="let player of myHelper.sortPlayers(players, 'pseudo')" class="player" (click)="selectPlayer(player)">
-            {{ player.pseudo }}
-          </li>
-        </ul>
+  <div class="col-4">
+    <div class='group'>
+      <div class='header'>
+        Selected players
       </div>
-    </div>
-    <div class="col-4">
-      <div class='group'>
-        <div class='header'>
-          Selected players
-        </div>
-        <ul class='content'>
-          <li *ngFor="let player of myHelper.sortPlayers(selectedPlayers, 'pseudo')" class="player" (click)="deselectPlayer(player)">
-            {{ player.pseudo }}
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class='group'>
-        <div class='header red'>
-          RED
-        </div>
-        <ul class='content'>
-          <li *ngFor="let player of myHelper.sortPlayers(redTeam, 'pseudo')" class="player" (click)="deselectPlayer(player)">
-            {{ player.pseudo }}
-          </li>
-        </ul>
-      </div>
-      <div class='group'>
-        <div class='header blue'>
-          BLUE
-        </div>
-        <ul class='content'>
-          <li *ngFor="let player of myHelper.sortPlayers(blueTeam, 'pseudo')" class="player" (click)="deselectPlayer(player)">
-            {{ player.pseudo }}
-          </li>
-        </ul>
-      </div>
-      <div>Quality: {{ quality | percent }}</div>
-      <button class='gray-button' ngxClipboard [cbContent]="copyTeams()" [disabled]="blueTeam.length + redTeam.length < 2">Copy Teams</button>
+      <ul class='content'>
+        <li *ngFor="let player of myHelper.sortPlayers(selectedPlayers, 'pseudo')" class="player" (click)="deselectPlayer(player)">
+          {{ player.pseudo }}
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="row">
-    <div class="col text-center">
-      <button *ngFor="let algo of algos" (click)="generateTeams(algo.key_name, this.selectedPlayers)">Generate using {{ algo.name }}</button>
+  <div class="col-4">
+    <div class='group'>
+      <div class='header red'>
+        RED
+      </div>
+      <ul class='content'>
+        <li *ngFor="let player of myHelper.sortPlayers(redTeam, 'pseudo')" class="player" (click)="deselectPlayer(player)">
+          {{ player.pseudo }}
+        </li>
+      </ul>
     </div>
+    <div class='group'>
+      <div class='header blue'>
+        BLUE
+      </div>
+      <ul class='content'>
+        <li *ngFor="let player of myHelper.sortPlayers(blueTeam, 'pseudo')" class="player" (click)="deselectPlayer(player)">
+          {{ player.pseudo }}
+        </li>
+      </ul>
+    </div>
+    <div>Quality: {{ quality | percent }}</div>
+    <button class='gray-button' ngxClipboard [cbContent]="copyTeams()" [disabled]="blueTeam.length + redTeam.length < 2">Copy Teams</button>
   </div>
 </div>

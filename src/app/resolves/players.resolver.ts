@@ -8,7 +8,7 @@ import {
 } from '../_models/player.model';
 
 @Injectable()
-export class PlayersResolver implements Resolve<any> {
+export class PlayersResolver implements Resolve<Player[]> {
     constructor(private tagApiService: TagApiService) { }
     resolve(route: ActivatedRouteSnapshot): Observable<Player[]> {
         return this.tagApiService.getAllUsers();

@@ -3,6 +3,7 @@ import { TagApiService } from "../services/tag-api.service";
 import { ActivatedRoute } from "@angular/router";
 import { Player } from "../_models/player.model";
 import { MyHelper } from "../services/my-helper.service";
+import { Season } from "../_models/season.model";
 
 @Component({
   selector: "algo",
@@ -10,6 +11,7 @@ import { MyHelper } from "../services/my-helper.service";
   styleUrls: ["./algo.style.scss"]
 })
 export class AlgoComponent {
+  currentSeason: Season;
   players: Player[] = [];
   selectedPlayers: Player[] = [];
   redTeam: Player[] = [];
@@ -30,6 +32,7 @@ export class AlgoComponent {
     console.log("AlgoComponent");
     this.route.data.subscribe(res => {
       this.players = res.players as Player[];
+      this.currentSeason = res.currentSeason as Season;
     });
   }
 

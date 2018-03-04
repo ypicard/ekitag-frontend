@@ -6,7 +6,7 @@ import { TagApiService } from '../services/tag-api.service';
 import {  PendingMatch } from '../_models/pending-match.model';
 
 @Injectable()
-export class PendingMatchesResolver implements Resolve<any> {
+export class PendingMatchesResolver implements Resolve<PendingMatch[]> {
     constructor(private tagApiService: TagApiService) { }
     resolve(route: ActivatedRouteSnapshot): Observable<PendingMatch[]> {
         return this.tagApiService.getPendingMatches();

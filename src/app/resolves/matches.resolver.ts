@@ -6,7 +6,7 @@ import { TagApiService } from '../services/tag-api.service';
 import {  Match } from '../_models/match.model';
 
 @Injectable()
-export class MatchesResolver implements Resolve<any> {
+export class MatchesResolver implements Resolve<Match[]> {
     constructor(private tagApiService: TagApiService) { }
     resolve(route: ActivatedRouteSnapshot): Observable< Match[] > {
         return this.tagApiService.getMatches();
