@@ -8,7 +8,7 @@ export class Player {
   isActive: boolean;
   goldStars: number;
   silverStars: number;
-  copperStars: number;
+  bronzeStars: number;
   loserStars: number;
   statistics?: Statistics;
 
@@ -20,7 +20,7 @@ export class Player {
     this.isActive = playerHash.is_active;
     this.goldStars = playerHash.gold_stars;
     this.silverStars = playerHash.silver_stars;
-    this.copperStars = playerHash.copper_stars;
+    this.bronzeStars = playerHash.bronze_stars;
     this.loserStars = playerHash.loser_stars;
     if (playerHash.statistics) {
       this.statistics = new Statistics(playerHash.statistics);
