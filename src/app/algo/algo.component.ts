@@ -17,12 +17,7 @@ export class AlgoComponent {
   redTeam: Player[] = [];
   blueTeam: Player[] = [];
   quality: number;
-  algos = [
-    {
-      name: "Musigma Team",
-      key_name: "musigma_team"
-    }
-  ];
+  algos: any = [];
 
   constructor(
     public route: ActivatedRoute,
@@ -30,6 +25,7 @@ export class AlgoComponent {
     public myHelper: MyHelper
   ) {
     console.log("AlgoComponent");
+    this.algos = this.myHelper.algoList();
     this.route.data.subscribe(res => {
       this.players = res.players as Player[];
       this.currentSeason = res.currentSeason as Season;

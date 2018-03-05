@@ -39,13 +39,14 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { CookieService } from 'ng2-cookies';
 
 // RESOLVERS
+import { PlayerResolver } from './resolves/player.resolver';
 import { PlayersResolver } from './resolves/players.resolver';
 import { SeasonsResolver } from './resolves/seasons.resolver';
 import { SeasonResolver } from './resolves/season.resolver';
-import { CurrentSeasonResolver } from "./resolves/current-season.resolver";
+import { CurrentSeasonResolver } from './resolves/current-season.resolver';
 import { MatchesResolver } from './resolves/matches.resolver';
 import { PendingMatchesResolver } from './resolves/pending-matches.resolver';
-import { PendingMatchResolver } from "./resolves/pending-match.resolver";
+import { PendingMatchResolver } from './resolves/pending-match.resolver';
 import { MatchResolver } from './resolves/match.resolver';
 
 // Routes
@@ -60,7 +61,7 @@ const appRoutes: Routes = [
   { path: 'new_match', component: NewMatchComponent, resolve: { players: PlayersResolver } },
 
   { path: 'players', component: PlayersComponent, resolve: { players: PlayersResolver } },
-  { path: 'players/:id', component: PlayerComponent },
+  { path: 'players/:id', component: PlayerComponent, resolve: {player: PlayerResolver} },
 
   { path: 'seasons', component: SeasonsComponent, resolve: { seasons: SeasonsResolver } },
   { path: 'seasons/:id', component: SeasonComponent, resolve: { season: SeasonResolver } },
@@ -107,6 +108,7 @@ const appRoutes: Routes = [
     MyHelper,
     CookieService,
     PlayersResolver,
+    PlayerResolver,
     AuthService,
     SeasonsResolver,
     SeasonResolver,

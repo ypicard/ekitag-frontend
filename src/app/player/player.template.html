@@ -1,36 +1,41 @@
-<div class="row" *ngIf="player">
-  <div class="col-12">
-    <h1>{{ player.pseudo }}</h1>
-    <div>ID: {{ player.id }}</div>
-    <!-- STARS -->
-    <div *ngIf='player.goldStars > 0'><img src='/assets/images/gold_star.png' class='star'> {{ player.goldStars }}</div>
-    <div *ngIf='player.silverStars > 0'><img src='/assets/images/silver_star.png' class='star'> {{ player.silverStars }}</div>
-    <div *ngIf='player.bronzeStars > 0'><img src='/assets/images/bronze_star.png' class='star'> {{ player.bronzeStars }}</div>
-    <div *ngIf='player.loserStars > 0'><img src='/assets/images/loser_star.png' class='star'> {{ player.loserStars }}</div>
-    <div *ngIf='player.usualPseudos.length > 0'>Usual Pseudos: {{ player.usualPseudos }}</div>
-    <!-- STATS -->
-    
-    <!-- ADMIN PART -->
-    <div *ngIf='player.isAdmin'>
-      <div>Is Active: {{ player.isActive }}</div>
-      <div>Is Admin: {{ player.isAdmin }}</div>
-    </div>
+<div class="col-12">
+  <h1>{{ player.pseudo }}</h1>
+  <div>ID: {{ player.id }}</div>
+  <!-- STARS -->
+  <div *ngIf='player.goldStars > 0'>
+    <img src='/assets/images/gold_star.png' class='star'> {{ player.goldStars }}</div>
+  <div *ngIf='player.silverStars > 0'>
+    <img src='/assets/images/silver_star.png' class='star'> {{ player.silverStars }}</div>
+  <div *ngIf='player.bronzeStars > 0'>
+    <img src='/assets/images/bronze_star.png' class='star'> {{ player.bronzeStars }}</div>
+  <div *ngIf='player.loserStars > 0'>
+    <img src='/assets/images/loser_star.png' class='star'> {{ player.loserStars }}</div>
+  <div *ngIf='player.usualPseudos.length > 0'>Usual Pseudos: {{ player.usualPseudos }}</div>
+  <!-- STATS -->
 
-    <div *ngIf="tagApiService.isLoggedIn() && player.isAdmin">
-      <form #newPseudoForm="ngForm" (ngSubmit)=addPseudo(newPseudoForm)>
-        <label for="new-pseudo">Add pseudo</label>
-        <input type="text" name="new-pseudo" class='form-control' ngModel minlength="3" required>
-        <button type="submit" [disabled]='!newPseudoForm.form.valid'>Add Pseudo</button>
-      </form>
-      <br>
-      <h3>Promote admin</h3>
-      <form #promoteForm="ngForm" (ngSubmit)="promoteAdmin(promoteForm)">
-        <label for="password">Choose a password for him</label>
-        <input type="text" name="password" class="form-control" ngModel minlength='6' required>
-        <button type="submit" [disabled]='!promoteForm.form.valid'>Promote admin</button>
-      </form>
-      <button *ngIf="player.is_active" (click)="deactivate()">DEACTIVATE</button>
-      <button *ngIf="player.is_admin" (click)="downgradeAdmin()">Remove admin rights</button>
-    </div>
+  <!-- ADMIN PART -->
+  <div *ngIf='tagApiService.isLoggedIn()'>
+    <div>Is Active: {{ player.isActive }}</div>
+    <div>Is Admin: {{ player.isAdmin }}</div>
+  </div>
+
+  <div *ngIf="tagApiService.isLoggedIn()">
+    <h3 for="new-pseudo">Add pseudo</h3>
+    <form #newPseudoForm="ngForm" (ngSubmit)=addPseudo(newPseudoForm)>
+      <input type="text" name="new-pseudo" class='form-control' ngModel minlength="3" required>
+      <button type="submit" [disabled]='!newPseudoForm.form.valid'>Add Pseudo</button>
+    </form>
+    <br>
+  </div>
+
+  <div *ngIf="tagApiService.isLoggedIn() && !player.isAdmin">
+    <h3>Promote admin</h3>
+    <form #promoteForm="ngForm" (ngSubmit)="promoteAdmin(promoteForm)">
+      <label for="password">Choose a password for him</label>
+      <input type="text" name="password" class="form-control" ngModel minlength='6' required>
+      <button type="submit" [disabled]='!promoteForm.form.valid'>Promote admin</button>
+    </form>
+    <button *ngIf="player.is_active" (click)="deactivate()">DEACTIVATE</button>
+    <button *ngIf="player.is_admin" (click)="downgradeAdmin()">Remove admin rights</button>
   </div>
 </div>

@@ -11,8 +11,11 @@ export class Player {
   bronzeStars: number;
   loserStars: number;
   statistics?: Statistics;
+  rank?: number;
+  sigma?: number;
+  mu?: number;
 
-  constructor(playerHash: any, statsHash? : any) {
+  constructor(playerHash: any, statsHash?: any) {
     this.id = playerHash.id;
     this.pseudo = playerHash.pseudo;
     this.usualPseudos = playerHash.usual_pseudos;
@@ -22,10 +25,15 @@ export class Player {
     this.silverStars = playerHash.silver_stars;
     this.bronzeStars = playerHash.bronze_stars;
     this.loserStars = playerHash.loser_stars;
+
+    this.mu = playerHash.mu;
+    this.sigma = playerHash.sigma;
+    this.rank = playerHash.rank;
+
     if (playerHash.statistics) {
       this.statistics = new Statistics(playerHash.statistics);
     }
-    if(statsHash){
+    if (statsHash) {
       this.statistics = new Statistics(statsHash);
     }
   }

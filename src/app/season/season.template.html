@@ -25,6 +25,27 @@
     </table>
   </div>
 </div>
+
+<div *ngFor='let ranking of rankings'>
+  <h3>{{ myHelper.getAlgoName(ranking.algo) }} ranking</h3>
+  <table>
+    <thead>
+      <th>Rank</th>
+      <th>Pseudo</th>
+      <th>Mu</th>
+      <th>Sigma</th>
+    </thead>
+    <tbody>
+      <tr *ngFor='let player of ranking.players' routerLink="/players/{{ player.id }}" class='pointer'>
+        <td class='text-right'>{{ player.rank }}</td>
+        <td>{{ player.pseudo }}</td>
+        <td>{{ player.mu | number: '.0-2' }}</td>
+        <td>{{ player.sigma | number: '.0-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <h3>Matches</h3>
 <div class="row">
   <div class="col-12">
