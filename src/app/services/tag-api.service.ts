@@ -1,45 +1,46 @@
-import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { CookieService } from 'ng2-cookies';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/forkJoin';
-import { Player } from '../_models/player.model';
-import { Season } from '../_models/season.model';
-import { Match } from '../_models/match.model';
-import { AlgoRanking } from '../_models/algo-ranking.model';
-import { PendingMatch } from '../_models/pending-match.model';
-import { environment } from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import "rxjs/add/operator/map";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { CookieService } from "ng2-cookies";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/observable/forkJoin";
+import { Player } from "../_models/player.model";
+import { Season } from "../_models/season.model";
+import { Match } from "../_models/match.model";
+import { AlgoRanking } from "../_models/algo-ranking.model";
+import { PendingMatch } from "../_models/pending-match.model";
+import { environment } from "../../environments/environment";
+import { using } from "rxjs/observable/using";
 
 @Injectable()
 export class TagApiService {
   API_BASE_URL = environment.apiBaseUrl;
 
   constructor(private http: HttpClient, public cookieService: CookieService) {
-    console.log('TagApiService');
+    console.log("TagApiService");
   }
 
   // ------------------------- ADMIN
   isLoggedIn(): boolean {
-    return this.cookieService.check('Bearer');
+    return this.cookieService.check("Bearer");
   }
 
   getAdminHeaders(): HttpHeaders {
     let headers = new HttpHeaders();
     headers = headers.append(
-      'Authorization',
-      'Bearer ' + this.cookieService.get('Bearer')
+      "Authorization",
+      "Bearer " + this.cookieService.get("Bearer")
     );
     return headers;
   }
 
   promoteAdmin(id: number, password: string): Observable<any> {
     let formData = new FormData();
-    formData.append('user_id', id.toString());
-    formData.append('password', password);
+    formData.append("user_id", id.toString());
+    formData.append("password", password);
 
     return this.http.post(
-      this.API_BASE_URL + 'users/' + id + '/promote',
+      this.API_BASE_URL + "users/" + id + "/promote",
       formData,
       {
         headers: this.getAdminHeaders()
@@ -48,32 +49,32 @@ export class TagApiService {
   }
 
   downgradeAdmin(id: number): Observable<any> {
-    return this.http.delete(this.API_BASE_URL + 'users/' + id + '/promote', {
+    return this.http.delete(this.API_BASE_URL + "users/" + id + "/promote", {
       headers: this.getAdminHeaders()
     });
   }
 
   login(trigram: string, password: string): Observable<any> {
     let formData = new FormData();
-    formData.append('login', trigram);
-    formData.append('password', password);
-    return this.http.post(this.API_BASE_URL + 'admin/', formData);
+    formData.append("login", trigram);
+    formData.append("password", password);
+    return this.http.post(this.API_BASE_URL + "admin/", formData);
   }
 
   deactivateUser(id: number): Observable<any> {
     // TODO: fix in back i think
-    return this.http.delete(this.API_BASE_URL + 'users/' + id);
+    return this.http.delete(this.API_BASE_URL + "users/" + id);
   }
 
   // ------------------------- USERS
   getUser(id: number): Observable<Player> {
-    return this.http.get(this.API_BASE_URL + 'users/' + id).map(res => {
+    return this.http.get(this.API_BASE_URL + "users/" + id).map(res => {
       return new Player(res);
     });
   }
 
   getAllUsers(): Observable<Player[]> {
-    return this.http.get(this.API_BASE_URL + 'users').map((res: any[]) => {
+    return this.http.get(this.API_BASE_URL + "users").map((res: any[]) => {
       return res.map(pl => {
         return new Player(pl);
       });
@@ -82,34 +83,34 @@ export class TagApiService {
 
   createUser(trigram: string, pseudo: string): Observable<any> {
     let formData = new FormData();
-    formData.append('trigram', trigram);
-    formData.append('pseudo', pseudo);
-    return this.http.post(this.API_BASE_URL + 'users', formData);
+    formData.append("trigram", trigram);
+    formData.append("pseudo", pseudo);
+    return this.http.post(this.API_BASE_URL + "users", formData);
   }
 
   addPseudo(user: Player, newPseudo: string): Observable<any> {
     if (user.usualPseudos.indexOf(newPseudo) >= 0) return; // No duplicate pseudo
     let formData = new FormData();
-    formData.append('user_id', user.id.toString());
-    formData.append('pseudo', user.pseudo);
+    formData.append("user_id", user.id.toString());
+    formData.append("pseudo", user.pseudo);
     user.usualPseudos.forEach(pseudo => {
-      formData.append('usual_pseudos', pseudo);
+      formData.append("usual_pseudos", pseudo);
     });
-    formData.append('usual_pseudos', newPseudo);
+    formData.append("usual_pseudos", newPseudo);
 
-    return this.http.put(this.API_BASE_URL + 'users/' + user.id, formData);
+    return this.http.put(this.API_BASE_URL + "users/" + user.id, formData);
   }
 
   // ------------------------- MATCHES
 
   getMatch(id: number): Observable<Match> {
     return this.http
-      .get(this.API_BASE_URL + 'matches/' + id)
+      .get(this.API_BASE_URL + "matches/" + id)
       .map((res: any[]) => {
-        ['b', 'r'].forEach(t => {
+        ["b", "r"].forEach(t => {
           [1, 2, 3, 4, 5, 6].forEach(i => {
-            res[t + i]['statistics'] = res[t + i + '_stats'];
-            delete res[t + i + '_stats'];
+            res[t + i]["statistics"] = res[t + i + "_stats"];
+            delete res[t + i + "_stats"];
           });
         });
         return new Match(res);
@@ -117,7 +118,7 @@ export class TagApiService {
   }
 
   getMatches(): Observable<Match[]> {
-    return this.http.get(this.API_BASE_URL + 'matches').map((res: any[]) => {
+    return this.http.get(this.API_BASE_URL + "matches").map((res: any[]) => {
       return res.map(m => {
         return new Match(m);
       });
@@ -126,7 +127,7 @@ export class TagApiService {
 
   getPendingMatches(): Observable<PendingMatch[]> {
     return this.http
-      .get(this.API_BASE_URL + 'matches/pending')
+      .get(this.API_BASE_URL + "matches/pending")
       .map((res: any[]) => {
         return res.map(m => {
           return new PendingMatch(m);
@@ -136,19 +137,19 @@ export class TagApiService {
 
   getPendingMatch(id: number): Observable<PendingMatch> {
     return this.http
-      .get(this.API_BASE_URL + 'matches/pending/' + id)
+      .get(this.API_BASE_URL + "matches/pending/" + id)
       .map(res => new PendingMatch(res));
   }
 
   deletePendingMatch(id: number): Observable<any> {
-    return this.http.delete(this.API_BASE_URL + 'matches/pending/' + id, {
+    return this.http.delete(this.API_BASE_URL + "matches/pending/" + id, {
       headers: this.getAdminHeaders()
     });
   }
 
   confirmPendingMatch(id: number): Observable<any> {
     return this.http.put(
-      this.API_BASE_URL + 'matches/pending/' + id,
+      this.API_BASE_URL + "matches/pending/" + id,
       {},
       {
         headers: this.getAdminHeaders()
@@ -163,15 +164,15 @@ export class TagApiService {
     }
 
     return this.http
-      .post(this.API_BASE_URL + 'matches/pending', matchFormData, {})
+      .post(this.API_BASE_URL + "matches/pending", matchFormData, {})
       .map(
         res => {
-          let matchId = res['value'];
+          let matchId = res["value"];
           let statRequests = [];
 
           stats.forEach(pl => {
             let statsFormData = new FormData();
-            statsFormData.append('match_id', matchId.toString());
+            statsFormData.append("match_id", matchId.toString());
             for (let k in pl) {
               if (pl[k] != null) {
                 statsFormData.append(k, pl[k]);
@@ -181,7 +182,7 @@ export class TagApiService {
             statRequests.push(
               this.http
                 .post(
-                  this.API_BASE_URL + 'matches/pending/' + matchId + '/stats',
+                  this.API_BASE_URL + "matches/pending/" + matchId + "/stats",
                   statsFormData,
                   {}
                 )
@@ -202,7 +203,7 @@ export class TagApiService {
   // ------------------------- SEASONS
 
   getAllSeasons(): Observable<Season[]> {
-    return this.http.get(this.API_BASE_URL + 'seasons').map((res: any[]) => {
+    return this.http.get(this.API_BASE_URL + "seasons").map((res: any[]) => {
       return res.map(m => {
         return new Season(m);
       });
@@ -211,19 +212,19 @@ export class TagApiService {
 
   getSeason(id: number): Observable<Season> {
     return this.http
-      .get(this.API_BASE_URL + 'seasons/' + id)
+      .get(this.API_BASE_URL + "seasons/" + id)
       .map(res => new Season(res));
   }
 
   getCurrentSeason(): Observable<Season> {
-    return this.http.get(this.API_BASE_URL + 'seasons/current').map(res => {
-      return res['id'] != null ? new Season(res) : null;
+    return this.http.get(this.API_BASE_URL + "seasons/current").map(res => {
+      return res["id"] != null ? new Season(res) : null;
     });
   }
 
   getSeasonMatches(id: number): Observable<Match[]> {
     return this.http
-      .get(this.API_BASE_URL + 'seasons/' + id + '/matches')
+      .get(this.API_BASE_URL + "seasons/" + id + "/matches")
       .map((res: any[]) => {
         return res.map(m => {
           return new Match(m);
@@ -232,7 +233,7 @@ export class TagApiService {
   }
 
   endSeason(id: number): Observable<any> {
-    return this.http.delete(this.API_BASE_URL + 'seasons/' + id, {
+    return this.http.delete(this.API_BASE_URL + "seasons/" + id, {
       headers: this.getAdminHeaders()
     });
   }
@@ -243,41 +244,47 @@ export class TagApiService {
     maxTimeInSeconds: any
   ): Observable<any> {
     let formData = new FormData();
-    formData.append('name', name);
+    formData.append("name", name);
     if (maxTimeInSeconds) {
-      formData.append('max_time', maxTimeInSeconds);
+      formData.append("max_time", maxTimeInSeconds);
     }
     if (maxMatches) {
-      formData.append('max_matches', maxMatches);
+      formData.append("max_matches", maxMatches);
     }
 
-    return this.http.post(this.API_BASE_URL + 'seasons', formData, {
+    return this.http.post(this.API_BASE_URL + "seasons", formData, {
       headers: this.getAdminHeaders()
     });
   }
 
   // ------------------------- ALGO
-  runAlgo(algoName, playerIds): Observable<any> {
+  runAlgo(algoName: string, playerIds: number[]): Observable<any> {
     let reqParams = new HttpParams();
     playerIds.forEach(id => {
-      reqParams = reqParams.append('ids', id);
+      reqParams = reqParams.append("ids", id.toString());
     });
-    return this.http.get(this.API_BASE_URL + 'algo/' + algoName, {
+    return this.http.get(this.API_BASE_URL + "algo/" + algoName, {
       params: reqParams
     });
   }
 
-  getAlgoRanking(algoName, seasonId): Observable<AlgoRanking> {
+  getAlgoRanking(algoName: string, seasonId: number): Observable<AlgoRanking> {
     let reqParams = new HttpParams();
     if (seasonId) {
-      reqParams = reqParams.append('season_id', seasonId);
+      reqParams = reqParams.append("season_id", seasonId.toString());
     }
     return this.http
-      .get(this.API_BASE_URL + 'algo/' + algoName + '/users', {
+      .get(this.API_BASE_URL + "algo/" + algoName + "/users", {
         params: reqParams
       })
       .map(res => {
         return new AlgoRanking(res);
       });
+  }
+
+  getAlgoUserSeasonRankings(userId: number, algoName: string): Observable<any> {
+    return this.http.get(
+      this.API_BASE_URL + "algo/" + algoName + "/users/" + userId
+    );
   }
 }
