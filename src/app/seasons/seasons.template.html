@@ -60,7 +60,7 @@
         <th>Max Matches</th>
       </thead>
       <tbody>
-        <tr *ngFor="let season of seasons" routerLink="/seasons/{{ season.id }}" class="pointer">
+        <tr *ngFor="let season of passedSeasons" routerLink="/seasons/{{ season.id }}" class="pointer">
           <td class='text-right'>{{ season.id }}</td>
           <td>{{ season.name }}</td>
           <td>{{ season.startTime | date: 'EEE dd yyyy, HH:mm' }}</td>

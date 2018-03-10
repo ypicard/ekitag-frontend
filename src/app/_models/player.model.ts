@@ -12,6 +12,7 @@ export class Player {
   loserStars: number;
   statistics?: Statistics;
   rank?: number;
+  exposition?: number;
   sigma?: number;
   mu?: number;
 
@@ -26,6 +27,7 @@ export class Player {
     this.bronzeStars = playerHash.bronze_stars;
     this.loserStars = playerHash.loser_stars;
 
+    this.exposition = playerHash.exposition;
     this.mu = playerHash.mu;
     this.sigma = playerHash.sigma;
     this.rank = playerHash.rank;

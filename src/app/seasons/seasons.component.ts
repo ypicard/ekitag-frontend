@@ -11,6 +11,7 @@ import { Season } from "../_models/season.model";
 export class SeasonsComponent {
   seasons: Season[];
   currentSeason: Season;
+  passedSeasons: Season[];
 
   constructor(
     public route: ActivatedRoute,
@@ -21,6 +22,9 @@ export class SeasonsComponent {
       this.seasons = val.seasons;
       this.currentSeason = this.seasons.find(season => {
         return season.running;
+      });
+      this.passedSeasons = this.seasons.filter(season => {
+        return !season.running;
       });
       console.log(this.seasons)
     });

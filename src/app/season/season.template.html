@@ -32,6 +32,7 @@
     <thead>
       <th>Rank</th>
       <th>Pseudo</th>
+      <th>Exposition</th>
       <th>Mu</th>
       <th>Sigma</th>
     </thead>
@@ -39,6 +40,7 @@
       <tr *ngFor='let player of ranking.players' routerLink="/players/{{ player.id }}" class='pointer'>
         <td class='text-right'>{{ player.rank }}</td>
         <td>{{ player.pseudo }}</td>
+        <td>{{ player.exposition | number: '.0-2' }}</td>
         <td>{{ player.mu | number: '.0-2' }}</td>
         <td>{{ player.sigma | number: '.0-2' }}</td>
       </tr>
