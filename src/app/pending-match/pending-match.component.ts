@@ -33,7 +33,7 @@ export class PendingMatchComponent {
       },
       error => {
         console.log(error);
-        alert(error.statusText);
+        alert(error.error.message);
       }
     );
   }
@@ -44,7 +44,7 @@ export class PendingMatchComponent {
         this.router.navigate(['/matches']);
       },
       error => {
-        alert(error.statusText);
+        alert(error.error.message);
       }
     );
   }
