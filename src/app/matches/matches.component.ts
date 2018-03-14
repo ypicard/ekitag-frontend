@@ -41,7 +41,7 @@ export class MatchesComponent {
     this.tagApiService.confirmPendingMatch(id).subscribe(res => {
       this.updateUI();
     }, error => {
-      alert(error.statusText);
+      alert(error.error.message);
     });
   }
 
@@ -49,7 +49,7 @@ export class MatchesComponent {
     this.tagApiService.deletePendingMatch(id).subscribe(res => {
       this.updateUI();
     }, error => {
-      alert(error.statusText);
+      alert(error.error.message);
     });
   }
 
