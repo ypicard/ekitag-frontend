@@ -18,7 +18,9 @@ export class PlayersComponent {
   ) {
     console.log('PlayersComponent');
     this.route.data.subscribe(val => {
-      this.players = val.players;
+      this.players = val.players.sort((pl1, pl2) => {
+        return pl1.pseudo > pl2.pseudo;
+      })
     });
   }
 
