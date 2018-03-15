@@ -6,7 +6,7 @@
 </div>
 <div class="row">
   <div class="col text-center">
-    <button *ngFor="let algo of algos" (click)="generateTeams(algo.key_name, this.selectedPlayers)">Generate using {{ algo.name }}</button>
+    <button *ngFor="let algo of algos" (click)="generateTeams(algo.key, this.selectedPlayers)">Generate using {{ algo.name }}</button>
   </div>
 </div>
 
