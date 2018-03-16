@@ -31,19 +31,12 @@ export class PlayerComponent {
         .getAlgoUserSeasonRankings(this.player.id, algo.key)
         .subscribe(res => {
           this.rankings[algo.key] = res.rankings;
-          console.log(this.rankings)
         });
     });
   }
 
-  refreshUser() {
-    this.tagApiService.getUser(this.player.id).subscribe(res => {
-      this.player = new Player(res);
-    });
-  }
-
-  addPseudo(newPseudo: string) {
-    this.tagApiService.addPseudo(this.player, newPseudo).subscribe(
+  addPseudo(form: NgForm) {
+    this.tagApiService.addPseudo(this.player, form.value['new-pseudo']).subscribe(
       res => {
         alert(res["message"]);
         this.refreshUI();
@@ -64,6 +57,7 @@ export class PlayerComponent {
   refreshUI() {
     this.tagApiService.getUser(this.player.id).subscribe(res => {
       this.player = new Player(res);
+      console.log(this.player)
     });
   }
 
@@ -76,7 +70,7 @@ export class PlayerComponent {
       .promoteAdmin(this.player.id, form.value.password)
       .subscribe(res => {
         alert("Success");
-        this.refreshUser();
+        this.refreshUI();
       });
   }
 
