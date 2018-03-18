@@ -35,6 +35,9 @@ export class AlgoComponent {
   selectPlayer(player: Player): void {
     this.selectedPlayers.push(player);
     this.players.splice(this.players.indexOf(player), 1);
+    this.selectedPlayers = this.selectedPlayers
+      .concat(this.redTeam)
+      .concat(this.blueTeam);
     this.clearTeams();
   }
 
