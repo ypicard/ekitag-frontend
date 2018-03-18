@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { TagApiService } from '../services/tag-api.service';
-import { MyHelper } from '../services/my-helper.service';
-import { ActivatedRoute } from '@angular/router';
-import { Player } from '../_models/player.model';
-import { NgForm } from '@angular/forms';
+import { Component } from "@angular/core";
+import { TagApiService } from "../services/tag-api.service";
+import { MyHelper } from "../services/my-helper.service";
+import { ActivatedRoute } from "@angular/router";
+import { Player } from "../_models/player.model";
+import { NgForm } from "@angular/forms";
+import { MultiSeriesGraphComponent } from "../_d3/multi-series-graph.component";
+import * as moment from 'moment';
 
 @Component({
   selector: "player",
@@ -15,6 +17,11 @@ export class PlayerComponent {
   player: Player;
   newPseudo: string;
   rankings: any = {};
+  charts: any = {
+    history:{
+      data: []
+    }
+  }
 
   constructor(
     public tagApiService: TagApiService,
@@ -32,19 +39,41 @@ export class PlayerComponent {
         .subscribe(res => {
           this.rankings[algo.key] = res.rankings;
         });
+
+      this.tagApiService
+        .getAlgoUserViz(this.player.id, algo.key, "history")
+        .subscribe(res => {
+          res.history.forEach(el => {
+            var historyData = this.charts.history.data.find(
+              d => d.key === el.season_id
+            );
+            if (!historyData) {
+              historyData = {
+                key: el.season_id,
+                values: []
+              };
+              this.charts.history.data.push(historyData);
+            }
+            el.datetime = moment(el.datetime).toDate();
+            historyData.values.push(el);
+          });
+        });
+        
     });
   }
 
   addPseudo(form: NgForm) {
-    this.tagApiService.addPseudo(this.player, form.value['new-pseudo']).subscribe(
-      res => {
-        alert(res["message"]);
-        this.refreshUI();
-      },
-      err => {
-        alert(err.error.message);
-      }
-    );
+    this.tagApiService
+      .addPseudo(this.player, form.value["new-pseudo"])
+      .subscribe(
+        res => {
+          alert(res["message"]);
+          this.refreshUI();
+        },
+        err => {
+          alert(err.error.message);
+        }
+      );
   }
 
   deactivateUser() {
@@ -57,7 +86,7 @@ export class PlayerComponent {
   refreshUI() {
     this.tagApiService.getUser(this.player.id).subscribe(res => {
       this.player = new Player(res);
-      console.log(this.player)
+      console.log(this.player);
     });
   }
 

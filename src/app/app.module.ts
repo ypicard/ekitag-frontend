@@ -48,6 +48,7 @@ import { MatchesResolver } from './resolves/matches.resolver';
 import { PendingMatchesResolver } from './resolves/pending-matches.resolver';
 import { PendingMatchResolver } from './resolves/pending-match.resolver';
 import { MatchResolver } from './resolves/match.resolver';
+import { MultiSeriesGraphComponent } from './_d3/multi-series-graph.component';
 
 // Routes
 const appRoutes: Routes = [
@@ -87,6 +88,7 @@ const appRoutes: Routes = [
     SeasonsComponent,
     SeasonComponent,
     PendingMatchComponent,
+    MultiSeriesGraphComponent,
     // PIPES
     ArraySortPipe
   ],

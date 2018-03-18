@@ -1,0 +1,32 @@
+@import "../../_variables.scss";
+$axis-color: #fff;
+
+svg {
+  background-color: $tag-light-gray;
+}
+
+::ng-deep path.line {
+  fill: none;
+}
+
+::ng-deep text {
+  fill: $axis-color;
+}
+
+::ng-deep .axis path,
+::ng-deep .axis line {
+  stroke: none;
+}
+
+::ng-deep .axis--x .tick line{
+  stroke: $axis-color;
+}
+
+::ng-deep .grid {
+  &>.tick>line {
+    stroke: darken(white, 50%);
+  }
+  &>path {
+    stroke: none;
+  }
+}

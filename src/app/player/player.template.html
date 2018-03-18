@@ -1,6 +1,6 @@
 <div class='row'>
   <div class="col-12">
-    <h1>{{ player.id + '. ' + player.pseudo }}</h1>
+    <h1>{{ player.pseudo }}</h1>
     <!-- STARS -->
     <div *ngIf='player.goldStars > 0'>
       <img src='/assets/images/gold_star.png' class='star'> {{ player.goldStars }}</div>
@@ -17,11 +17,12 @@
 <div class='row' *ngFor='let algo of objectKeys(rankings)'>
   <div class="col-12">
     <!-- STATS -->
-    <h3>{{ myHelper.getAlgoName(algo) }}</h3>
+    <!-- <h3>{{ myHelper.getAlgoName(algo) }}</h3> -->
     <table>
       <thead>
         <th>Season Name</th>
         <th>Rank</th>
+        <th>Exposition</th>
         <th>Mu</th>
         <th>Sigma</th>
       </thead>
@@ -29,6 +30,7 @@
         <tr *ngFor="let rank of rankings[algo]">
           <td>{{ rank.season_id ? rank.season_name : 'ALL TIME'}}</td>
           <td>{{ rank.rank }}</td>
+          <td>{{ rank.exposition | number: '.0-2' }}</td>
           <td>{{ rank.mu | number: '.0-2' }}</td>
           <td>{{ rank.sigma | number: '.0-2' }}</td>
         </tr>
@@ -59,5 +61,12 @@
       <button *ngIf="player.is_active" (click)="deactivate()">DEACTIVATE</button>
       <button *ngIf="player.is_admin" (click)="downgradeAdmin()">Remove admin rights</button>
     </div>
+  </div>
+</div>
+
+<div class='row' *ngIf='charts.history.data.length > 0'>
+  <div class='col-12' style='min-height:300px;'>
+    <h3>Exposition evolution</h3>
+    <multi-series-graph [series]='charts.history.data'></multi-series-graph>
   </div>
 </div>

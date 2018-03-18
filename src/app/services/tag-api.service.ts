@@ -287,4 +287,11 @@ export class TagApiService {
       this.API_BASE_URL + "algo/" + algoName + "/users/" + userId
     );
   }
+
+  getAlgoUserViz(userId: number, algoName: string, vizName: string): Observable<any> {
+    return this.http.get(
+      this.API_BASE_URL + "algo/" + algoName + "/users/" + userId + "/" + vizName
+    );
+  }
+
 }
