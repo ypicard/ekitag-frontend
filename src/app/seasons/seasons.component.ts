@@ -19,6 +19,7 @@ export class SeasonsComponent {
   ) {
     console.log("SeasonsComponent");
     this.route.data.subscribe(val => {
+      console.log(val)
       this.seasons = val.seasons;
       this.currentSeason = this.seasons.find(season => {
         return season.running;
@@ -48,7 +49,7 @@ export class SeasonsComponent {
         err => {
           console.log(err);
           alert(err.error.message);
-          
+
         }
       );
   }

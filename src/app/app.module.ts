@@ -26,6 +26,8 @@ import { PendingMatchComponent } from './pending-match/pending-match.component';
 import { SeasonsComponent } from './seasons/seasons.component';
 import { SeasonComponent } from './season/season.component';
 
+import { RankingsComponent } from './rankings/rankings.component';
+
 // PROVIDERS
 import { TagApiService } from './services/tag-api.service';
 import { AuthService } from './services/auth.service';
@@ -48,6 +50,8 @@ import { MatchesResolver } from './resolves/matches.resolver';
 import { PendingMatchesResolver } from './resolves/pending-matches.resolver';
 import { PendingMatchResolver } from './resolves/pending-match.resolver';
 import { MatchResolver } from './resolves/match.resolver';
+import { RankingsResolver } from './resolves/rankings.resolver';
+
 
 // Routes
 const appRoutes: Routes = [
@@ -65,6 +69,8 @@ const appRoutes: Routes = [
 
   { path: 'seasons', component: SeasonsComponent, resolve: { seasons: SeasonsResolver } },
   { path: 'seasons/:id', component: SeasonComponent, resolve: { season: SeasonResolver } },
+
+  { path: 'rankings', component: RankingsComponent, resolve: { season: RankingsResolver } },
 
   { path: 'hall_of_fame', component: HallOfFameComponent },
   { path: 'algo', component: AlgoComponent, resolve: { players: PlayersResolver, currentSeason: CurrentSeasonResolver } },
@@ -86,9 +92,11 @@ const appRoutes: Routes = [
     MatchComponent,
     SeasonsComponent,
     SeasonComponent,
+    RankingsComponent,
     PendingMatchComponent,
     // PIPES
-    ArraySortPipe
+    ArraySortPipe,
+    RankingsComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +105,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     ),
     // LIBRAIRIES
     ClipboardModule,
@@ -116,7 +124,8 @@ const appRoutes: Routes = [
     MatchesResolver,
     PendingMatchesResolver,
     MatchResolver,
-    PendingMatchResolver
+    PendingMatchResolver,
+    RankingsResolver
   ],
   bootstrap: [AppComponent]
 })
