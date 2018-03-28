@@ -1,14 +1,13 @@
-
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { TagApiService } from '../services/tag-api.service';
-import {  Player } from '../_models/player.model';
+import { AlgoRanking } from '../_models/algo-ranking.model';
 
 @Injectable()
-export class RankingsResolver implements Resolve<Player[]> {
-    constructor(private tagApiService: TagApiService) { }
-    resolve(route: ActivatedRouteSnapshot): Observable< Player[] > {
-        return this.tagApiService.getAllUsers();
-    }
+export class RankingsResolver implements Resolve<AlgoRanking> {
+  constructor(private tagApiService: TagApiService) {}
+  resolve(route: ActivatedRouteSnapshot): Observable<AlgoRanking> {
+    return this.tagApiService.getAlgoRanking('musigma_team', null);
+  }
 }

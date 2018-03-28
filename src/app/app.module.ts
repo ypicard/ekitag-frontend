@@ -70,7 +70,7 @@ const appRoutes: Routes = [
   { path: 'seasons', component: SeasonsComponent, resolve: { seasons: SeasonsResolver } },
   { path: 'seasons/:id', component: SeasonComponent, resolve: { season: SeasonResolver } },
 
-  { path: 'rankings', component: RankingsComponent, resolve: { season: RankingsResolver } },
+  { path: 'rankings', component: RankingsComponent, resolve: { rankedPlayers: RankingsResolver } },
 
   { path: 'hall_of_fame', component: HallOfFameComponent },
   { path: 'algo', component: AlgoComponent, resolve: { players: PlayersResolver, currentSeason: CurrentSeasonResolver } },
