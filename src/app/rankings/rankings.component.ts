@@ -6,8 +6,8 @@ import { AuthService } from '../services/auth.service';
 import { PendingMatch } from '../_models/pending-match.model';
 
 @Component({
-  selector: 'app-rankings',
-  templateUrl: './rankings.component.html',
+  selector: 'rankings',
+  templateUrl: './rankings.template.html',
   styleUrls: ['./rankings.component.scss']
 })
 export class RankingsComponent {
