@@ -6,7 +6,7 @@
 </div>
 <div class="row">
   <div class="col text-center">
-    <button *ngFor="let algo of algos" (click)="generateTeams(algo.key, this.selectedPlayers)">Generate using {{ algo.name }}</button>
+    <button *ngFor="let algo of algos" (click)="runAlgo(algo.key)">Generate using {{ algo.name }}</button>
   </div>
 </div>
 
@@ -26,7 +26,7 @@
   <div class="col-4">
     <div class='group'>
       <div class='header'>
-        Selected players
+        Selected players: {{ selectedPlayers.length }}
       </div>
       <ul class='content'>
         <li *ngFor="let player of myHelper.sortPlayers(selectedPlayers, 'pseudo')" class="player" (click)="deselectPlayer(player)">
@@ -34,6 +34,7 @@
         </li>
       </ul>
     </div>
+    <button (click)='clearSelectedPlayers()'>Clear</button>
   </div>
   <div class="col-4">
     <div class='group'>

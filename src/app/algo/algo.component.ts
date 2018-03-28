@@ -53,13 +53,18 @@ export class AlgoComponent {
     this.clearTeams();
   }
 
-  generateTeams(algoName: string, players: Player[]): void {
-    if (players.length < 2) return;
+  runAlgo(algoName: string): void {
+    // If rerun: move red & blue players back to selected players
+    this.selectedPlayers = this.selectedPlayers
+      .concat(this.redTeam)
+      .concat(this.blueTeam);
+    this.clearTeams();
+    if (this.selectedPlayers.length < 2) return;
 
     this.tagApiService
       .runAlgo(
         algoName,
-        players.map(pl => {
+        this.selectedPlayers.map(pl => {
           return pl.id;
         })
       )
@@ -96,6 +101,11 @@ export class AlgoComponent {
   clearTeams(): void {
     this.redTeam = [];
     this.blueTeam = [];
+  }
+
+  clearSelectedPlayers(): void {
+    this.players = this.players.concat(this.selectedPlayers);
+    this.selectedPlayers = [];
   }
 
   copyTeams(): string {
