@@ -32,7 +32,6 @@ export class SeasonComponent {
 
     this.myHelper.algoList().forEach(algo => {
       this.tagApiService.getAlgoRanking(algo.key, this.season.id).subscribe(res => {
-        console.log(res)
         this.rankings.push(res);
       });
     });

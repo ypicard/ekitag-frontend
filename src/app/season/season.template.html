@@ -1,9 +1,9 @@
-<h1>SEASON {{ season.name }}</h1>
+<h1>{{ season.name }}</h1>
 <div class="row">
   <div class="col-12">
     <table>
       <thead>
-        <th>ID</th>
+        <!-- <th>ID</th> -->
         <th>Name</th>
         <th>Start Date</th>
         <th>End Date</th>
@@ -13,11 +13,11 @@
       </thead>
       <tbody>
         <tr>
-          <td class='text-right'>{{ season.id }}</td>
+          <!-- <td class='text-right'>{{ season.id }}</td> -->
           <td>{{ season.name }}</td>
           <td>{{ season.startTime | date: 'EEE dd yyyy, HH:mm' }}</td>
           <td>{{ season.endTime | date: 'EEE dd yyyy, HH:mm' }}</td>
-          <td>{{ season.maxTime }} days</td>
+          <td>{{ season.maxTime ? season.maxTime + ' days' : null }}</td>
           <td>{{ season.playedMatches }}</td>
           <td>{{ season.maxMatches }}</td>
         </tr>
@@ -26,34 +26,40 @@
   </div>
 </div>
 
+
 <div *ngFor='let ranking of rankings'>
-  <h3>{{ myHelper.getAlgoName(ranking.algo) }} ranking</h3>
-  <table>
-    <thead>
-      <th>Rank</th>
-      <th>Pseudo</th>
-      <th>Exposition</th>
-      <th>Mu</th>
-      <th>Sigma</th>
-    </thead>
-    <tbody>
-      <tr *ngFor='let player of ranking.players' routerLink="/players/{{ player.id }}" class='pointer'>
-        <td class='text-right'>{{ player.rank }}</td>
-        <td>{{ player.pseudo }}</td>
-        <td>{{ player.exposition | number: '.0-2' }}</td>
-        <td>{{ player.mu | number: '.0-2' }}</td>
-        <td>{{ player.sigma | number: '.0-2' }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row" *ngIf="ranking.players.length > 0">
+    <div class="col-12">
+      <h3>{{ myHelper.getAlgoName(ranking.algo) }} ranking</h3>
+      <table>
+        <thead>
+          <th>Rank</th>
+          <th>Pseudo</th>
+          <th>Exposition</th>
+          <th>Mu</th>
+          <th>Sigma</th>
+        </thead>
+        <tbody>
+          <tr *ngFor='let player of ranking.players' routerLink="/players/{{ player.id }}" class='pointer'>
+            <td class='text-right'>{{ player.rank }}</td>
+            <td>{{ player.pseudo }}</td>
+            <td>{{ player.exposition | number: '.0-2' }}</td>
+            <td>{{ player.mu | number: '.0-2' }}</td>
+            <td>{{ player.sigma | number: '.0-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
-<h3>Matches</h3>
-<div class="row">
+
+<div class="row" *ngIf="matches && matches.length > 0">
   <div class="col-12">
+    <h3>Matches</h3>
     <table>
       <thead>
-        <th>ID</th>
+        <!-- <th>ID</th> -->
         <th>Red score</th>
         <th>Blue score</th>
         <th>Date</th>
@@ -62,7 +68,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let match of matches" routerLink="/matches/{{ match.id }}" class='pointer'>
-          <td>{{ match.id }}</td>
+          <!-- <td>{{ match.id }}</td> -->
           <td class='text-right'>{{ match.rScore }}</td>
           <td>{{ match.bScore }}</td>
           <td class='text-right'>{{ match.datetime | date: 'EEE dd yyyy, HH:mm' }}</td>

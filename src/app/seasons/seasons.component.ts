@@ -19,7 +19,6 @@ export class SeasonsComponent {
   ) {
     console.log("SeasonsComponent");
     this.route.data.subscribe(val => {
-      console.log(val)
       this.seasons = val.seasons;
       this.currentSeason = this.seasons.find(season => {
         return season.running;
@@ -27,7 +26,6 @@ export class SeasonsComponent {
       this.passedSeasons = this.seasons.filter(season => {
         return !season.running;
       });
-      console.log(this.seasons)
     });
   }
 

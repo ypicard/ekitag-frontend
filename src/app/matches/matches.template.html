@@ -5,7 +5,7 @@
     <h1>Pending matches</h1>
     <table>
       <thead>
-        <th>ID</th>
+        <!-- <th>ID</th> -->
         <th>Red score</th>
         <th>Blue score</th>
         <th>Duration</th>
@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let match of pendingMatches" class='pointer'>
-          <td routerLink="/matches_pending/{{ match.id }}">{{ match.id }}</td>
+          <!-- <td routerLink="/matches_pending/{{ match.id }}">{{ match.id }}</td> -->
           <td routerLink="/matches_pending/{{ match.id }}" class='text-right'>{{ match.rScore }}</td>
           <td routerLink="/matches_pending/{{ match.id }}">{{ match.bScore }}</td>
           <td routerLink="/matches_pending/{{ match.id }}">{{ match.duration * 1000 | date: 'mm:ss'}}</td>
@@ -36,7 +36,7 @@
     <h1>Match history</h1>
     <table>
       <thead>
-        <th>ID</th>
+        <!-- <th>ID</th> -->
         <th>Red score</th>
         <th>Blue score</th>
         <th>Duration</th>
@@ -46,7 +46,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let match of matches" routerLink="/matches/{{ match.id }}" class='pointer'>
-          <td>{{ match.id }}</td>
+          <!-- <td>{{ match.id }}</td> -->
           <td class='text-right'>{{ match.rScore }}</td>
           <td>{{ match.bScore }}</td>
           <td>{{ match.duration * 1000 | date: 'mm:ss'}}</td>

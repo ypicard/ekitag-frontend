@@ -121,7 +121,7 @@ export class TagApiService {
     return this.http.get(this.API_BASE_URL + "matches").map((res: any[]) => {
       return res.map(m => {
         return new Match(m);
-      });
+      })
     });
   }
 
