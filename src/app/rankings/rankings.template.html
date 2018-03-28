@@ -1,3 +1,26 @@
-<div class="" *ngFor="let player of rankedPlayers">
-  {{player.rank}}. {{player.pseudo}}
-</div>
+<h1>Clax all Time</h1>
+<table>
+  <thead>
+    <th>Rank</th>
+    <th>Player</th>
+    <th>Stars</th>
+    <th>Exposition</th>
+    <th>Mu</th>
+    <th>Sigma</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let player of rankedPlayers" routerLink="/players/{{ player.id }}" class="pointer">
+      <td class='text-right'>{{ player.rank }}</td>
+      <td>{{ player.pseudo }}</td>
+      <td>
+        <img src='/assets/images/gold_star.png' class='star' *ngFor='let _ of player.goldStars'>
+        <img src='/assets/images/silver_star.png' class='star' *ngFor='let _ of player.silverStars'>
+        <img src='/assets/images/bronze_star.png' class='star' *ngFor='let _ of player.bronzeStars'>
+        <img src='/assets/images/loser_star.png' class='star' *ngFor='let _ of player.loserStars'>
+      </td>
+      <td>{{ player.exposition | number: '.0-2' }}</td>
+      <td>{{ player.mu | number: '.0-2' }}</td>
+      <td>{{ player.sigma | number: '.0-2' }}</td>
+    </tr>
+  </tbody>
+</table>

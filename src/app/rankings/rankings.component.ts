@@ -16,6 +16,7 @@ export class RankingsComponent {
   constructor(private tagApiService: TagApiService, public route: ActivatedRoute, public authService: AuthService) {
     this.route.data.subscribe(val => {
       this.rankedPlayers = val.rankedPlayers.players;
+      console.log(this.rankedPlayers)
     });
    }
 
