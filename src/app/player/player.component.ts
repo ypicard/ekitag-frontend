@@ -18,7 +18,7 @@ export class PlayerComponent {
   newPseudo: string;
   rankings: any = {};
   charts: any = {
-    history:{
+    history: {
       data: []
     }
   }
@@ -43,7 +43,7 @@ export class PlayerComponent {
       this.tagApiService
         .getAlgoUserViz(this.player.id, algo.key, "history")
         .subscribe(res => {
-          res.history.forEach(el => {
+          res.history.forEach((el, idx) => {
             var historyData = this.charts.history.data.find(
               d => d.key === el.season_id
             );
@@ -54,10 +54,12 @@ export class PlayerComponent {
               };
               this.charts.history.data.push(historyData);
             }
-            el.datetime = moment(el.datetime).toDate();
+            el.datetime = el.datetime ? moment(el.datetime).toDate() : moment(res.history[idx + 1].datetime).subtract(1, 'day').toDate();
             historyData.values.push(el);
           });
+          console.log(this.charts);
         });
+
         
     });
   }
