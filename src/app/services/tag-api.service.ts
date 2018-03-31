@@ -125,6 +125,14 @@ export class TagApiService {
     });
   }
 
+  getUserMatches(userId): Observable<Match[]> {
+     return this.http.get(this.API_BASE_URL + "users/" + userId + "/matches").map((res: any[]) => {
+      return res.map(m => {
+        return new Match(m);
+      })
+    });
+  }
+
   getPendingMatches(): Observable<PendingMatch[]> {
     return this.http
       .get(this.API_BASE_URL + "matches/pending")

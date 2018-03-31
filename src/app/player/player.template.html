@@ -27,7 +27,7 @@
         <th>Sigma</th>
       </thead>
       <tbody>
-        <tr *ngFor="let rank of rankings[algo]">
+        <tr *ngFor="let rank of rankings[algo]" class="pointer" [routerLink]="rank.season_id ? '/seasons/' + rank.season_id : null">
           <td>{{ rank.season_id ? rank.season_name : 'ALL TIME'}}</td>
           <td>{{ rank.rank }}</td>
           <td>{{ rank.exposition | number: '.0-2' }}</td>
@@ -64,9 +64,31 @@
   </div>
 </div>
 
-<div class='row' *ngIf='charts.history.data.length > 0'>
-  <div class='col-12' style='min-height:300px;'>
+<div class='row' *ngIf='charts.history.data.length > 0' style="margin-bottom: 70px;">
+  <div class='col-12'>
     <h3>Exposition evolution</h3>
     <multi-series-graph [series]='charts.history.data'></multi-series-graph>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <h1>Recent matches</h1>
+    <table>
+      <thead>
+        <th>Date</th>
+        <th class="text-right">Red score</th>
+        <th>Blue score</th>
+        <th>Season</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let match of matches" class="pointer" [ngClass]="match.output" routerLink="/matches/{{ match.id }}">
+          <td>{{ match.datetime | date: 'EEE dd yyyy, HH:mm' }}</td>
+          <td class="text-right">{{ match.rScore }}</td>
+          <td>{{ match.bScore }}</td>
+          <td>{{ match.season?.name }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

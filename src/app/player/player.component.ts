@@ -3,6 +3,7 @@ import { TagApiService } from "../services/tag-api.service";
 import { MyHelper } from "../services/my-helper.service";
 import { ActivatedRoute } from "@angular/router";
 import { Player } from "../_models/player.model";
+import { Match } from "../_models/match.model";
 import { NgForm } from "@angular/forms";
 import { MultiSeriesGraphComponent } from "../_d3/multi-series-graph.component";
 import * as moment from 'moment';
@@ -21,7 +22,8 @@ export class PlayerComponent {
     history: {
       data: []
     }
-  }
+  };
+  matches: Match[];
 
   constructor(
     public tagApiService: TagApiService,
@@ -31,6 +33,7 @@ export class PlayerComponent {
     console.log("PlayerComponent");
     this.route.data.subscribe(val => {
       this.player = val.player;
+      this.matches = val.matches;
     });
 
     this.myHelper.algoList().forEach(algo => {
@@ -54,6 +57,7 @@ export class PlayerComponent {
               };
               this.charts.history.data.push(historyData);
             }
+            // If no date (default first value), set date to one day before next el
             el.datetime = el.datetime ? moment(el.datetime).toDate() : moment(res.history[idx + 1].datetime).subtract(1, 'day').toDate();
             historyData.values.push(el);
           });

@@ -52,6 +52,7 @@ import { PendingMatchResolver } from './resolves/pending-match.resolver';
 import { MatchResolver } from './resolves/match.resolver';
 import { MultiSeriesGraphComponent } from './_d3/multi-series-graph.component';
 import { RankingsResolver } from './resolves/rankings.resolver';
+import { UserMatchesResolver } from "./resolves/user-matches.resolver";
 
 // Routes
 const appRoutes: Routes = [
@@ -65,7 +66,7 @@ const appRoutes: Routes = [
   { path: 'new_match', component: NewMatchComponent, resolve: { players: PlayersResolver } },
 
   { path: 'players', component: PlayersComponent, resolve: { players: PlayersResolver } },
-  { path: 'players/:id', component: PlayerComponent, resolve: {player: PlayerResolver} },
+  { path: 'players/:id', component: PlayerComponent, resolve: {player: PlayerResolver, matches: UserMatchesResolver} },
 
   { path: 'seasons', component: SeasonsComponent, resolve: { seasons: SeasonsResolver } },
   { path: 'seasons/:id', component: SeasonComponent, resolve: { season: SeasonResolver } },
@@ -126,7 +127,8 @@ const appRoutes: Routes = [
     PendingMatchesResolver,
     MatchResolver,
     PendingMatchResolver,
-    RankingsResolver
+    RankingsResolver,
+    UserMatchesResolver
   ],
   bootstrap: [AppComponent]
 })

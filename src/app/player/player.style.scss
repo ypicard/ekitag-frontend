@@ -1,0 +1,15 @@
+@import "../../_variables.scss";
+
+.win{
+    color: $win-green;
+}
+.tie{
+    color: $tie-orange;
+}
+.lose{
+    color: $lose-red;
+}
+
+tr:hover{
+    color:white;
+}

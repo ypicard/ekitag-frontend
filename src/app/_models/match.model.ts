@@ -16,6 +16,7 @@ export class Match {
   r5?: Player;
   r6?: Player;
   season?: Season;
+  output?: String;
   players: Player[];
   redTeam: Player[];
   blueTeam: Player[];
@@ -42,6 +43,8 @@ export class Match {
     if (matchHash.r6 && matchHash.r6.id != null) { this.r6 = new Player(matchHash.r6); }
 
     if (matchHash.season && matchHash.season.id != null) { this.season = new Season(matchHash.season); }
+    if (matchHash.output) { this.output = matchHash.output }
+
     this.rScore = matchHash.r_score;
     this.bScore = matchHash.b_score;
     this.datetime = matchHash.datetime;
