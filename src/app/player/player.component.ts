@@ -24,6 +24,8 @@ export class PlayerComponent {
     }
   };
   matches: Match[];
+  userCustomStats: any;
+  userMatchStats: any;
 
   constructor(
     public tagApiService: TagApiService,
@@ -61,11 +63,15 @@ export class PlayerComponent {
             el.datetime = el.datetime ? moment(el.datetime).toDate() : moment(res.history[idx + 1].datetime).subtract(1, 'day').toDate();
             historyData.values.push(el);
           });
-          console.log(this.charts);
         });
-
-        
     });
+
+    this.tagApiService.getUserCustomStats(this.player.id).subscribe(res => {
+      this.userCustomStats = res;
+    })
+    this.tagApiService.getUserMatchStats(this.player.id).subscribe(res => {
+      this.userMatchStats = res;
+    })
   }
 
   addPseudo(form: NgForm) {

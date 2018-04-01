@@ -101,6 +101,14 @@ export class TagApiService {
     return this.http.put(this.API_BASE_URL + "users/" + user.id, formData);
   }
 
+  getUserCustomStats(userId: number): Observable<any> {
+    return this.http.get(this.API_BASE_URL + "users/" + userId + "/user_stats");
+  }
+
+  getUserMatchStats(userId: number): Observable<any> {
+    return this.http.get(this.API_BASE_URL + "users/" + userId + "/match_stats");
+  }
+
   // ------------------------- MATCHES
 
   getMatch(id: number): Observable<Match> {
@@ -121,16 +129,18 @@ export class TagApiService {
     return this.http.get(this.API_BASE_URL + "matches").map((res: any[]) => {
       return res.map(m => {
         return new Match(m);
-      })
+      });
     });
   }
 
   getUserMatches(userId): Observable<Match[]> {
-     return this.http.get(this.API_BASE_URL + "users/" + userId + "/matches").map((res: any[]) => {
-      return res.map(m => {
-        return new Match(m);
-      })
-    });
+    return this.http
+      .get(this.API_BASE_URL + "users/" + userId + "/matches")
+      .map((res: any[]) => {
+        return res.map(m => {
+          return new Match(m);
+        });
+      });
   }
 
   getPendingMatches(): Observable<PendingMatch[]> {
@@ -296,10 +306,19 @@ export class TagApiService {
     );
   }
 
-  getAlgoUserViz(userId: number, algoName: string, vizName: string): Observable<any> {
+  getAlgoUserViz(
+    userId: number,
+    algoName: string,
+    vizName: string
+  ): Observable<any> {
     return this.http.get(
-      this.API_BASE_URL + "algo/" + algoName + "/users/" + userId + "/" + vizName
+      this.API_BASE_URL +
+        "algo/" +
+        algoName +
+        "/users/" +
+        userId +
+        "/" +
+        vizName
     );
   }
-
 }

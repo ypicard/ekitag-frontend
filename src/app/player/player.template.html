@@ -83,7 +83,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let match of matches" class="pointer" [ngClass]="match.output" routerLink="/matches/{{ match.id }}">
-          <td>{{ match.datetime | date: 'EEE dd yyyy, HH:mm' }}</td>
+          <td>{{ match.datetime | date: 'EEE dd yyyy,
+             HH:mm' }}</td>
           <td class="text-right">{{ match.rScore }}</td>
           <td>{{ match.bScore }}</td>
           <td>{{ match.season?.name }}</td>
@@ -91,4 +92,25 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div *ngIf="userCustomStats && userMatchStats">
+  <p>Matches played: {{ userMatchStats.matches_played }}</p>
+  <p>Wins: {{ userMatchStats.wins }}</p>
+  <p>Losses: {{ userMatchStats.losses }}</p>
+  <p>Ties: {{ userMatchStats.ties }}</p>
+  <p>Average match duration: {{ userMatchStats.avg_match_duration }}</p>
+  <p>Average team score: {{ userMatchStats.avg_team_score }}</p>
+
+  <p>Average Score: {{ userCustomStats.avg_score }}</p>
+  <p>Average Tags: {{ userCustomStats.avg_tags }}</p>
+  <p>Average Popped: {{ userCustomStats.avg_popped }}</p>
+  <p>Average Grabs: {{ userCustomStats.avg_grabs }}</p>
+  <p>Average Drops: {{ userCustomStats.avg_drops }}</p>
+  <p>Average Hold: {{ userCustomStats.avg_hold }}</p>
+  <p>Average Captures: {{ userCustomStats.avg_captures }}</p>
+  <p>Average Prevent: {{ userCustomStats.avg_prevent }}</p>
+  <p>Average Returns: {{ userCustomStats.avg_returns }}</p>
+  <p>Average Support: {{ userCustomStats.avg_support }}</p>
+  <p>Average Pups: {{ userCustomStats.avg_pups }}</p>
 </div>
