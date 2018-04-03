@@ -6,7 +6,8 @@ import { Player } from "../_models/player.model";
 import { Match } from "../_models/match.model";
 import { NgForm } from "@angular/forms";
 import { MultiSeriesGraphComponent } from "../_d3/multi-series-graph.component";
-import * as moment from 'moment';
+import { RadarChartComponent } from "../_d3/radar-chart/radar-chart.component";
+import * as moment from "moment";
 
 @Component({
   selector: "player",
@@ -20,6 +21,9 @@ export class PlayerComponent {
   rankings: any = {};
   charts: any = {
     history: {
+      data: []
+    },
+    ratings: {
       data: []
     }
   };
@@ -60,18 +64,34 @@ export class PlayerComponent {
               this.charts.history.data.push(historyData);
             }
             // If no date (default first value), set date to one day before next el
-            el.datetime = el.datetime ? moment(el.datetime).toDate() : moment(res.history[idx + 1].datetime).subtract(1, 'day').toDate();
+            el.datetime = el.datetime
+              ? moment(el.datetime).toDate()
+              : moment(res.history[idx + 1].datetime)
+                  .subtract(1, "day")
+                  .toDate();
             historyData.values.push(el);
           });
         });
     });
 
+    // User custom stats
     this.tagApiService.getUserCustomStats(this.player.id).subscribe(res => {
       this.userCustomStats = res;
-    })
+      console.log(res)
+
+      // Ratings data
+      this.charts.ratings.data.push(Object.entries(res).reduce((obj, el) => {
+        if (el[0].includes("rating")) {
+          obj.push({ area: el[0], value: el[1] * 100 });
+        }
+        return obj;
+      }, []));
+    });
+
+    // User match stats
     this.tagApiService.getUserMatchStats(this.player.id).subscribe(res => {
       this.userMatchStats = res;
-    })
+    });
   }
 
   addPseudo(form: NgForm) {

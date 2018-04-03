@@ -51,6 +51,7 @@ import { PendingMatchesResolver } from './resolves/pending-matches.resolver';
 import { PendingMatchResolver } from './resolves/pending-match.resolver';
 import { MatchResolver } from './resolves/match.resolver';
 import { MultiSeriesGraphComponent } from './_d3/multi-series-graph.component';
+import { RadarChartComponent } from './_d3/radar-chart/radar-chart.component';
 import { RankingsResolver } from './resolves/rankings.resolver';
 import { UserMatchesResolver } from "./resolves/user-matches.resolver";
 
@@ -96,6 +97,7 @@ const appRoutes: Routes = [
     RankingsComponent,
     PendingMatchComponent,
     MultiSeriesGraphComponent,
+    RadarChartComponent,
     // PIPES
     ArraySortPipe,
     RankingsComponent

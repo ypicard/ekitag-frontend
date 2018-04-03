@@ -64,6 +64,101 @@
   </div>
 </div>
 
+<h3>Statistics</h3>
+
+<div class="row">
+  <div class="col-6">
+
+    <table *ngIf="userCustomStats && userMatchStats">
+      <tbody>
+        <tr>
+          <td>Matches </td>
+          <td>{{ userMatchStats.matches_played }}</td>
+        </tr>
+        <tr>
+          <td>Wins</td>
+          <td>{{ userMatchStats.wins }}</td>
+        </tr>
+        <tr>
+          <td>Losses</td>
+          <td>{{ userMatchStats.losses }}</td>
+        </tr>
+        <tr>
+          <td>Ties</td>
+          <td>{{ userMatchStats.ties }}</td>
+        </tr>
+        <tr>
+          <td>Average match duration</td>
+          <td>{{ userMatchStats.avg_match_duration }}</td>
+        </tr>
+        <tr>
+          <td>Average team score</td>
+          <td>{{ userMatchStats.avg_team_score }}</td>
+        </tr>
+        <tr>
+          <td>Average Score</td>
+          <td>{{ userCustomStats.avg_score }}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Tags</td>
+          <td>{{ userCustomStats.avg_tags }}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Popped</td>
+          <td>{{ userCustomStats.avg_popped }}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Grabs</td>
+          <td>{{ userCustomStats.avg_grabs }}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Drops</td>
+          <td>{{ userCustomStats.avg_drops }}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Hold</td>
+          <td>{{ userCustomStats.avg_hold }}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Captures</td>
+          <td>{{ userCustomStats.avg_captures }}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Prevent</td>
+          <td>{{ userCustomStats.avg_prevent }}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Returns</td>
+          <td>{{ userCustomStats.avg_returns }}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Support</td>
+          <td>{{ userCustomStats.avg_support }}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Pups</td>
+          <td>{{ userCustomStats.avg_pups }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="col-6">
+    <radar-chart *ngIf="charts.ratings.data.length > 0" [data]='charts.ratings.data'></radar-chart>
+  </div>
+</div>
+
 <div class='row' *ngIf='charts.history.data.length > 0' style="margin-bottom: 70px;">
   <div class='col-12'>
     <h3>Exposition evolution</h3>
@@ -83,8 +178,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let match of matches" class="pointer" [ngClass]="match.output" routerLink="/matches/{{ match.id }}">
-          <td>{{ match.datetime | date: 'EEE dd yyyy,
-             HH:mm' }}</td>
+          <td>{{ match.datetime | date: 'EEE dd yyyy, HH:mm' }}</td>
           <td class="text-right">{{ match.rScore }}</td>
           <td>{{ match.bScore }}</td>
           <td>{{ match.season?.name }}</td>
@@ -92,25 +186,4 @@
       </tbody>
     </table>
   </div>
-</div>
-
-<div *ngIf="userCustomStats && userMatchStats">
-  <p>Matches played: {{ userMatchStats.matches_played }}</p>
-  <p>Wins: {{ userMatchStats.wins }}</p>
-  <p>Losses: {{ userMatchStats.losses }}</p>
-  <p>Ties: {{ userMatchStats.ties }}</p>
-  <p>Average match duration: {{ userMatchStats.avg_match_duration }}</p>
-  <p>Average team score: {{ userMatchStats.avg_team_score }}</p>
-
-  <p>Average Score: {{ userCustomStats.avg_score }}</p>
-  <p>Average Tags: {{ userCustomStats.avg_tags }}</p>
-  <p>Average Popped: {{ userCustomStats.avg_popped }}</p>
-  <p>Average Grabs: {{ userCustomStats.avg_grabs }}</p>
-  <p>Average Drops: {{ userCustomStats.avg_drops }}</p>
-  <p>Average Hold: {{ userCustomStats.avg_hold }}</p>
-  <p>Average Captures: {{ userCustomStats.avg_captures }}</p>
-  <p>Average Prevent: {{ userCustomStats.avg_prevent }}</p>
-  <p>Average Returns: {{ userCustomStats.avg_returns }}</p>
-  <p>Average Support: {{ userCustomStats.avg_support }}</p>
-  <p>Average Pups: {{ userCustomStats.avg_pups }}</p>
 </div>

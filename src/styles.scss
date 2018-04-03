@@ -115,7 +115,7 @@ a {
 }
 
 table {
-  min-width: 700px;
+  // min-width: 700px;
   border-collapse: collapse;
   border-spacing: 0;
   border-top-color: gray;
@@ -137,6 +137,7 @@ table {
     background: #353535;
     td {
       padding: 0.2em 0.5em;
+      min-width: 100px;
     }
     &:nth-child(2n) {
       background: #404040;
