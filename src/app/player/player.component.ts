@@ -77,7 +77,6 @@ export class PlayerComponent {
     // User custom stats
     this.tagApiService.getUserCustomStats(this.player.id).subscribe(res => {
       this.userCustomStats = res;
-      console.log(res)
 
       // Ratings data
       this.charts.ratings.data.push(Object.entries(res).reduce((obj, el) => {

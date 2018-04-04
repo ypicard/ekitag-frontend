@@ -12,8 +12,8 @@ export class RadarChartComponent {
   @Input() data;
     
     config = {
-    w: 300,
-    h: 300,
+    w: 250,
+    h: 250,
     maxValue: 100,
     levels: 5,
     ExtraWidthX: 300
@@ -327,7 +327,6 @@ export class RadarChartComponent {
           .style("stroke", cfg.color(series))
           .style("fill-opacity", 0.9)
           .on("mouseover", function(d) {
-            console.log(d.area);
             tooltip
               .style("left", d3.event.pageX - 40 + "px")
               .style("top", d3.event.pageY - 80 + "px")

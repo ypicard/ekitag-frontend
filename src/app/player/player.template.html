@@ -64,105 +64,118 @@
   </div>
 </div>
 
-<h3>Statistics</h3>
+
 
 <div class="row">
-  <div class="col-6">
+  <div class="col-4">
+    <h3>Statistics</h3>
 
-    <table *ngIf="userCustomStats && userMatchStats">
+    <table *ngIf="userMatchStats">
       <tbody>
         <tr>
           <td>Matches </td>
           <td>{{ userMatchStats.matches_played }}</td>
         </tr>
-        <tr>
+        <tr class='win'>
           <td>Wins</td>
-          <td>{{ userMatchStats.wins }}</td>
+          <td>{{ userMatchStats.wins }} ({{ userMatchStats.wins / userMatchStats.matches_played | percent }})</td>
         </tr>
-        <tr>
-          <td>Losses</td>
-          <td>{{ userMatchStats.losses }}</td>
-        </tr>
-        <tr>
+        <tr class='tie'>
           <td>Ties</td>
-          <td>{{ userMatchStats.ties }}</td>
+          <td>{{ userMatchStats.ties }} ({{ userMatchStats.ties / userMatchStats.matches_played | percent }})</td>
+        </tr>
+        <tr class='lose'>
+          <td>Losses</td>
+          <td>{{ userMatchStats.losses }} ({{ userMatchStats.losses / userMatchStats.matches_played | percent }})</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <table *ngIf="userMatchStats">
+      <tbody>
+        <tr>
+          <td>Avg Match Duration</td>
+          <td>{{ userMatchStats.avg_match_duration | number: '.0-2' }}</td>
         </tr>
         <tr>
-          <td>Average match duration</td>
-          <td>{{ userMatchStats.avg_match_duration }}</td>
+          <td>Avg Team Score</td>
+          <td>{{ userMatchStats.avg_team_score | number: '.0-2' }}</td>
         </tr>
+      </tbody>
+    </table>
+
+
+    <table *ngIf="userCustomStats">
+      <tbody>
         <tr>
-          <td>Average team score</td>
-          <td>{{ userMatchStats.avg_team_score }}</td>
-        </tr>
-        <tr>
-          <td>Average Score</td>
-          <td>{{ userCustomStats.avg_score }}
+          <td>Avg Score</td>
+          <td>{{ userCustomStats.avg_score | number: '.0-2' }}
           </td>
         </tr>
         <tr>
-          <td>Average Tags</td>
-          <td>{{ userCustomStats.avg_tags }}
+          <td>Avg Tags</td>
+          <td>{{ userCustomStats.avg_tags | number: '.0-2' }}
           </td>
         </tr>
         <tr>
-          <td>Average Popped</td>
-          <td>{{ userCustomStats.avg_popped }}
+          <td>Avg Popped</td>
+          <td>{{ userCustomStats.avg_popped | number: '.0-2' }}
           </td>
         </tr>
         <tr>
-          <td>Average Grabs</td>
-          <td>{{ userCustomStats.avg_grabs }}
+          <td>Avg Grabs</td>
+          <td>{{ userCustomStats.avg_grabs | number: '.0-2' }}
           </td>
         </tr>
         <tr>
-          <td>Average Drops</td>
-          <td>{{ userCustomStats.avg_drops }}
+          <td>Avg Drops</td>
+          <td>{{ userCustomStats.avg_drops | number: '.0-2' }}
           </td>
         </tr>
         <tr>
-          <td>Average Hold</td>
-          <td>{{ userCustomStats.avg_hold }}
+          <td>Avg Hold</td>
+          <td>{{ userCustomStats.avg_hold | number: '.0-2' }}
           </td>
         </tr>
         <tr>
-          <td>Average Captures</td>
-          <td>{{ userCustomStats.avg_captures }}
+          <td>Avg Captures</td>
+          <td>{{ userCustomStats.avg_captures | number: '.0-2' }}
           </td>
         </tr>
         <tr>
-          <td>Average Prevent</td>
-          <td>{{ userCustomStats.avg_prevent }}
+          <td>Avg Prevent</td>
+          <td>{{ userCustomStats.avg_prevent | number: '.0-2' }}
           </td>
         </tr>
         <tr>
-          <td>Average Returns</td>
-          <td>{{ userCustomStats.avg_returns }}
+          <td>Avg Returns</td>
+          <td>{{ userCustomStats.avg_returns | number: '.0-2' }}
           </td>
         </tr>
         <tr>
-          <td>Average Support</td>
-          <td>{{ userCustomStats.avg_support }}
+          <td>Avg Support</td>
+          <td>{{ userCustomStats.avg_support | number: '.0-2' }}
           </td>
         </tr>
         <tr>
-          <td>Average Pups</td>
-          <td>{{ userCustomStats.avg_pups }}
+          <td>Avg Pups</td>
+          <td>{{ userCustomStats.avg_pups | number: '.0-2' }}
           </td>
         </tr>
       </tbody>
     </table>
 
   </div>
-  <div class="col-6">
-    <radar-chart *ngIf="charts.ratings.data.length > 0" [data]='charts.ratings.data'></radar-chart>
-  </div>
-</div>
-
-<div class='row' *ngIf='charts.history.data.length > 0' style="margin-bottom: 70px;">
-  <div class='col-12'>
-    <h3>Exposition evolution</h3>
-    <multi-series-graph [series]='charts.history.data'></multi-series-graph>
+  <div class="col-8">
+    <div>
+      <h3>Radar chart</h3>
+      <radar-chart *ngIf="charts.ratings.data.length > 0" [data]='charts.ratings.data'></radar-chart>
+    </div>
+    <div style="height: 300px; margin-bottom: 70px;">
+      <h3>Exposition evolution</h3>
+      <multi-series-graph *ngIf='charts.history.data.length > 0' [series]='charts.history.data'></multi-series-graph>
+    </div>
   </div>
 </div>
 
