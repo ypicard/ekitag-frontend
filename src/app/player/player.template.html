@@ -71,97 +71,112 @@
     <h3>Statistics</h3>
 
     <table *ngIf="userMatchStats">
+      <thead>
+        <th>Match Stats</th>
+        <th></th>
+        <th></th>
+      </thead>
       <tbody>
         <tr>
           <td>Matches </td>
           <td>{{ userMatchStats.matches_played }}</td>
+          <td></td>
         </tr>
         <tr class='win'>
           <td>Wins</td>
-          <td>{{ userMatchStats.wins }} ({{ userMatchStats.wins / userMatchStats.matches_played | percent }})</td>
+          <td>{{ userMatchStats.wins }}</td>
+          <td>{{ userMatchStats.wins / userMatchStats.matches_played | percent }}</td>
         </tr>
         <tr class='tie'>
           <td>Ties</td>
-          <td>{{ userMatchStats.ties }} ({{ userMatchStats.ties / userMatchStats.matches_played | percent }})</td>
+          <td>{{ userMatchStats.ties }}</td>
+          <td>{{ userMatchStats.ties / userMatchStats.matches_played | percent }}</td>
         </tr>
         <tr class='lose'>
           <td>Losses</td>
-          <td>{{ userMatchStats.losses }} ({{ userMatchStats.losses / userMatchStats.matches_played | percent }})</td>
+          <td>{{ userMatchStats.losses }}</td>
+          <td>{{ userMatchStats.losses / userMatchStats.matches_played | percent }}</td>
         </tr>
-      </tbody>
-    </table>
-
-
-    <table *ngIf="userMatchStats">
-      <tbody>
+        <tr>
+          <td> </td>
+          <td> </td>
+          <td></td>
+        </tr>
         <tr>
           <td>Avg Match Duration</td>
-          <td>{{ userMatchStats.avg_match_duration | number: '.0-2' }}</td>
+          <td>{{ userMatchStats.match_duration_avg | number: '.0-2' }}</td>
+          <td></td>
         </tr>
         <tr>
           <td>Avg Team Score</td>
-          <td>{{ userMatchStats.avg_team_score | number: '.0-2' }}</td>
+          <td>{{ userMatchStats.team_score_avg | number: '.0-2' }}</td>
+          <td></td>
         </tr>
       </tbody>
     </table>
 
 
-    <table *ngIf="userCustomStats">
+    <table *ngIf="userCustomStats" style="width: 100%;">
+      <thead>
+        <th>Stat</th>
+        <th>Avg</th>
+        <th>Rank</th>
+      </thead>
       <tbody>
         <tr>
-          <td>Avg Score</td>
-          <td>{{ userCustomStats.avg_score | number: '.0-2' }}
-          </td>
+          <td>Score</td>
+          <td>{{ userCustomStats.score_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.score_rank }}</td>
         </tr>
         <tr>
-          <td>Avg Tags</td>
-          <td>{{ userCustomStats.avg_tags | number: '.0-2' }}
-          </td>
+          <td>Tags</td>
+          <td>{{ userCustomStats.tags_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.tags_rank }}</td>
         </tr>
         <tr>
-          <td>Avg Popped</td>
-          <td>{{ userCustomStats.avg_popped | number: '.0-2' }}
-          </td>
+          <td>Popped</td>
+          <td>{{ userCustomStats.popped_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.popped_rank }}</td>
         </tr>
         <tr>
-          <td>Avg Grabs</td>
-          <td>{{ userCustomStats.avg_grabs | number: '.0-2' }}
-          </td>
+          <td>Grabs</td>
+          <td>{{ userCustomStats.grabs_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.grabs_rank }}</td>
         </tr>
         <tr>
-          <td>Avg Drops</td>
-          <td>{{ userCustomStats.avg_drops | number: '.0-2' }}
-          </td>
+          <td>Drops</td>
+          <td>{{ userCustomStats.drops_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.drops_rank }}</td>
         </tr>
         <tr>
-          <td>Avg Hold</td>
-          <td>{{ userCustomStats.avg_hold | number: '.0-2' }}
-          </td>
+          <td>Hold</td>
+          <td>{{ userCustomStats.hold_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.hold_rank }}</td>
         </tr>
         <tr>
-          <td>Avg Captures</td>
-          <td>{{ userCustomStats.avg_captures | number: '.0-2' }}
-          </td>
+          <td>Captures</td>
+          <td>{{ userCustomStats.captures_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.captures_rank }}</td>
         </tr>
         <tr>
-          <td>Avg Prevent</td>
-          <td>{{ userCustomStats.avg_prevent | number: '.0-2' }}
-          </td>
+          <td>Prevent</td>
+          <td>{{ userCustomStats.prevent_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.prevent_rank }}</td>
         </tr>
         <tr>
-          <td>Avg Returns</td>
-          <td>{{ userCustomStats.avg_returns | number: '.0-2' }}
-          </td>
+          <td>Returns</td>
+          <td>{{ userCustomStats.returns_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.returns_rank }}</td>
         </tr>
         <tr>
-          <td>Avg Support</td>
-          <td>{{ userCustomStats.avg_support | number: '.0-2' }}
-          </td>
+          <td>Support</td>
+          <td>{{ userCustomStats.support_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.support_rank }}</td>
         </tr>
         <tr>
-          <td>Avg Pups</td>
-          <td>{{ userCustomStats.avg_pups | number: '.0-2' }}
-          </td>
+          <td>Pups</td>
+          <td>{{ userCustomStats.pups_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.pups_rank }}</td>
         </tr>
       </tbody>
     </table>
