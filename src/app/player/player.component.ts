@@ -77,12 +77,14 @@ export class PlayerComponent {
     // User custom stats
     this.tagApiService.getUserCustomStats(this.player.id).subscribe(res => {
       this.userCustomStats = res;
-      console.log(res)
 
       // Ratings data
       this.charts.ratings.data.push(Object.entries(res).reduce((obj, el) => {
         if (el[0].includes("rating")) {
-          obj.push({ area: el[0], value: el[1] * 100 });
+          // Format labels
+          let key = el[0].split('_')[0]
+          key = key.charAt(0).toUpperCase() + key.slice(1)
+          obj.push({ area: key, value: el[1] * 100 });
         }
         return obj;
       }, []));
