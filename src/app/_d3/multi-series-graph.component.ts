@@ -49,7 +49,7 @@ export class MultiSeriesGraphComponent {
 
     var allValues = [].concat.apply([], this.series.map(s => s.values));
     x.domain(d3.extent(allValues, d => d.datetime));
-    y.domain(d3.extent(allValues, d => d.mu));
+    y.domain(d3.extent(allValues, d => d.exposition));
     z.domain(this.series.map(s => s.key));
 
     function makeYgridlines() {
