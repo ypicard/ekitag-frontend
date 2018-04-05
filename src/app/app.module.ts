@@ -35,6 +35,7 @@ import { MyHelper } from './services/my-helper.service';
 
 // PIPES
 import { ArraySortPipe } from './pipes';
+import { DurationPipe } from "./pipes";
 
 // LIBRAIRIES
 import { ClipboardModule } from 'ngx-clipboard';
@@ -100,6 +101,7 @@ const appRoutes: Routes = [
     RadarChartComponent,
     // PIPES
     ArraySortPipe,
+    DurationPipe,
     RankingsComponent
   ],
   imports: [

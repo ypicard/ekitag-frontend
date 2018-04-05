@@ -98,13 +98,13 @@
           <td>{{ userMatchStats.losses / userMatchStats.matches_played | percent }}</td>
         </tr>
         <tr>
-          <td> </td>
-          <td> </td>
+          <td></td>
+          <td></td>
           <td></td>
         </tr>
         <tr>
           <td>Avg Match Duration</td>
-          <td>{{ userMatchStats.match_duration_avg | number: '.0-2' }}</td>
+          <td>{{ userMatchStats.match_duration_avg | duration: 'm-s' }}</td>
           <td></td>
         </tr>
         <tr>
@@ -119,7 +119,7 @@
     <table *ngIf="userCustomStats" style="width: 100%;">
       <thead>
         <th>Stat</th>
-        <th>Avg</th>
+        <th>Average</th>
         <th>Rank</th>
       </thead>
       <tbody>
@@ -150,7 +150,7 @@
         </tr>
         <tr>
           <td>Hold</td>
-          <td>{{ userCustomStats.hold_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.hold_avg | duration: 'm-s' }}</td>
           <td>{{ userCustomStats.hold_rank }}</td>
         </tr>
         <tr>
@@ -160,7 +160,7 @@
         </tr>
         <tr>
           <td>Prevent</td>
-          <td>{{ userCustomStats.prevent_avg | number: '.0-2' }}</td>
+          <td>{{ userCustomStats.prevent_avg | duration: 'm-s'}}</td>
           <td>{{ userCustomStats.prevent_rank }}</td>
         </tr>
         <tr>

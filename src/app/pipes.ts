@@ -17,3 +17,22 @@ export class ArraySortPipe {
     return array;
   }
 }
+
+@Pipe({
+  name: "duration"
+})
+export class DurationPipe {
+  // Use the options param to pass wanted display values:
+  // 'h-m-s' will display hours, minutes and seconds
+  // 'm-s' will display only minutes and seconds
+  transform(seconds: number, options: any): string {
+    var date = new Date(null);
+    date.setSeconds(seconds);
+
+    options = options.split("-");
+    let startIdx = { h: 11, m: 14, s: 17 }[options[0]];
+    let endIdx = { h: 13, m: 16, s: 19 }[options[options.length - 1]];
+
+    return date.toISOString().substring(startIdx, endIdx);
+  }
+}
