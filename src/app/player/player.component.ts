@@ -46,7 +46,7 @@ export class PlayerComponent {
       this.tagApiService
         .getAlgoUserSeasonRankings(this.player.id, algo.key)
         .subscribe(res => {
-          this.rankings[algo.key] = res.rankings;
+          this.rankings[algo.key] = res;
         });
 
       this.tagApiService
