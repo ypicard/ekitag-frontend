@@ -64,7 +64,6 @@
         <th>Blue score</th>
         <th>Date</th>
         <th>Validator</th>
-        <th>Season</th>
       </thead>
       <tbody>
         <tr *ngFor="let match of matches" routerLink="/matches/{{ match.id }}" class='pointer'>
@@ -73,7 +72,6 @@
           <td>{{ match.bScore }}</td>
           <td class='text-right'>{{ match.datetime | date: 'EEE dd yyyy, HH:mm' }}</td>
           <td>{{ match.validator.pseudo }}</td>
-          <td>Season ?</td>
         </tr>
       </tbody>
     </table>

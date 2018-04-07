@@ -178,6 +178,31 @@
           <td>{{ userCustomStats.pups_avg | number: '.0-2' }}</td>
           <td>{{ userCustomStats.pups_rank }}</td>
         </tr>
+        </tbody>
+        </table>
+
+    <table *ngIf="userCustomStats" style="width: 100%;">
+      <thead>
+        <th>Computed Stats</th>
+        <th></th>
+        <th>Rank</th>
+      </thead>
+      <tbody>
+        <tr title="Probability for a player to capture when grabbing the flag">
+          <td>Grab Eff</td>
+          <td>{{ userCustomStats.grabs_eff | percent }}</td>
+          <td>{{ userCustomStats.grabs_eff_rank }}</td>
+        </tr>
+        <tr title="Avg hold time per grab">
+          <td>Hold Eff</td>
+          <td>{{ userCustomStats.hold_eff | duration: 'm-s' }}</td>
+          <td>{{ userCustomStats.hold_eff_rank }}</td>
+        </tr>
+        <tr title="Hold time necessary for a capture">
+          <td>Capture Time</td>
+          <td>{{ userCustomStats.captures_time | duration: 'm-s' }}</td>
+          <td>{{ userCustomStats.captures_time_rank }}</td>
+        </tr>
       </tbody>
     </table>
 
