@@ -36,3 +36,14 @@ export class DurationPipe {
     return date.toISOString().substring(startIdx, endIdx);
   }
 }
+
+
+@Pipe({
+  name: "ekimoney"
+})
+export class EkiMoneyPipe {
+  transform(seconds: number): string {
+    let ekiRate = 1000 / 8 / 60 / 60; // = $ rate per seconds
+   return (seconds * ekiRate).toFixed(0) + "€";
+  }
+}

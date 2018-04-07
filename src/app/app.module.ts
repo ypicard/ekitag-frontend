@@ -36,6 +36,7 @@ import { MyHelper } from './services/my-helper.service';
 // PIPES
 import { ArraySortPipe } from './pipes';
 import { DurationPipe } from "./pipes";
+import { EkiMoneyPipe } from "./pipes";
 
 // LIBRAIRIES
 import { ClipboardModule } from 'ngx-clipboard';
@@ -99,10 +100,11 @@ const appRoutes: Routes = [
     PendingMatchComponent,
     MultiSeriesGraphComponent,
     RadarChartComponent,
+    RankingsComponent,
     // PIPES
     ArraySortPipe,
     DurationPipe,
-    RankingsComponent
+    EkiMoneyPipe
   ],
   imports: [
     BrowserModule,
