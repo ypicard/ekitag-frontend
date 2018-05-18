@@ -20,9 +20,9 @@
     <!-- <h3>{{ myHelper.getAlgoName(algo) }}</h3> -->
     <table>
       <thead>
-        <th>Season Name</th>
+        <th>Season</th>
         <th>Rank</th>
-        <th>Exposition</th>
+        <th>Exp</th>
         <th>Mu</th>
         <th>Sigma</th>
       </thead>
@@ -67,7 +67,7 @@
 
 
 <div class="row">
-  <div class="col-4">
+  <div class="col-md-4">
     <h3>Statistics</h3>
 
     <table *ngIf="userMatchStats">
@@ -123,7 +123,7 @@
     </table>
 
 
-    <table *ngIf="userCustomStats" style="width: 100%;">
+    <table *ngIf="userCustomStats">
       <thead>
         <th>Stat</th>
         <th>Average</th>
@@ -188,7 +188,7 @@
         </tbody>
         </table>
 
-    <table *ngIf="userCustomStats" style="width: 100%;">
+    <table *ngIf="userCustomStats">
       <thead>
         <th>Computed Stats</th>
         <th></th>
@@ -214,7 +214,7 @@
     </table>
 
   </div>
-  <div class="col-8">
+  <div class="col-md-8">
     <div>
       <h3>Radar chart</h3>
       <radar-chart *ngIf="charts.ratings.data.length > 0" [data]='charts.ratings.data'></radar-chart>

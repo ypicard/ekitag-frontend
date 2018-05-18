@@ -3,17 +3,15 @@
     <h1>Current Season</h1>
     <table>
       <thead>
-        <th>ID</th>
         <th>Name</th>
-        <th>Start Date</th>
-        <th>End Date</th>
+        <th>Start</th>
+        <th>End</th>
         <th>Max Time</th>
-        <th>Played Matches</th>
+        <th>Matches</th>
         <th>Max Matches</th>
       </thead>
       <tbody>
         <tr routerLink="/seasons/{{ currentSeason.id }}" class="pointer">
-          <td class='text-right'>{{ currentSeason.id }}</td>
           <td>{{ currentSeason.name }}</td>
           <td>{{ currentSeason.startTime | date: 'EEE dd yyyy, HH:mm' }}</td>
           <td>{{ currentSeason.endTime | date: 'EEE dd yyyy, HH:mm' }}</td>
@@ -51,17 +49,15 @@
     <h1>Passed seasons</h1>
     <table>
       <thead>
-        <th>ID</th>
         <th>Name</th>
-        <th>Start Date</th>
-        <th>End Date</th>
+        <th>Start</th>
+        <th>End</th>
         <th>Max Time</th>
-        <th>Played Matches</th>
+        <th>Matches</th>
         <th>Max Matches</th>
       </thead>
       <tbody>
         <tr *ngFor="let season of passedSeasons" routerLink="/seasons/{{ season.id }}" class="pointer">
-          <td class='text-right'>{{ season.id }}</td>
           <td>{{ season.name }}</td>
           <td>{{ season.startTime | date: 'EEE dd yyyy, HH:mm' }}</td>
           <td>{{ season.endTime | date: 'EEE dd yyyy, HH:mm' }}</td>

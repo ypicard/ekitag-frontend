@@ -62,7 +62,6 @@ button {
   border: 1px solid #095C96;
   box-shadow: 0 3px #095C96;
   border-radius: 3px;
-  width: 128px;
   padding: 5px;
   text-transform: uppercase;
   text-align: center;
@@ -123,22 +122,19 @@ table {
   border-bottom-color: gray;
   border-left-color: gray;
   margin-bottom: 20px;
+  width: 100%;
   thead {
     background: #8BC34A;
     color: #232323;
   }
-  th {
-    padding: 0.2em 0.5em;
+  th, td {
+    padding: 0.2em 0.4em;
   }
   tr {
     border: 1px solid #212121;
     border-bottom: 1px solid #2D2D2D;
     border-top: none;
     background: #353535;
-    td {
-      padding: 0.2em 0.5em;
-      min-width: 100px;
-    }
     &:nth-child(2n) {
       background: #404040;
     }
