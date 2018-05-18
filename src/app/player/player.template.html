@@ -105,14 +105,14 @@
         <tr>
           <td>Time Played</td>
           <td>{{ userMatchStats.time_played | duration: 'h-m-s' }}</td>
-          <td *ngIf="player.isAdmin">{{ userMatchStats.time_played | ekimoney }}</td>
-          <td *ngIf="!player.isAdmin"></td>
+          <td *ngIf="authService.isLoggedIn()">{{ userMatchStats.time_played | ekimoney }}</td>
+          <td *ngIf="!authService.isLoggedIn()"></td>
         </tr>
         <tr>
           <td>Avg Match Duration</td>
           <td>{{ userMatchStats.match_duration_avg | duration: 'm-s' }}</td>
-          <td *ngIf="player.isAdmin">{{ userMatchStats.match_duration_avg | ekimoney }}</td>
-          <td *ngIf="!player.isAdmin"></td>
+          <td *ngIf="authService.isLoggedIn()">{{ userMatchStats.match_duration_avg | ekimoney }}</td>
+          <td *ngIf="!authService.isLoggedIn()"></td>
         </tr>
         <tr>
           <td>Avg Team Score</td>

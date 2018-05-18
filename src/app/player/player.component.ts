@@ -8,6 +8,7 @@ import { NgForm } from "@angular/forms";
 import { MultiSeriesGraphComponent } from "../_d3/multi-series-graph.component";
 import { RadarChartComponent } from "../_d3/radar-chart/radar-chart.component";
 import * as moment from "moment";
+import { AuthService } from "../services/auth.service";
 
 @Component({
   selector: "player",
@@ -34,7 +35,8 @@ export class PlayerComponent {
   constructor(
     public tagApiService: TagApiService,
     private route: ActivatedRoute,
-    public myHelper: MyHelper
+    public myHelper: MyHelper,
+    public authService: AuthService
   ) {
     console.log("PlayerComponent");
     this.route.data.subscribe(val => {
@@ -79,15 +81,17 @@ export class PlayerComponent {
       this.userCustomStats = res;
 
       // Ratings data
-      this.charts.ratings.data.push(Object.entries(res).reduce((obj, el) => {
-        if (el[0].includes("rating")) {
-          // Format labels
-          let key = el[0].split('_')[0]
-          key = key.charAt(0).toUpperCase() + key.slice(1)
-          obj.push({ area: key, value: el[1] * 100 });
-        }
-        return obj;
-      }, []));
+      this.charts.ratings.data.push(
+        Object.entries(res).reduce((obj, el) => {
+          if (el[0].includes("rating")) {
+            // Format labels
+            let key = el[0].split("_")[0];
+            key = key.charAt(0).toUpperCase() + key.slice(1);
+            obj.push({ area: key, value: el[1] * 100 });
+          }
+          return obj;
+        }, [])
+      );
     });
 
     // User match stats
