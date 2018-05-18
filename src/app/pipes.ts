@@ -1,4 +1,5 @@
 import { Pipe } from "@angular/core";
+import { DecimalPipe } from "@angular/common";
 
 @Pipe({
   name: "sort"
@@ -37,13 +38,34 @@ export class DurationPipe {
   }
 }
 
-
 @Pipe({
   name: "ekimoney"
 })
 export class EkiMoneyPipe {
   transform(seconds: number): string {
     let ekiRate = 1000 / 8 / 60 / 60; // = $ rate per seconds
-   return (seconds * ekiRate).toFixed(0) + "€";
+    return (seconds * ekiRate).toFixed(0) + "€";
+  }
+}
+
+@Pipe({
+  name: "tagstat"
+})
+export class TagStatPipe {
+  constructor(
+    private decimalPipe: DecimalPipe
+  ) {}
+  transform(value: any, stat: string): string {
+    let res;
+    switch (stat) {
+      case "hold":
+      case "prevent":
+        res = value;
+        break;
+      default:
+        res = this.decimalPipe.transform(value, ".0-2");
+        break;
+    }
+    return res;
   }
 }

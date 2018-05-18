@@ -1,0 +1,31 @@
+<select [ngModel]="selectedSeason" [(ngModel)]="selectedSeason" (change)="getRanking()">
+  <option [value]="null">ALL TIME</option>
+  <option *ngFor="let season of seasons" [ngValue]="season">{{ season.id }}. {{ season.name }}</option>
+</select>
+
+<select [ngModel]="selectedStat" (change)="setStat($event.target.value)">
+  <option *ngFor="let stat of stats" [value]="stat">{{ stat }}</option>
+</select>
+
+<select [ngModel]="selectedMethod" (change)="setMethod($event.target.value)">
+  <option *ngFor="let method of methods" [value]="method">{{ method }}</option>
+</select>
+
+<div class="row" *ngIf="ranking">
+  <div class="col-12">
+    <table>
+      <thead>
+        <th>Rank</th>
+        <th>Pseudo</th>
+        <th>Value</th>
+      </thead>
+      <tbody>
+        <tr  *ngFor='let rank of ranking.ranking' routerLink="/players/{{ rank.user_id }}" class='pointer'>
+          <td class='text-right'>{{ rank.rank }}</td>
+          <td>{{ rank.pseudo }}</td>
+          <td>{{ rank.value | tagstat:ranking.stat }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

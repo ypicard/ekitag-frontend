@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DecimalPipe } from "@angular/common";
 
 import { RouterModule, Routes } from '@angular/router'; // Routes
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // ng-bootstrap
@@ -22,11 +23,12 @@ import { MatchesComponent } from './matches/matches.component';
 import { NewMatchComponent } from './new-match/new-match.component';
 import { PendingMatchComponent } from './pending-match/pending-match.component';
 
-
 import { SeasonsComponent } from './seasons/seasons.component';
 import { SeasonComponent } from './season/season.component';
 
 import { RankingsComponent } from './rankings/rankings.component';
+import { SpecificRankingComponent } from './specific-ranking/specific-ranking.component';
+import { SpecificRankingsComponent } from "./specific-rankings/specific-rankings.component";
 
 // PROVIDERS
 import { TagApiService } from './services/tag-api.service';
@@ -34,7 +36,7 @@ import { AuthService } from './services/auth.service';
 import { MyHelper } from './services/my-helper.service';
 
 // PIPES
-import { ArraySortPipe } from './pipes';
+import { ArraySortPipe, TagStatPipe } from './pipes';
 import { DurationPipe } from "./pipes";
 import { EkiMoneyPipe } from "./pipes";
 
@@ -76,6 +78,8 @@ const appRoutes: Routes = [
 
   { path: 'rankings', component: RankingsComponent, resolve: { rankedPlayers: RankingsResolver } },
 
+  { path: 'specific-rankings', component: SpecificRankingsComponent, resolve: { seasons: SeasonsResolver } },
+
   { path: 'hall_of_fame', component: HallOfFameComponent },
   { path: 'algo', component: AlgoComponent, resolve: { players: PlayersResolver, currentSeason: CurrentSeasonResolver } },
   { path: 'auth', component: AuthComponent },
@@ -101,10 +105,13 @@ const appRoutes: Routes = [
     MultiSeriesGraphComponent,
     RadarChartComponent,
     RankingsComponent,
+    SpecificRankingsComponent,
+    SpecificRankingComponent,
     // PIPES
     ArraySortPipe,
     DurationPipe,
-    EkiMoneyPipe
+    EkiMoneyPipe,
+    TagStatPipe
   ],
   imports: [
     BrowserModule,
@@ -134,7 +141,8 @@ const appRoutes: Routes = [
     MatchResolver,
     PendingMatchResolver,
     RankingsResolver,
-    UserMatchesResolver
+    UserMatchesResolver,
+    DecimalPipe
   ],
   bootstrap: [AppComponent]
 })

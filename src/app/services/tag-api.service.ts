@@ -106,7 +106,9 @@ export class TagApiService {
   }
 
   getUserMatchStats(userId: number): Observable<any> {
-    return this.http.get(this.API_BASE_URL + "users/" + userId + "/match_stats");
+    return this.http.get(
+      this.API_BASE_URL + "users/" + userId + "/match_stats"
+    );
   }
 
   // ------------------------- MATCHES
@@ -320,5 +322,20 @@ export class TagApiService {
         "/" +
         vizName
     );
+  }
+
+  // ------------------------- RANKINGS
+
+  getSpecificRanking(stat, method, seasonId) {
+    let formData = new FormData();
+    formData.append("stat", stat);
+    formData.append("method", method);
+    if (seasonId) {
+      formData.append("season_id", seasonId);
+    }
+
+    return this.http.post(this.API_BASE_URL + "statistics/ranking", formData, {
+      headers: this.getAdminHeaders()
+    });
   }
 }
