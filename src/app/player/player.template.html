@@ -1,15 +1,8 @@
 <div class='row'>
   <div class="col-12">
-    <h1>{{ player.pseudo }}</h1>
-    <!-- STARS -->
-    <div *ngIf='player.goldStars > 0'>
-      <img src='/assets/images/gold_star.png' class='star'> {{ player.goldStars }}</div>
-    <div *ngIf='player.silverStars > 0'>
-      <img src='/assets/images/silver_star.png' class='star'> {{ player.silverStars }}</div>
-    <div *ngIf='player.bronzeStars > 0'>
-      <img src='/assets/images/bronze_star.png' class='star'> {{ player.bronzeStars }}</div>
-    <div *ngIf='player.loserStars > 0'>
-      <img src='/assets/images/loser_star.png' class='star'> {{ player.loserStars }}</div>
+    <h1>{{ player.pseudo }}
+      <stars [player]="player"></stars>
+    </h1>
     <div *ngIf='player.usualPseudos.length > 0'>Usual Pseudos: {{ player.usualPseudos }}</div>
   </div>
 </div>
@@ -28,7 +21,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let rank of rankings[algo]" class="pointer" [routerLink]="rank.season_id ? '/seasons/' + rank.season_id : null">
-          <td>{{ rank.season_id ? rank.season_name : 'ALL TIME'}}</td>
+          <td>
+            {{ rank.season_id ? rank.season_name : 'ALL TIME'}}
+            <img *ngIf="rank.rank === 1" src='/assets/images/gold_star.png' class='star' title="Gold Stars">
+            <img *ngIf="rank.rank === 2" src='/assets/images/silver_star.png' class='star' title="Silver Stars">
+            <img *ngIf="rank.rank === 3" src='/assets/images/bronze_star.png' class='star' title="Bronze Stars">
+          </td>
           <td>{{ rank.rank }}</td>
           <td>{{ rank.exposition | number: '.0-2' }}</td>
           <td>{{ rank.mu | number: '.0-2' }}</td>
@@ -185,8 +183,8 @@
           <td>{{ userCustomStats.pups_avg | number: '.0-2' }}</td>
           <td>{{ userCustomStats.pups_rank }}</td>
         </tr>
-        </tbody>
-        </table>
+      </tbody>
+    </table>
 
     <table *ngIf="userCustomStats">
       <thead>

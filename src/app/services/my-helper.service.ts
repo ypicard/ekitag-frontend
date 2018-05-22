@@ -27,4 +27,8 @@ export class MyHelper {
       return el.key === algoKey;
     }).name;
   }
+
+  arrayGen(nb: number): any[]{
+    return Array(nb);
+  }
 }

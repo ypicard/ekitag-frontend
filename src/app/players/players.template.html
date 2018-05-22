@@ -5,16 +5,14 @@
       <thead>
         <!-- <th>ID</th> -->
         <th>Preferred pseudo</th>
-        <th>Also known as</th>
-        <th></th>
+        <th>Awards</th>
       </thead>
       <tbody>
         <tr *ngFor="let player of getActivePlayers()" routerLink="/players/{{ player.id }}" class="pointer">
           <!-- <td class='text-right'>{{ player.id }}</td> -->
           <td class='text-right'>{{ player.pseudo }}</td>
-          <td>{{ player.usual_pseudos }}</td>
           <td>
-            <a routerLink="/players/{{ player.id }}" class='text-right'>Edit</a>
+            <stars [player]="player"></stars>
           </td>
         </tr>
       </tbody>
@@ -41,15 +39,17 @@
     <h1>Disabled Players</h1>
     <table>
       <thead>
-        <!-- <th>ID</th> -->
+        <th>ID</th>
         <th>Preferred pseudo</th>
-        <th>Also known as</th>
+        <th>Awards</th>
       </thead>
       <tbody>
         <tr *ngFor="let player of getInactivePlayers()">
-          <!-- <td class='text-right'>{{ player.id }}</td> -->
+          <td class='text-right'>{{ player.id }}</td>
           <td class='text-right'>{{ player.pseudo }}</td>
-          <td>{{ player.usualPseudos }}</td>
+          <td>
+            <stars [player]="player"></stars>
+          </td>
         </tr>
       </tbody>
     </table>
