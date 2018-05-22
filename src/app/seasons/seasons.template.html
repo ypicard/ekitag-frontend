@@ -33,10 +33,10 @@
       <input type="text" name="name" class="col-sm-8 form-control" ngModel required>
       <br>
       <label class='col-sm-2' for="maxMatches">Max matches</label>
-      <input type="text" name="maxMatches" class="col-sm-8 form-control" ngModel pattern="\d">
+      <input type="text" name="maxMatches" class="col-sm-8 form-control" ngModel pattern="\d+">
       <br>
       <label class='col-sm-2' for="maxTime">Max days</label>
-      <input type="text" name="maxTime" class="col-sm-8 form-control" ngModel pattern="\d">
+      <input type="text" name="maxTime" class="col-sm-8 form-control" ngModel pattern="\d+">
       <br>
       <hr>
       <button type="submit" [disabled]='!newSeasonForm.form.valid'>Launch new season</button>
