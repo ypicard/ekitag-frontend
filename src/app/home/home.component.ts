@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { TagApiService } from "../services/tag-api.service";
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.template.html',
-  styleUrls: ['./home.style.scss']
+  selector: "home",
+  templateUrl: "./home.template.html",
+  styleUrls: ["./home.style.scss"]
 })
-
 export class HomeComponent {
+  constructor(private _tagApiService: TagApiService) {}
 
-  constructor() {
+  pingIOT() {
+    this._tagApiService.pingIOT().subscribe(res => {}, err => {});
   }
-
 }

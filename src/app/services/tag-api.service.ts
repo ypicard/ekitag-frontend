@@ -338,4 +338,9 @@ export class TagApiService {
       headers: this.getAdminHeaders()
     });
   }
+
+  // ------------------------- IOT
+  pingIOT() {
+    return this.http.get(this.API_BASE_URL + "iot");
+  }
 }
