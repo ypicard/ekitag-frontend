@@ -76,21 +76,3 @@
     </table>
   </div>
 </div>
-
-<div *ngIf="authService.isLoggedIn()">
-<form #penaltyForm="ngForm" (ngSubmit)="addPenalty(penaltyForm)">
-  <label class='col-sm-2' for="player">Who was a FDP ?</label>
-  <select type="text" name="player" class="col-sm-8 form-control" required ngModel>
-    <option *ngFor="let player of match.players" [ngValue]="player">{{ player.pseudo }}</option>
-  </select>
-  <br>
-  <label class='col-sm-2' for="desc">What did this FDP do ?</label>
-  <input type="text" name="desc" class="col-sm-8 form-control" required ngModel>
-  <br>
-  <label class='col-sm-2' for="value">Penalty value (on exp)</label>
-  <input type="text" name="value" class="col-sm-8 form-control" pattern="\d+" required ngModel>
-  <br>
-  <hr>
-  <button type="submit" [disabled]='!penaltyForm.form.valid'>Submit</button>
-</form>
-</div>

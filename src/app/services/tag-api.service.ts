@@ -313,10 +313,10 @@ export class TagApiService {
       });
   }
 
-  postPenalty(userId: number, matchId: number, desc: string, value: number) {
+  postPenalty(userId: number, seasonId: number, desc: string, value: number) {
     let formData = new FormData();
     formData.append('user_id', userId.toString());
-    formData.append('match_id', matchId.toString());
+    formData.append('season_id', seasonId.toString());
     formData.append('description', desc);
     formData.append('value', value.toString());
     return this.http.post(this.API_BASE_URL + 'penalties', formData, {

@@ -1,10 +1,50 @@
-<p>{{seasons | json }} </p>
-<p>Season: {{season | json }} </p>
+Season:
 <select [(ngModel)]="season" (change)="fetchPenalties()">
   <option [ngValue]="null">All</option>
   <option *ngFor="let s of seasons" [ngValue]="s">{{ s.name }}</option>
 </select>
 
-<p>
-  penalties works! {{ penalties | json }}
-</p>
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Season</th>
+    <th>User</th>
+    <th>Desc</th>
+    <th>Value</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pen of penalties">
+      <td>{{ pen.id }}</td>
+      <td>{{ pen.seasonId }}</td>
+      <td>{{ pen.userId }}</td>
+      <td>{{ pen.desc }}</td>
+      <td>{{ pen.value }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<div *ngIf="authService.isLoggedIn()">
+  <form #penaltyForm="ngForm" (ngSubmit)="addPenalty(penaltyForm)">
+    <label class='col-sm-2' for="player">Who was a FDP ?</label>
+    <select type="text" name="player" class="col-sm-8 form-control" required ngModel>
+      <option value="" disabled selected>Player...</option>
+      <option *ngFor="let player of players" [ngValue]="player">{{ player.pseudo }}</option>
+    </select>
+    <br>
+    <label class='col-sm-2' for="season">Which season did this FDP ruin ?</label>
+    <select type="text" name="season" class="col-sm-8 form-control" required ngModel>
+      <option value="" disabled selected>Season...</option>
+      <option *ngFor="let s of seasons" [ngValue]="s">{{ s.name }}</option>
+    </select>
+    <br>
+    <label class='col-sm-2' for="desc">What did this FDP do ?</label>
+    <input type="text" name="desc" class="col-sm-8 form-control" required ngModel>
+    <br>
+    <label class='col-sm-2' for="value">Penalty value (on exp)</label>
+    <input type="text" name="value" class="col-sm-8 form-control" pattern="\d+" required ngModel>
+    <br>
+    <hr>
+    <button type="submit" [disabled]='!penaltyForm.form.valid'>Submit</button>
+  </form>
+</div>
