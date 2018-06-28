@@ -1,0 +1,10 @@
+<p>{{seasons | json }} </p>
+<p>Season: {{season | json }} </p>
+<select [(ngModel)]="season" (change)="fetchPenalties()">
+  <option [ngValue]="null">All</option>
+  <option *ngFor="let s of seasons" [ngValue]="s">{{ s.name }}</option>
+</select>
+
+<p>
+  penalties works! {{ penalties | json }}
+</p>

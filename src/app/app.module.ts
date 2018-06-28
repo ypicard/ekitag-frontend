@@ -30,6 +30,8 @@ import { RankingsComponent } from "./rankings/rankings.component";
 import { SpecificRankingComponent } from "./specific-ranking/specific-ranking.component";
 import { SpecificRankingsComponent } from "./specific-rankings/specific-rankings.component";
 
+import { PenaltiesComponent } from './penalties/penalties.component';
+
 // PROVIDERS
 import { TagApiService } from "./services/tag-api.service";
 import { AuthService } from "./services/auth.service";
@@ -130,7 +132,8 @@ const appRoutes: Routes = [
     component: AlgoComponent,
     resolve: { players: PlayersResolver, currentSeason: CurrentSeasonResolver }
   },
-  { path: "auth", component: AuthComponent }
+  { path: "auth", component: AuthComponent },
+  { path: "penalties", component: PenaltiesComponent }
 ];
 
 @NgModule({
@@ -160,7 +163,8 @@ const appRoutes: Routes = [
     ArraySortPipe,
     DurationPipe,
     EkiMoneyPipe,
-    TagStatPipe
+    TagStatPipe,
+    PenaltiesComponent
   ],
   imports: [
     BrowserModule,
