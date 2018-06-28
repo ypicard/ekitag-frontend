@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TagApiService } from '../services/tag-api.service';
 import { Season } from '../_models/season.model';
+import { Penalty } from '../_models/penalty.model';
 
 @Component({
   selector: 'app-penalties',
@@ -10,7 +11,7 @@ import { Season } from '../_models/season.model';
 export class PenaltiesComponent implements OnInit {
   season: Season;
   seasons: Season[];
-  penalties: any[]; // TODO: Penalty TS object
+  penalties: Penalty[];
 
   constructor(private _api: TagApiService) {}
 

@@ -11,6 +11,7 @@ import { AlgoRanking } from '../_models/algo-ranking.model';
 import { PendingMatch } from '../_models/pending-match.model';
 import { environment } from '../../environments/environment';
 import { using } from 'rxjs/observable/using';
+import { Penalty } from '../_models/penalty.model';
 
 @Injectable()
 export class TagApiService {
@@ -298,12 +299,18 @@ export class TagApiService {
     });
   }
   // ------------------------- PENALTIES
-  getPenalties(seasonId: number = null): Observable<any> {
+  getPenalties(seasonId: number = null): Observable<Penalty[]> {
     let reqParams = new HttpParams();
     if (seasonId) {
       reqParams = reqParams.append('season_id', seasonId.toString());
     }
-    return this.http.get(this.API_BASE_URL + 'penalties', { params: reqParams });
+    return this.http
+      .get(this.API_BASE_URL + 'penalties', { params: reqParams })
+      .map((res: any[]) => {
+        return res.map(pen => {
+          return new Penalty(pen);
+        });
+      });
   }
 
   postPenalty(userId: number, matchId: number, desc: string, value: number) {
